@@ -1,5 +1,6 @@
 $CommandPath = Split-Path $MyInvocation.MyCommand.Path -Parent
-Import-Module "C:\Users\ngetchell\Documents\Git\PSGitLab\Modules\PSGitLab\PSGitLab.psd1"
+$ModulePath = "C:\Users\ngetchell\Documents\Git\PSGitLab\Modules\PSGitLab\PSGitLab.psd1"
+Import-Module $ModulePath
 
 #region Save-GitLabAPIConfiguration
 
@@ -21,6 +22,25 @@ Describe "Save-GitLabAPIConfigruation" {
     }
 }
 
+Describe "ImportConfig" {
+    $Token = (Get-date -Format yy-mm-dd-HH)
+    Save-GitLabAPIConfiguration -Domain 'http://gitlab.com' -Token $Token
+    
+    InModuleScope PSGitLab {
+        it "Domain Test" {
+            $Config = ImportConfig
+            $Config.Domain | SHould be 'http://gitlab.com'
+        }
+
+        It "Token Test" {
+            $Config = ImportConfig
+            $Config.Token | Should be (Get-date -Format yy-mm-dd-HH)
+        }
+
+    }
+}
+
 
 
 #endregion Save-GitLabAPIConfiguration
+Remove-Module [P]SGitLab
