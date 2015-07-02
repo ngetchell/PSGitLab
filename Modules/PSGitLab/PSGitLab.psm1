@@ -2,6 +2,16 @@ $ConfigurationPath = $Env:AppData
 $CommandPath = split-path $PSCommandPath -Parent
 
 Function Save-GitLabAPIConfiguration {
+<#
+.Synopsis
+   Used to store information about your GitLab instance. 
+.DESCRIPTION
+   Used to store information about your GitLab instance. The domain and api token are given. 
+.EXAMPLE
+   Save-GitLabAPIConfiguration -Domain http://gitlab.com -Token "Token"
+.NOTES
+   Implemented using Export-CLIXML saving the configurations. Stores .xml in $env:appdata\GitLabAPI\
+#>
 [cmdletbinding()]
 param(
     [Parameter(mandatory=$true)]
