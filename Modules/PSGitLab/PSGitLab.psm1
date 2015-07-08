@@ -56,3 +56,50 @@ Function ImportConfig {
     }
     
 }
+
+Function QueryGitLabAPI {
+[cmdletbinding()]
+param(
+    $Request,
+    $ObjectType
+)
+
+    $GitLabConfig = ImportConfig
+    $Domain = $GitLabConfig.Domain
+    $Token = $GitLabConfig.Token
+    
+    try  {
+        $Results = Invoke-RestMethod @Request
+    } catch {
+        $ErrorMessage = $_.exception.response.statusDescription
+        Write-Warning  -Message "$ErrorMessage. See $Domain/help/api/README.md#status-codes for more information."
+    }
+
+    foreach ($Result in $Results) {
+        $Result.pstypenames.insert(0,$ObjectType)
+        Write-Output $Result
+    }
+}
+
+Function Get-GitlabProjects {
+[cmdletbinding()]
+param(
+    $archived
+)
+
+    $GitlabAPI = ImportConfig
+
+    $Headers = @{
+        'PRIVATE-TOKEN'=$GitlabAPI.Token;
+    }
+        
+    $Request = @{
+        URI="$($GitlabAPI.Domain)/api/v3/projects";
+        Method='Get';
+        Headers=$Headers;
+    }
+
+    QueryGitLabAPI -Request $Request -ObjectType "GitLab.Project"
+    
+
+}
