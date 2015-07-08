@@ -1,0 +1,36 @@
+<Configuration>
+    <ViewDefinitions>
+      <View>
+        <Name>PSGitLab</Name>
+    <ViewSelectedBy>
+      <TypeName>GitLab.Project</TypeName>
+    </ViewSelectedBy>
+        <ListControl>
+          <ListEntries>
+            <ListEntry>
+              <ListItems>
+                <ListItem>
+                  <PropertyName>Id</PropertyName>
+                </ListItem>
+                <ListItem>
+                  <PropertyName>Name</PropertyName>
+                </ListItem>
+                <ListItem>
+                  <PropertyName>Name_With_Namespace</PropertyName>
+                </ListItem>
+                <ListItem>
+                  <PropertyName>web_url</PropertyName>
+                </ListItem>
+                <ListItem>
+                  <PropertyName>created_at</PropertyName>
+                </ListItem>
+                <ListItem>
+                  <PropertyName>last_activity_at</PropertyName>
+                </ListItem>
+              </ListItems>
+            </ListEntry>
+          </ListEntries>
+        </ListControl>
+      </View>
+   </ViewDefinitions>
+</Configuration>
