@@ -84,11 +84,16 @@ param(
 Function Get-GitlabProjects {
 [cmdletbinding()]
 param(
-    $archived,
-    [ValidateSet("asc","desc")]
-    $order_by = 'desc',
-    $sort,
-    $search
+    
+    [switch]$archived = $false,
+
+    [ValidateSet("id","name","path","created_at","updated_at","last_activity_at")]
+    [string]$order_by = 'created_at',
+
+    [ValidateSet("asc","desc")]    
+    [string]$sort = 'desc',
+    
+    [string]$search = $null
 )
 
     $GitlabAPI = ImportConfig
@@ -106,8 +111,14 @@ param(
 
     ## GET Method Paramters
     $GetUrlParameters = @()
-    $GetUrlParameters += @{archived=$archived}
-    $GetUrlParameters += @{ordered_by=$order_by}
+    if ($archived) {
+        $GetUrlParameters += @{archived='true'}
+    }
+
+    if ($search -ne $null) {
+        $GetUrlParameters += @{search=$search}
+    }
+    $GetUrlParameters += @{order_by=$order_by}
     $GetUrlParameters += @{sort=$sort}
     $URLParamters = GetMethodParameters -GetURLParameters $GetUrlParameters
     $Request.URI = "$($Request.URI)" + "$URLParamters"
