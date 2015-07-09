@@ -84,7 +84,11 @@ param(
 Function Get-GitlabProjects {
 [cmdletbinding()]
 param(
-    $archived
+    $archived,
+    [ValidateSet("asc","desc")]
+    $order_by = 'desc',
+    $sort,
+    $search
 )
 
     $GitlabAPI = ImportConfig
@@ -92,14 +96,41 @@ param(
     $Headers = @{
         'PRIVATE-TOKEN'=$GitlabAPI.Token;
     }
-        
+    
+    
     $Request = @{
         URI="$($GitlabAPI.Domain)/api/v3/projects";
         Method='Get';
         Headers=$Headers;
     }
 
-    QueryGitLabAPI -Request $Request -ObjectType "GitLab.Project"
+    ## GET Method Paramters
+    $GetUrlParameters = @()
+    $GetUrlParameters += @{archived=$archived}
+    $GetUrlParameters += @{ordered_by=$order_by}
+    $GetUrlParameters += @{sort=$sort}
+    $URLParamters = GetMethodParameters -GetURLParameters $GetUrlParameters
+    $Request.URI = "$($Request.URI)" + "$URLParamters"
+
+    QueryGitLabAPI -Request $Request -ObjectType "GitLab.Project" -Verbose
     
 
+}
+
+Function GetMethodParameters {
+    [cmdletbinding()]
+    param(
+        $GetURLParameters
+    )
+
+    $string = '?'
+    foreach ($Param in $GetUrlParameters) {
+        $Param.Keys | ForEach-Object {
+            $key = $_
+            $value = $Param[$_]
+        }
+        $string += "&$key=$value"
+    }
+    $string = $string -replace '\?&',"?"
+    Write-Output $string
 }
