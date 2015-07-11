@@ -1,5 +1,5 @@
 $CommandPath = Split-Path $MyInvocation.MyCommand.Path -Parent
-$ModulePath = "C:\Users\ngetchell\Documents\Git\PSGitLab\Modules\PSGitLab\PSGitLab.psd1"
+$ModulePath = "$CommandPath\..\Modules\PSGitLab\PSGitLab.psd1"
 Import-Module $ModulePath
 
 #region Save-GitLabAPIConfiguration
