@@ -239,3 +239,54 @@ param(
     
 
 }
+
+Function Get-GitlabSingleProject {
+[cmdletbinding()]
+param(
+    [ValidateNotNull()]
+    [ValidateNotNullOrEmpty()]
+    [Parameter(ParameterSetName='Id')]
+    [string]$Id,
+
+    [ValidateNotNull()]
+    [ValidateNotNullOrEmpty()]
+    [Parameter(ParameterSetName='Namespace')]
+    [string]$Namespace
+)
+
+    $GitlabAPI = ImportConfig
+
+    $Headers = @{
+        'PRIVATE-TOKEN'=$GitlabAPI.Token;
+    }
+    
+    $queryID = $null
+    switch ($PSCmdlet.ParameterSetName) {
+        'Id' { $queryID = $id }
+        'Namespace' { $queryID = $Namespace -replace "/","%2F" -replace " ","" }
+    }
+    
+    $Request = @{
+        URI="$($GitlabAPI.Domain)/api/v3/projects/$queryID";
+        Method='Get';
+        Headers=$Headers;
+    }
+    <#
+    ## GET Method Paramters
+    $GetUrlParameters = @()
+    if ($archived) {
+        $GetUrlParameters += @{archived='true'}
+    }
+
+    if ($search -ne $null) {
+        $GetUrlParameters += @{search=$search}
+    }
+    $GetUrlParameters += @{order_by=$order_by}
+    $GetUrlParameters += @{sort=$sort}
+    $URLParamters = GetMethodParameters -GetURLParameters $GetUrlParameters
+    $Request.URI = "$($Request.URI)" + "$URLParamters"
+    #>
+    QueryGitLabAPI -Request $Request -ObjectType "GitLab.Project" -Verbose
+    
+
+}
