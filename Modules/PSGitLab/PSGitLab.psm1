@@ -84,7 +84,16 @@ param(
 Function Get-GitlabProjects {
 [cmdletbinding()]
 param(
-    $archived
+    
+    [switch]$archived = $false,
+
+    [ValidateSet("id","name","path","created_at","updated_at","last_activity_at")]
+    [string]$order_by = 'created_at',
+
+    [ValidateSet("asc","desc")]    
+    [string]$sort = 'desc',
+    
+    [string]$search = $null
 )
 
     $GitlabAPI = ImportConfig
@@ -92,14 +101,192 @@ param(
     $Headers = @{
         'PRIVATE-TOKEN'=$GitlabAPI.Token;
     }
-        
+    
+    
     $Request = @{
         URI="$($GitlabAPI.Domain)/api/v3/projects";
         Method='Get';
         Headers=$Headers;
     }
 
-    QueryGitLabAPI -Request $Request -ObjectType "GitLab.Project"
+    ## GET Method Paramters
+    $GetUrlParameters = @()
+    if ($archived) {
+        $GetUrlParameters += @{archived='true'}
+    }
+
+    if ($search -ne $null) {
+        $GetUrlParameters += @{search=$search}
+    }
+    $GetUrlParameters += @{order_by=$order_by}
+    $GetUrlParameters += @{sort=$sort}
+    $URLParamters = GetMethodParameters -GetURLParameters $GetUrlParameters
+    $Request.URI = "$($Request.URI)" + "$URLParamters"
+
+    QueryGitLabAPI -Request $Request -ObjectType "GitLab.Project" -Verbose
+    
+
+}
+
+Function GetMethodParameters {
+    [cmdletbinding()]
+    param(
+        $GetURLParameters
+    )
+
+    $string = '?'
+    foreach ($Param in $GetUrlParameters) {
+        $Param.Keys | ForEach-Object {
+            $key = $_
+            $value = $Param[$_]
+        }
+        $string += "&$key=$value"
+    }
+    $string = $string -replace '\?&',"?"
+    Write-Output $string
+}
+
+Function Get-GitlabOwnedProjects {
+[cmdletbinding()]
+param(
+    
+    [switch]$archived = $false,
+
+    [ValidateSet("id","name","path","created_at","updated_at","last_activity_at")]
+    [string]$order_by = 'created_at',
+
+    [ValidateSet("asc","desc")]    
+    [string]$sort = 'desc',
+    
+    [string]$search = $null
+)
+
+    $GitlabAPI = ImportConfig
+
+    $Headers = @{
+        'PRIVATE-TOKEN'=$GitlabAPI.Token;
+    }
+    
+    
+    $Request = @{
+        URI="$($GitlabAPI.Domain)/api/v3/projects/owned";
+        Method='Get';
+        Headers=$Headers;
+    }
+
+    ## GET Method Paramters
+    $GetUrlParameters = @()
+    if ($archived) {
+        $GetUrlParameters += @{archived='true'}
+    }
+
+    if ($search -ne $null) {
+        $GetUrlParameters += @{search=$search}
+    }
+    $GetUrlParameters += @{order_by=$order_by}
+    $GetUrlParameters += @{sort=$sort}
+    $URLParamters = GetMethodParameters -GetURLParameters $GetUrlParameters
+    $Request.URI = "$($Request.URI)" + "$URLParamters"
+
+    QueryGitLabAPI -Request $Request -ObjectType "GitLab.Project" -Verbose
+    
+
+}
+
+Function Get-GitlabAllProjects {
+[cmdletbinding()]
+param(
+    
+    [switch]$archived = $false,
+
+    [ValidateSet("id","name","path","created_at","updated_at","last_activity_at")]
+    [string]$order_by = 'created_at',
+
+    [ValidateSet("asc","desc")]    
+    [string]$sort = 'desc',
+    
+    [string]$search = $null
+)
+
+    $GitlabAPI = ImportConfig
+
+    $Headers = @{
+        'PRIVATE-TOKEN'=$GitlabAPI.Token;
+    }
+    
+    
+    $Request = @{
+        URI="$($GitlabAPI.Domain)/api/v3/projects/all";
+        Method='Get';
+        Headers=$Headers;
+    }
+
+    ## GET Method Paramters
+    $GetUrlParameters = @()
+    if ($archived) {
+        $GetUrlParameters += @{archived='true'}
+    }
+
+    if ($search -ne $null) {
+        $GetUrlParameters += @{search=$search}
+    }
+    $GetUrlParameters += @{order_by=$order_by}
+    $GetUrlParameters += @{sort=$sort}
+    $URLParamters = GetMethodParameters -GetURLParameters $GetUrlParameters
+    $Request.URI = "$($Request.URI)" + "$URLParamters"
+
+    QueryGitLabAPI -Request $Request -ObjectType "GitLab.Project" -Verbose
+    
+
+}
+
+Function Get-GitlabSingleProject {
+[cmdletbinding()]
+param(
+    [ValidateNotNull()]
+    [ValidateNotNullOrEmpty()]
+    [Parameter(ParameterSetName='Id')]
+    [string]$Id,
+
+    [ValidateNotNull()]
+    [ValidateNotNullOrEmpty()]
+    [Parameter(ParameterSetName='Namespace')]
+    [string]$Namespace
+)
+
+    $GitlabAPI = ImportConfig
+
+    $Headers = @{
+        'PRIVATE-TOKEN'=$GitlabAPI.Token;
+    }
+    
+    $queryID = $null
+    switch ($PSCmdlet.ParameterSetName) {
+        'Id' { $queryID = $id }
+        'Namespace' { $queryID = $Namespace -replace "/","%2F" -replace " ","" }
+    }
+    
+    $Request = @{
+        URI="$($GitlabAPI.Domain)/api/v3/projects/$queryID";
+        Method='Get';
+        Headers=$Headers;
+    }
+    <#
+    ## GET Method Paramters
+    $GetUrlParameters = @()
+    if ($archived) {
+        $GetUrlParameters += @{archived='true'}
+    }
+
+    if ($search -ne $null) {
+        $GetUrlParameters += @{search=$search}
+    }
+    $GetUrlParameters += @{order_by=$order_by}
+    $GetUrlParameters += @{sort=$sort}
+    $URLParamters = GetMethodParameters -GetURLParameters $GetUrlParameters
+    $Request.URI = "$($Request.URI)" + "$URLParamters"
+    #>
+    QueryGitLabAPI -Request $Request -ObjectType "GitLab.Project" -Verbose
     
 
 }
