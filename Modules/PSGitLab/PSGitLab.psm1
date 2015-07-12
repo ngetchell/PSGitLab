@@ -327,3 +327,72 @@ param(
     
 
 }
+
+Function New-GitLabProject {
+    [cmdletbinding()]
+    param(
+        [ValidateNotNull()]
+        [ValidateNotNullOrEmpty()]
+        [Parameter(Mandatory=$true)]
+        [string]$Name,
+
+        [string]$Path,
+        [string]$Namespace_ID,
+        [string]$Description,
+        [switch]$Issues_Enabled,
+        [switch]$Merge_Requests_Enabled,
+        [switch]$Wiki_Enabled,
+        [Switch]$Snippets_Enabled,
+        [Switch]$public
+    )
+
+    $GitlabAPI = ImportConfig
+
+    $Headers = @{
+        'PRIVATE-TOKEN'=$GitlabAPI.Token;
+    }
+    
+    $Body = @{
+        name=$Name;
+    }
+  
+    $Request = @{
+        URI="$($GitlabAPI.Domain)/api/v3/projects";
+        Method='POST';
+        Headers=$Headers;
+        Body=$Body;
+    }
+
+    QueryGitLabAPI -Request $Request -ObjectType "GitLab.Project" 
+
+}
+
+Function Remove-GitLabProject {
+[cmdletbinding()]
+param(
+    [ValidateNotNull()]
+    [ValidateNotNullOrEmpty()]
+    [Parameter(Mandatory=$true)]
+    [string]$Id
+)
+
+    $GitlabAPI = ImportConfig
+
+    $Headers = @{
+        'PRIVATE-TOKEN'=$GitlabAPI.Token;
+    }
+    
+    $Request = @{
+        URI="$($GitlabAPI.Domain)/api/v3/projects/$ID";
+        Method='Delete';
+        Headers=$Headers;
+    }
+
+    if (QueryGitLabAPI -Request $Request -ObjectType "GitLab.Project" -Verbose) {
+        Write-Warning "Project $ID deleted."
+    } else {
+        Write-Error "Project $Id not deleted"
+    }
+    
+
+}
