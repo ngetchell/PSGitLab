@@ -290,3 +290,40 @@ param(
     
 
 }
+
+Function Get-GitlabProjectEvents {
+[cmdletbinding()]
+param(
+    [ValidateNotNull()]
+    [ValidateNotNullOrEmpty()]
+    [Parameter(ParameterSetName='Id')]
+    [string]$Id,
+
+    [ValidateNotNull()]
+    [ValidateNotNullOrEmpty()]
+    [Parameter(ParameterSetName='Namespace')]
+    [string]$Namespace
+)
+
+    $GitlabAPI = ImportConfig
+
+    $Headers = @{
+        'PRIVATE-TOKEN'=$GitlabAPI.Token;
+    }
+    
+    $queryID = $null
+    switch ($PSCmdlet.ParameterSetName) {
+        'Id' { $queryID = $id }
+        'Namespace' { $queryID = $Namespace -replace "/","%2F" -replace " ","" }
+    }
+    
+    $Request = @{
+        URI="$($GitlabAPI.Domain)/api/v3/projects/$queryID/events";
+        Method='Get';
+        Headers=$Headers;
+    }
+
+    QueryGitLabAPI -Request $Request -ObjectType "GitLab.Project.Events" -Verbose
+    
+
+}
