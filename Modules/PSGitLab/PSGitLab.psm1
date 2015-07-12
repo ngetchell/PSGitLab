@@ -145,3 +145,50 @@ Function GetMethodParameters {
     $string = $string -replace '\?&',"?"
     Write-Output $string
 }
+
+Function Get-GitlabOwnedProjects {
+[cmdletbinding()]
+param(
+    
+    [switch]$archived = $false,
+
+    [ValidateSet("id","name","path","created_at","updated_at","last_activity_at")]
+    [string]$order_by = 'created_at',
+
+    [ValidateSet("asc","desc")]    
+    [string]$sort = 'desc',
+    
+    [string]$search = $null
+)
+
+    $GitlabAPI = ImportConfig
+
+    $Headers = @{
+        'PRIVATE-TOKEN'=$GitlabAPI.Token;
+    }
+    
+    
+    $Request = @{
+        URI="$($GitlabAPI.Domain)/api/v3/projects/owned";
+        Method='Get';
+        Headers=$Headers;
+    }
+
+    ## GET Method Paramters
+    $GetUrlParameters = @()
+    if ($archived) {
+        $GetUrlParameters += @{archived='true'}
+    }
+
+    if ($search -ne $null) {
+        $GetUrlParameters += @{search=$search}
+    }
+    $GetUrlParameters += @{order_by=$order_by}
+    $GetUrlParameters += @{sort=$sort}
+    $URLParamters = GetMethodParameters -GetURLParameters $GetUrlParameters
+    $Request.URI = "$($Request.URI)" + "$URLParamters"
+
+    QueryGitLabAPI -Request $Request -ObjectType "GitLab.Project" -Verbose
+    
+
+}
