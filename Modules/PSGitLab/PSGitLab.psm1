@@ -67,6 +67,13 @@ param(
     $GitLabConfig = ImportConfig
     $Domain = $GitLabConfig.Domain
     $Token = $GitLabConfig.Token
+
+    $Headers = @{
+        'PRIVATE-TOKEN'=$Token;
+    }
+
+    $Request.Add("Headers",$Headers)
+    $Request.URI = "$Domain/api/v3" + $Request.URI
     
     try  {
         $Results = Invoke-RestMethod @Request
@@ -96,17 +103,9 @@ param(
     [string]$search = $null
 )
 
-    $GitlabAPI = ImportConfig
-
-    $Headers = @{
-        'PRIVATE-TOKEN'=$GitlabAPI.Token;
-    }
-    
-    
     $Request = @{
-        URI="$($GitlabAPI.Domain)/api/v3/projects";
+        URI="/projects";
         Method='Get';
-        Headers=$Headers;
     }
 
     ## GET Method Paramters
@@ -161,17 +160,9 @@ param(
     [string]$search = $null
 )
 
-    $GitlabAPI = ImportConfig
-
-    $Headers = @{
-        'PRIVATE-TOKEN'=$GitlabAPI.Token;
-    }
-    
-    
     $Request = @{
-        URI="$($GitlabAPI.Domain)/api/v3/projects/owned";
+        URI="/projects/owned";
         Method='Get';
-        Headers=$Headers;
     }
 
     ## GET Method Paramters
@@ -208,17 +199,9 @@ param(
     [string]$search = $null
 )
 
-    $GitlabAPI = ImportConfig
-
-    $Headers = @{
-        'PRIVATE-TOKEN'=$GitlabAPI.Token;
-    }
-    
-    
     $Request = @{
-        URI="$($GitlabAPI.Domain)/api/v3/projects/all";
+        URI="/projects/all";
         Method='Get';
-        Headers=$Headers;
     }
 
     ## GET Method Paramters
@@ -254,12 +237,6 @@ param(
     [string]$Namespace
 )
 
-    $GitlabAPI = ImportConfig
-
-    $Headers = @{
-        'PRIVATE-TOKEN'=$GitlabAPI.Token;
-    }
-    
     $queryID = $null
     switch ($PSCmdlet.ParameterSetName) {
         'Id' { $queryID = $id }
@@ -267,25 +244,10 @@ param(
     }
     
     $Request = @{
-        URI="$($GitlabAPI.Domain)/api/v3/projects/$queryID";
+        URI="/projects/$queryID";
         Method='Get';
-        Headers=$Headers;
-    }
-    <#
-    ## GET Method Paramters
-    $GetUrlParameters = @()
-    if ($archived) {
-        $GetUrlParameters += @{archived='true'}
     }
 
-    if ($search -ne $null) {
-        $GetUrlParameters += @{search=$search}
-    }
-    $GetUrlParameters += @{order_by=$order_by}
-    $GetUrlParameters += @{sort=$sort}
-    $URLParamters = GetMethodParameters -GetURLParameters $GetUrlParameters
-    $Request.URI = "$($Request.URI)" + "$URLParamters"
-    #>
     QueryGitLabAPI -Request $Request -ObjectType "GitLab.Project" -Verbose
     
 
@@ -305,12 +267,6 @@ param(
     [string]$Namespace
 )
 
-    $GitlabAPI = ImportConfig
-
-    $Headers = @{
-        'PRIVATE-TOKEN'=$GitlabAPI.Token;
-    }
-    
     $queryID = $null
     switch ($PSCmdlet.ParameterSetName) {
         'Id' { $queryID = $id }
@@ -318,9 +274,8 @@ param(
     }
     
     $Request = @{
-        URI="$($GitlabAPI.Domain)/api/v3/projects/$queryID/events";
+        URI="/projects/$queryID/events";
         Method='Get';
-        Headers=$Headers;
     }
 
     QueryGitLabAPI -Request $Request -ObjectType "GitLab.Project.Events" -Verbose
@@ -346,20 +301,13 @@ Function New-GitLabProject {
         [Switch]$public
     )
 
-    $GitlabAPI = ImportConfig
-
-    $Headers = @{
-        'PRIVATE-TOKEN'=$GitlabAPI.Token;
-    }
-    
     $Body = @{
         name=$Name;
     }
   
     $Request = @{
-        URI="$($GitlabAPI.Domain)/api/v3/projects";
+        URI="/projects";
         Method='POST';
-        Headers=$Headers;
         Body=$Body;
     }
 
@@ -376,16 +324,9 @@ param(
     [string]$Id
 )
 
-    $GitlabAPI = ImportConfig
-
-    $Headers = @{
-        'PRIVATE-TOKEN'=$GitlabAPI.Token;
-    }
-    
     $Request = @{
-        URI="$($GitlabAPI.Domain)/api/v3/projects/$ID";
+        URI="/projects/$ID";
         Method='Delete';
-        Headers=$Headers;
     }
 
     if (QueryGitLabAPI -Request $Request -ObjectType "GitLab.Project" -Verbose) {
