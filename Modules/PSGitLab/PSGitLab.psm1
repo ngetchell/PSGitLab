@@ -14,12 +14,15 @@ Function Save-GitLabAPIConfiguration {
     #>
     [cmdletbinding()]
     param(
-        [Parameter(mandatory=$true)]
+        [Parameter(Mandatory=$true,
+                   HelpMessage="You can find the token in your profile.",
+                   Position=0)]
         [ValidateNotNullOrEmpty()]    
         $Token,
 
-        [Parameter(mandatory=$true,
-                   HelpMessage="Please provide a URI to the GitLab installation")]
+        [Parameter(Mandatory=$true,
+                   HelpMessage="Please provide a URI to the GitLab installation",
+                   Position=1)]
         [ValidateNotNullOrEmpty()]  
         [ValidatePattern("^(?:http|https):\/\/(?:[\w\.\-\+]+:{0,1}[\w\.\-\+]*@)?(?:[a-z0-9\-\.]+)(?::[0-9]+)?(?:\/|\/(?:[\w#!:\.\?\+=&%@!\-\/\(\)]+)|\?(?:[\w#!:\.\?\+=&%@!\-\/\(\)]+))?$")]  
         $Domain 
@@ -60,8 +63,17 @@ Function ImportConfig {
 Function QueryGitLabAPI {
 [cmdletbinding()]
 param(
+    [Parameter(Mandatory=$true,
+               HelpMessage="A hash table used for splatting against invoke-restmethod.",
+               Position=0)]
+    [ValidateNotNullOrEmpty()]   
     $Request,
-    $ObjectType
+
+    [Parameter(Mandatory=$false,
+               HelpMessage="Provide a datatype for the returing objects.",
+               Position=1)]
+    [ValidateNotNullOrEmpty()]   
+    [string]$ObjectType
 )
 
     $GitLabConfig = ImportConfig
@@ -91,15 +103,27 @@ param(
 Function Get-GitlabProjects {
 [cmdletbinding()]
 param(
-    
+    [Parameter(Mandatory=$false,
+               HelpMessage="Return only archived projects.")]
+    [ValidateNotNullOrEmpty()]   
     [switch]$archived = $false,
 
+    [Parameter(Mandatory=$false,
+               HelpMessage="Choose how the objects are returned by GitLab.",
+               Position=0)]
     [ValidateSet("id","name","path","created_at","updated_at","last_activity_at")]
     [string]$order_by = 'created_at',
 
+    [Parameter(Mandatory=$false,
+               HelpMessage="Choose ascending or descending.",
+               Position=1)]
     [ValidateSet("asc","desc")]    
     [string]$sort = 'desc',
     
+    [Parameter(Mandatory=$false,
+               HelpMessage="Search against GitLab to only return certain projects.",
+               Position=2)]
+    [ValidateNotNullOrEmpty()]
     [string]$search = $null
 )
 
@@ -122,7 +146,7 @@ param(
     $URLParamters = GetMethodParameters -GetURLParameters $GetUrlParameters
     $Request.URI = "$($Request.URI)" + "$URLParamters"
 
-    QueryGitLabAPI -Request $Request -ObjectType "GitLab.Project" -Verbose
+    QueryGitLabAPI -Request $Request -ObjectType "GitLab.Project" 
     
 
 }
@@ -148,15 +172,27 @@ Function GetMethodParameters {
 Function Get-GitlabOwnedProjects {
 [cmdletbinding()]
 param(
-    
+    [Parameter(Mandatory=$false,
+               HelpMessage="Return only archived projects.")]
+    [ValidateNotNullOrEmpty()]   
     [switch]$archived = $false,
 
+    [Parameter(Mandatory=$false,
+               HelpMessage="Choose how the objects are returned by GitLab.",
+               Position=0)]
     [ValidateSet("id","name","path","created_at","updated_at","last_activity_at")]
     [string]$order_by = 'created_at',
 
+    [Parameter(Mandatory=$false,
+               HelpMessage="Choose ascending or descending.",
+               Position=1)]
     [ValidateSet("asc","desc")]    
     [string]$sort = 'desc',
     
+    [Parameter(Mandatory=$false,
+               HelpMessage="Search against GitLab to only return certain projects.",
+               Position=2)]
+    [ValidateNotNullOrEmpty()]
     [string]$search = $null
 )
 
@@ -179,7 +215,7 @@ param(
     $URLParamters = GetMethodParameters -GetURLParameters $GetUrlParameters
     $Request.URI = "$($Request.URI)" + "$URLParamters"
 
-    QueryGitLabAPI -Request $Request -ObjectType "GitLab.Project" -Verbose
+    QueryGitLabAPI -Request $Request -ObjectType "GitLab.Project" 
     
 
 }
@@ -187,15 +223,27 @@ param(
 Function Get-GitlabAllProjects {
 [cmdletbinding()]
 param(
-    
+    [Parameter(Mandatory=$false,
+               HelpMessage="Return only archived projects.")]
+    [ValidateNotNullOrEmpty()]   
     [switch]$archived = $false,
 
+    [Parameter(Mandatory=$false,
+               HelpMessage="Choose how the objects are returned by GitLab.",
+               Position=0)]
     [ValidateSet("id","name","path","created_at","updated_at","last_activity_at")]
     [string]$order_by = 'created_at',
 
+    [Parameter(Mandatory=$false,
+               HelpMessage="Choose ascending or descending.",
+               Position=1)]
     [ValidateSet("asc","desc")]    
     [string]$sort = 'desc',
     
+    [Parameter(Mandatory=$false,
+               HelpMessage="Search against GitLab to only return certain projects.",
+               Position=2)]
+    [ValidateNotNullOrEmpty()]
     [string]$search = $null
 )
 
@@ -218,7 +266,7 @@ param(
     $URLParamters = GetMethodParameters -GetURLParameters $GetUrlParameters
     $Request.URI = "$($Request.URI)" + "$URLParamters"
 
-    QueryGitLabAPI -Request $Request -ObjectType "GitLab.Project" -Verbose
+    QueryGitLabAPI -Request $Request -ObjectType "GitLab.Project" 
     
 
 }
@@ -248,7 +296,7 @@ param(
         Method='Get';
     }
 
-    QueryGitLabAPI -Request $Request -ObjectType "GitLab.Project" -Verbose
+    QueryGitLabAPI -Request $Request -ObjectType "GitLab.Project" 
     
 
 }
@@ -278,7 +326,7 @@ param(
         Method='Get';
     }
 
-    QueryGitLabAPI -Request $Request -ObjectType "GitLab.Project.Events" -Verbose
+    QueryGitLabAPI -Request $Request -ObjectType "GitLab.Project.Events" 
     
 
 }
@@ -316,7 +364,7 @@ Function New-GitLabProject {
 }
 
 Function Remove-GitLabProject {
-[cmdletbinding()]
+[cmdletbinding(SupportsShouldProcess=$True,ConfirmImpact="High")]
 param(
     [ValidateNotNull()]
     [ValidateNotNullOrEmpty()]
@@ -329,11 +377,12 @@ param(
         Method='Delete';
     }
 
-    if (QueryGitLabAPI -Request $Request -ObjectType "GitLab.Project" -Verbose) {
-        Write-Warning "Project $ID deleted."
-    } else {
-        Write-Error "Project $Id not deleted"
+    $Project = Get-GitlabSingleProject -Id $Id
+
+    if ($PSCmdlet.ShouldProcess($Project.Name, "Delete Project")) {
+        $Worked = QueryGitLabAPI -Request $Request -ObjectType "GitLab.Project"
     }
+
     
 
 }
