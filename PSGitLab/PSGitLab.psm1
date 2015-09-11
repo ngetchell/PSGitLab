@@ -5,15 +5,19 @@
 
 
 # Get public and private function definition files.
-$Public  = @( Get-ChildItem -Path $PSScriptRoot\Public\*.psm1 -ErrorAction SilentlyContinue )
-$Private = @( Get-ChildItem -Path $PSScriptRoot\Private\*.psm1 -ErrorAction SilentlyContinue )
+$Public  = @( Get-ChildItem -Path $PSScriptRoot\Public\*.psm1 -ErrorAction SilentlyContinue | Add-Member -NotePropertyName Public -NotePropertyValue $true -PassThru )
+$Private = @( Get-ChildItem -Path $PSScriptRoot\Private\*.psm1 -ErrorAction SilentlyContinue | Add-Member -NotePropertyName Public -NotePropertyValue $false -PassThru)
 
+$FunctionsToExport = @()
 # Import Modules
 foreach($import in @($Public + $Private)) {
-    Try {
+    try {
         Import-Module $import.fullname
+        if ($import.Public) {
+            $FunctionsToExport += Get-Command -Module $import.basename | Select-Object -ExpandProperty Name
+        }
     }
-    Catch {
+    catch {
         Write-Error -Message "Failed to import function $($import.fullname): $_"
     }
 }
@@ -23,4 +27,4 @@ foreach($import in @($Public + $Private)) {
     # Export Public functions ($Public.BaseName) for WIP modules
     # Set variables visible to the module and its functions only
 
-Export-ModuleMember -Function $Public.Basename
+Export-ModuleMember -Function $FunctionsToExport
