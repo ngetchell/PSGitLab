@@ -1,5 +1,7 @@
 An interface for administering GitLab from a Windows PC using PowerShell.
 
+[![Build status](https://ci.appveyor.com/api/projects/status/t7wyv5xim2olu0r7/branch/master?svg=true)](https://ci.appveyor.com/project/ngetchell/psgitlab/branch/master)
+
 ## Usage
 Help files on the way. If you'd like to reach out to me start a conversation with me on Twitter [@getch3028](http://twitter.com/getch3028).
 
