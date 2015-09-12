@@ -1,5 +1,5 @@
 $CommandPath = Split-Path $MyInvocation.MyCommand.Path -Parent
-$ModulePath = "$CommandPath\..\Modules\PSGitLab\PSGitLab.psd1"
+$ModulePath = "$CommandPath\..\PSGitLab\PSGitLab.psd1"
 Import-Module $ModulePath
 
 #region Save-GitLabAPIConfiguration
@@ -25,7 +25,7 @@ Describe "Save-GitLabAPIConfigruation" {
 Describe "ImportConfig" {
     $Token = (Get-date -Format yy-mm-dd-HH)
     Save-GitLabAPIConfiguration -Domain 'http://gitlab.com' -Token $Token
-    
+
     InModuleScope PSGitLab {
         it "Domain Test" {
             $Config = ImportConfig
