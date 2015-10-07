@@ -14,6 +14,3 @@ Milestones will be used for code coverage. Each API call has it's own issue and 
 
 ### Issues
 If you find a bug, please let me know through the issue tracker. The more details you provide the better.
-
-## Build Status
-[![Build status](https://ci.appveyor.com/api/projects/status/oqlgm6u0njxxhjta?svg=true)](https://ci.appveyor.com/project/ngetchell/psgitlab-f9vn4)
