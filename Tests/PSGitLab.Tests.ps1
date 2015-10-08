@@ -40,6 +40,55 @@ Describe "ImportConfig" {
     }
 }
 
+Describe "Module Information" {
+    
+    $ModuleManifest = "$PSScriptRoot\..\PSGitlab\PSGitlab.psd1"
+    
+    Context "Modules Loaded" {
+        It "Number of Modules" {
+            Get-Command -Module PSgitlab | measure | Select-Object -ExpandProperty Count | Should be 9
+        }
+    }
+
+    Context "Module Manifest" {
+        $Script:Manifest = $null
+        It "Valid Manifest File" {
+            {
+                $Script:Manifest = Test-ModuleManifest -Path $ModuleManifest -ErrorAction Stop -WarningAction SilentlyContinue
+            } | Should Not Throw
+        }
+
+        It "Valid Manifest Root Module" {
+            $Script:Manifest.RootModule | Should Be 'PSGitLab.psm1'
+        }
+
+        It "Valid Manifest Name" {
+            $Script:Manifest.Name | Should be PSGitLab
+        }
+
+        It "Valid Manifest GUID" {
+            $Script:Manifest.Guid | SHould be 'f844db87-fda8-403b-a7da-bdc00a3f5a58'
+        }
+
+        It "Valid Manifest Version" {
+            $Script:Manifest.Version -as [Version] | Should Not BeNullOrEmpty
+        }
+
+        It "Valid Format File" {
+            $ValidPath = Test-Path -Path $Script:Manifest.ExportedFormatFiles
+            $ValidPath | Should be $true
+        }
+
+        It "Required Modules" {
+            $Script:Manifest.RequiredModules | Should BeNullOrEmpty
+        }
+
+        It "Non blank description" {
+            $Script:Manifest.Description | Should not Benullorempty
+        }
+
+    }
+}
 
 
 #endregion Save-GitLabAPIConfiguration
