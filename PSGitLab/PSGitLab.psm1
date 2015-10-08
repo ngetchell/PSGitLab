@@ -13,7 +13,7 @@ $FunctionsToExport = @()
 foreach($import in @($Public + $Private)) {
     try {
         Import-Module $import.fullname
-        if ($import.Public) {
+        if ($import.Public -or -not ($import.public)) {
             $FunctionsToExport += Get-Command -Module $import.basename | Select-Object -ExpandProperty Name
         }
     }

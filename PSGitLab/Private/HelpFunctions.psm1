@@ -46,6 +46,7 @@ param(
     $Request.URI = "$Domain/api/v3" + $Request.URI
     
     try  {
+        Write-Verbose "URL: $($Request.URI)"
         $Results = Invoke-RestMethod @Request
     } catch {
         $ErrorMessage = $_.exception.response.statusDescription
