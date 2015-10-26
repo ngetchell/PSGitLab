@@ -74,6 +74,10 @@ Describe "Module Information" {
             $Script:Manifest.Version -as [Version] | Should Not BeNullOrEmpty
         }
 
+        It "Valid Manifest Description" {
+            $Script:Manifest.Description | Should Not BeNullOrEmpty
+        }
+
         It "Valid Format File" {
             $ValidPath = Test-Path -Path $Script:Manifest.ExportedFormatFiles
             $ValidPath | Should be $true
