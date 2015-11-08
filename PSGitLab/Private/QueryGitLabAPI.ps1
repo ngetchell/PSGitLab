@@ -2,13 +2,13 @@ Function QueryGitLabAPI {
 [cmdletbinding()]
 param(
     [Parameter(Mandatory=$true,
-               HelpMessage="A hash table used for splatting against invoke-restmethod.",
+               HelpMessage='A hash table used for splatting against invoke-restmethod.',
                Position=0)]
     [ValidateNotNullOrEmpty()]
     $Request,
 
     [Parameter(Mandatory=$false,
-               HelpMessage="Provide a datatype for the returing objects.",
+               HelpMessage='Provide a datatype for the returing objects.',
                Position=1)]
     [ValidateNotNullOrEmpty()]
     [string]$ObjectType
@@ -22,7 +22,7 @@ $Headers = @{
     'PRIVATE-TOKEN'=$Token;
 }
 
-$Request.Add("Headers",$Headers)
+$Request.Add('Headers',$Headers)
 $Request.URI = "$Domain/api/v3" + $Request.URI
 
 try  {

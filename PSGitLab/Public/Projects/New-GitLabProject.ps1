@@ -21,11 +21,11 @@ Function New-GitLabProject {
     }
 
     $Request = @{
-        URI="/projects";
+        URI='/projects';
         Method='POST';
         Body=$Body;
     }
 
-    QueryGitLabAPI -Request $Request -ObjectType "GitLab.Project"
+    QueryGitLabAPI -Request $Request -ObjectType 'GitLab.Project'
 
 }

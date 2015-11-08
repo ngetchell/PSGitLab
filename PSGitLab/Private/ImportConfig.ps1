@@ -12,7 +12,7 @@ if (Test-Path $ConfigFile) {
     Import-Clixml $ConfigFile
 
 } else {
-    Write-Warning "No Saved Configration Information. Run Save-GitLabAPIConfiguration."
+    Write-Warning 'No Saved Configration Information. Run Save-GitLabAPIConfiguration.'
     break;
 }
 }
