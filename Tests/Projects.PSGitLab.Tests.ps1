@@ -5,13 +5,13 @@ Import-Module $ModulePath
 ## Projects ##
 
 InModuleScope PSGitLab {
-    Describe "Get-GitLabAllProjects"  {
+    Describe "Get-GitLabAllProject"  {
         It "QueryGitLabAPI Calls" {
             # Arrange
             Mock QueryGitLabAPI {} 
 
             # Act 
-            $Results = Get-GitLabAllProjects 
+            $Results = Get-GitLabAllProject
 
             # Assert
             Assert-MockCalled QueryGitLabAPI 1
@@ -23,7 +23,7 @@ InModuleScope PSGitLab {
             Mock QueryGitLabAPI { $Request}
 
             # Act
-            $Results = Get-GitLabAllProjects -archived -sort asc -order_by id -search "Name"
+            $Results = Get-GitLabAllProject -archived -sort asc -order_by id -search "Name"
 
             # Assert
             $Results.Method | Should be "Get"
@@ -32,7 +32,7 @@ InModuleScope PSGitLab {
 
         Context "Parameter Checks - Archived"  {
             BeforeAll {
-                $Parameters = Get-Command Get-GitLabAllProjects |
+                $Parameters = Get-Command Get-GitLabAllProject |
                     Select-Object -ExpandProperty Parameters
             }
 
@@ -49,13 +49,13 @@ InModuleScope PSGitLab {
 }
 
 InModuleScope PSGitLab {
-    Describe "Get-GitLabOwnedProjects"  {
+    Describe "Get-GitLabOwnedProject"  {
         It "QueryGitLabAPI Calls" {
             # Arrange
             Mock QueryGitLabAPI {} 
 
             # Act 
-            $Results = Get-GitLabOwnedProjects
+            $Results = Get-GitLabOwnedProject
 
             # Assert
             Assert-MockCalled QueryGitLabAPI 1
@@ -65,13 +65,13 @@ InModuleScope PSGitLab {
 }
 
 InModuleScope PSGitLab {
-    Describe "Get-GitLabProjectEvents"  {
+    Describe "Get-GitLabProjectEvent"  {
         It "QueryGitLabAPI Calls" {
             # Arrange
             Mock QueryGitLabAPI {} 
 
             # Act 
-            $Results = Get-GitLabProjectEvents -id 12
+            $Results = Get-GitLabProjectEvent -id 12
 
             # Assert
             Assert-MockCalled QueryGitLabAPI 1
@@ -81,13 +81,13 @@ InModuleScope PSGitLab {
 }
 
 InModuleScope PSGitLab {
-    Describe "Get-GitLabProjects"  {
+    Describe "Get-GitLabProject"  {
         It "QueryGitLabAPI Calls" {
             # Arrange
             Mock QueryGitLabAPI {} 
 
             # Act 
-            $Results = Get-GitLabProjects
+            $Results = Get-GitLabProject
 
             # Assert
             Assert-MockCalled QueryGitLabAPI 1

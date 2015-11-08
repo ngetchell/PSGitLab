@@ -1,4 +1,4 @@
-Function Get-GitLabProjectEvents {
+Function Get-GitLabProjectEvent {
 [cmdletbinding()]
 param(
     [ValidateNotNull()]

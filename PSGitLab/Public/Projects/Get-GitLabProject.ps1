@@ -1,4 +1,4 @@
-Function Get-GitLabProjects {
+Function Get-GitLabProject {
 [cmdletbinding()]
 param(
     [Parameter(Mandatory=$false,

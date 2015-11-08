@@ -23,5 +23,5 @@ Function New-GitLabFork {
         Method='POST';
     }
 
-    QueryGitLabAPI -Request $Request -ObjectType "GitLab.Project"
+    QueryGitLabAPI -Request $Request -ObjectType 'GitLab.Project'
 }

@@ -1,4 +1,4 @@
-Function Get-GitLabOwnedProjects {
+Function Get-GitLabOwnedProject {
 [cmdletbinding()]
 param(
     [Parameter(Mandatory=$false,
