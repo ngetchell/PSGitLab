@@ -15,7 +15,7 @@ param(
     $queryID = $null
     switch ($PSCmdlet.ParameterSetName) {
         'Id' { $queryID = $id }
-        'Namespace' { $queryID = $Namespace -replace "/","%2F" -replace " ","" }
+        'Namespace' { $queryID = $Namespace -replace '/','%2F' -replace ' ','' }
     }
 
     $Request = @{
@@ -23,7 +23,7 @@ param(
         Method='Get';
     }
 
-    QueryGitLabAPI -Request $Request -ObjectType "GitLab.Project"
+    QueryGitLabAPI -Request $Request -ObjectType 'GitLab.Project'
 
 
 }

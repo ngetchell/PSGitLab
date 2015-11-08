@@ -12,6 +12,6 @@ foreach ($Param in $GetUrlParameters) {
     }
     $string += "&$key=$value"
 }
-$string = $string -replace '\?&',"?"
+$string = $string -replace '\?&','?'
 Write-Output $string
 }

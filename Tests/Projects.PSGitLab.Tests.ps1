@@ -5,8 +5,8 @@ Import-Module $ModulePath
 ## Projects ##
 
 InModuleScope PSGitLab {
-    Describe "Get-GitLabAllProject"  {
-        It "QueryGitLabAPI Calls" {
+    Describe 'Get-GitLabAllProject'  {
+        It 'QueryGitLabAPI Calls' {
             # Arrange
             Mock QueryGitLabAPI {} 
 
@@ -18,29 +18,29 @@ InModuleScope PSGitLab {
 
         }
 
-        It "Correct Params" {
+        It 'Correct Params' {
             # Arrange
             Mock QueryGitLabAPI { $Request}
 
             # Act
-            $Results = Get-GitLabAllProject -archived -sort asc -order_by id -search "Name"
+            $Results = Get-GitLabAllProject -archived -sort asc -order_by id -search 'Name'
 
             # Assert
-            $Results.Method | Should be "Get"
-            $Results.URi -match "&search=Name" | Should be $true
+            $Results.Method | Should be 'Get'
+            $Results.URi -match '&search=Name' | Should be $true
         }
 
-        Context "Parameter Checks - Archived"  {
+        Context 'Parameter Checks - Archived'  {
             BeforeAll {
                 $Parameters = Get-Command Get-GitLabAllProject |
                     Select-Object -ExpandProperty Parameters
             }
 
-            It "SwitchParam" {
+            It 'SwitchParam' {
                 $Parameters['Archived'].SwitchParameter | Should be $true
             }
 
-            It "Name" {
+            It 'Name' {
                 $Parameters['Archived'].Name | Should be 'Archived'
             }
             
@@ -49,8 +49,8 @@ InModuleScope PSGitLab {
 }
 
 InModuleScope PSGitLab {
-    Describe "Get-GitLabOwnedProject"  {
-        It "QueryGitLabAPI Calls" {
+    Describe 'Get-GitLabOwnedProject'  {
+        It 'QueryGitLabAPI Calls' {
             # Arrange
             Mock QueryGitLabAPI {} 
 
@@ -65,8 +65,8 @@ InModuleScope PSGitLab {
 }
 
 InModuleScope PSGitLab {
-    Describe "Get-GitLabProjectEvent"  {
-        It "QueryGitLabAPI Calls" {
+    Describe 'Get-GitLabProjectEvent'  {
+        It 'QueryGitLabAPI Calls' {
             # Arrange
             Mock QueryGitLabAPI {} 
 
@@ -81,8 +81,8 @@ InModuleScope PSGitLab {
 }
 
 InModuleScope PSGitLab {
-    Describe "Get-GitLabProject"  {
-        It "QueryGitLabAPI Calls" {
+    Describe 'Get-GitLabProject'  {
+        It 'QueryGitLabAPI Calls' {
             # Arrange
             Mock QueryGitLabAPI {} 
 
@@ -97,8 +97,8 @@ InModuleScope PSGitLab {
 }
 
 InModuleScope PSGitLab {
-    Describe "Get-GitlabSingleProject"  {
-        It "QueryGitLabAPI Calls" {
+    Describe 'Get-GitlabSingleProject'  {
+        It 'QueryGitLabAPI Calls' {
             # Arrange
             Mock QueryGitLabAPI {} 
 
@@ -113,8 +113,8 @@ InModuleScope PSGitLab {
 }
 
 InModuleScope PSGitLab {
-    Describe "New-GitLabFork"  {
-        It "QueryGitLabAPI Calls" {
+    Describe 'New-GitLabFork'  {
+        It 'QueryGitLabAPI Calls' {
             # Arrange
             Mock QueryGitLabAPI {} 
 
@@ -129,13 +129,13 @@ InModuleScope PSGitLab {
 }
 
 InModuleScope PSGitLab {
-    Describe "New-GitLabProject"  {
-        It "QueryGitLabAPI Calls" {
+    Describe 'New-GitLabProject'  {
+        It 'QueryGitLabAPI Calls' {
             # Arrange
             Mock QueryGitLabAPI {} 
 
             # Act 
-            $Results = New-GitLabProject -Name "Pester Test"
+            $Results = New-GitLabProject -Name 'Pester Test'
 
             # Assert
             Assert-MockCalled QueryGitLabAPI 1
@@ -145,8 +145,8 @@ InModuleScope PSGitLab {
 }
 
 InModuleScope PSGitLab {
-    Describe "Remove-GitLabProject"  {
-        It "QueryGitLabAPI Calls" {
+    Describe 'Remove-GitLabProject'  {
+        It 'QueryGitLabAPI Calls' {
             # Arrange
             Mock QueryGitLabAPI {} 
 
@@ -158,12 +158,12 @@ InModuleScope PSGitLab {
 
         }
 
-        Context "Parameter Checks - Id" {
+        Context 'Parameter Checks - Id' {
             BeforeAll {
                 $Parameters = Get-command Remove-GitLabProject | Select-Object -ExpandProperty Parameters
             }
 
-            It "Mandatory" {
+            It 'Mandatory' {
                 $parameters['id'].Attributes.Mandatory | Should be $true
             }
         }

@@ -2,31 +2,31 @@ Function Get-GitLabAllProject {
 [cmdletbinding()]
 param(
     [Parameter(Mandatory=$false,
-               HelpMessage="Return only archived projects.")]
+               HelpMessage='Return only archived projects.')]
     [ValidateNotNullOrEmpty()]
     [switch]$archived = $false,
 
     [Parameter(Mandatory=$false,
-               HelpMessage="Choose how the objects are returned by GitLab.",
+               HelpMessage='Choose how the objects are returned by GitLab.',
                Position=0)]
-    [ValidateSet("id","name","path","created_at","updated_at","last_activity_at")]
+    [ValidateSet('id','name','path','created_at','updated_at','last_activity_at')]
     [string]$order_by = 'created_at',
 
     [Parameter(Mandatory=$false,
-               HelpMessage="Choose ascending or descending.",
+               HelpMessage='Choose ascending or descending.',
                Position=1)]
-    [ValidateSet("asc","desc")]
+    [ValidateSet('asc','desc')]
     [string]$sort = 'desc',
 
     [Parameter(Mandatory=$false,
-               HelpMessage="Search against GitLab to only return certain projects.",
+               HelpMessage='Search against GitLab to only return certain projects.',
                Position=2)]
     [ValidateNotNullOrEmpty()]
     [string]$search = $null
 )
 
     $Request = @{
-        URI="/projects/all";
+        URI='/projects/all';
         Method='Get';
     }
 
@@ -44,7 +44,7 @@ param(
     $URLParamters = GetMethodParameters -GetURLParameters $GetUrlParameters
     $Request.URI = "$($Request.URI)" + "$URLParamters"
 
-    QueryGitLabAPI -Request $Request -ObjectType "GitLab.Project"
+    QueryGitLabAPI -Request $Request -ObjectType 'GitLab.Project'
 
 
 }
