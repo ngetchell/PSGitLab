@@ -1,4 +1,4 @@
-﻿# Functions 
+﻿# Public 
 
 ## Save-GitLabAPIConfiguration 
 
@@ -124,6 +124,6 @@ Remove-GitLabProject [-Id] <string> [-WhatIf] [-Confirm] [<CommonParameters>]
 
 ### Examples 
 
- _Auto Generated on 01/25/2016 22:01:33 by ngetchell_ 
+ _Auto Generated on 01/25/2016 22:04:22 by ngetchell_ 
 
 
