@@ -14,4 +14,3 @@ Milestones will be used for code coverage. Each API call has it's own issue and 
 
 ### Issues
 If you find a bug, please let me know through the issue tracker. The more details you provide the better.
-
