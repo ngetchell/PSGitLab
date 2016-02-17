@@ -1,0 +1,26 @@
+stages:
+    - environment
+    - testing
+    - linting
+
+Check Prereqs:
+   stage: environment
+   script:
+     - if ( -not (Get-PackageProvider -Name nuget)  ) { Install-PackageProvider -Name NuGet -Force -confirm:$false }
+     - if ( -not (Get-Module -ListAvailable | Where-Object { $_.name -eq 'PSScriptAnalyzer' }) ) { Install-Module -Name PSScriptAnalyzer -Force -confirm:$false }
+
+Unit Testing - Pester:
+   stage: testing
+   script:
+     - Invoke-Pester -EnableExit
+   tags: 
+     - shell-ps     
+
+Linting - ScriptAnalyzer:
+   stage: linting
+   tags: 
+     - shell-ps   
+   script: 
+     - $Errors = Invoke-ScriptAnalyzer -Recurse -Path .\ -Severity Error,Warning
+     - if ($Errors.Count -gt 0) { $Errors; exit 1 }
+     
