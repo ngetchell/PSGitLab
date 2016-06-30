@@ -1,4 +1,18 @@
 Function Get-GitLabProject {
+<#
+.SYNOPSIS
+Gets all of the projects associated with a GitLab domain. 
+.DESCRIPTION
+Gets all of the projects associated with a GitLab domain. Only returns projects you have access to. This uses the v3 GitLab API.  
+.EXAMPLE
+Get-GitLabProject -Search Chef
+id                  : 39
+name                : Chef
+name_with_namespace : HomeLab / Chef
+web_url             : http://example.com/HomeLab/Chef
+created_at          : 2016-02-01T23:55:26.696Z
+last_activity_at    : 2016-04-24T18:42:58.529Z
+#>
 [cmdletbinding()]
 param(
     [Parameter(Mandatory=$false,

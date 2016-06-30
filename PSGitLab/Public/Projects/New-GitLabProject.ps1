@@ -1,31 +1,72 @@
 Function New-GitLabProject {
+    <#
+    .SYNOPSIS
+    Creates a new GitLab project. Requires a name. 
+    .DESCRIPTION
+    Creates a new GitLab project. Requires a name. 
+    .EXAMPLE
+    New-GitlabProject -Name 'Fake'
+    #>    
     [cmdletbinding()]
     param(
         [ValidateNotNull()]
         [ValidateNotNullOrEmpty()]
         [Parameter(Mandatory=$true)]
-        [string]$Name,
-
-        [string]$Path,
-        [string]$Namespace_ID,
-        [string]$Description,
-        [switch]$Issues_Enabled,
-        [switch]$Merge_Requests_Enabled,
-        [switch]$Wiki_Enabled,
-        [Switch]$Snippets_Enabled,
-        [Switch]$public
+        [string]$name,
+        [string]$path,
+        [string]$namespace,
+        [string]$description,
+        [switch]$issues_enabled,
+        [switch]$merge_requests_enabled,
+        [switch]$builds_enabled,
+        [switch]$wiki_enabled,
+        [Switch]$snippets_enabled,
+        [Switch]$container_registry_enabled,
+        [Switch]$public,
+        [ValidateSet("Private", "Internal", "Public")]
+        [String]$visibility_level
     )
 
     $Body = @{
-        name=$Name;
+        name = $Name
     }
+    $PSBoundParameters.Remove('Name') | Out-Null
 
-    $Request = @{
-        URI='/projects';
-        Method='POST';
-        Body=$Body;
+    try {
+        if ($PSBoundParameters.ContainsKey('Namespace')) {
+            $nSpace = Search-GitLabNamespace -Namespace $Namespace
+            if ($nSpace.id.Count -eq 1) {
+                $Body.Add('namespace_id', $nSpace.id)
+                $PSBoundParameters.Remove('Namespace') | Out-Null
+            } elseif (!$nSpace.id.Count) {
+                throw "Error: No Namespace found"
+            } else {
+                throw "Error: Multiple namespaces found in search"
+            }
+        }
+
+        foreach($p in $PSBoundParameters.GetEnumerator()) {
+            if ($p.Key -eq 'visibility_level') {
+                $vLevel = switch ($p.Value) {
+                    'Private' {0}
+                    'Internal' {10}
+                    'Public' {20}
+                }
+                $Body.Add($p.Key, $vLevel)
+            } else {
+                $Body.Add($p.Key, $p.Value)
+            }
+        }
+
+        $Request = @{
+            URI='/projects';
+            Method='POST';
+            Body=$Body;
+        }
+
+        QueryGitLabAPI -Request $Request -ObjectType 'GitLab.Project'
     }
-
-    QueryGitLabAPI -Request $Request -ObjectType 'GitLab.Project'
-
+    catch {
+        Write-Error $_
+    }
 }

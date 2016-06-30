@@ -44,12 +44,6 @@ Describe 'Module Information' {
     
     $ModuleManifest = "$PSScriptRoot\..\PSGitlab\PSGitlab.psd1"
     
-    Context 'Modules Loaded' {
-        It 'Number of Modules' {
-            Get-Command -Module PSgitlab | measure | Select-Object -ExpandProperty Count | Should be 9
-        }
-    }
-
     Context 'Module Manifest' {
         $Script:Manifest = $null
         It 'Valid Manifest File' {
