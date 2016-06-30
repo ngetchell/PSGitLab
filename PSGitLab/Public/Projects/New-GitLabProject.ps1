@@ -1,4 +1,12 @@
 Function New-GitLabProject {
+    <#
+    .SYNOPSIS
+    Creates a new GitLab project. Requires a name. 
+    .DESCRIPTION
+    Creates a new GitLab project. Requires a name. 
+    .EXAMPLE
+    New-GitlabProject -Name 'Fake'
+    #>    
     [cmdletbinding()]
     param(
         [ValidateNotNull()]

@@ -1,4 +1,5 @@
 Function Search-GitLabUser {
+<<<<<<< HEAD
 <#
 .SYNOPSIS
 Retrives a GitLab user. 
@@ -12,6 +13,8 @@ id                 : 2
 state              : active
 is_admin           : true
 #>
+=======
+>>>>>>> dev
 [cmdletbinding()]
 param(
     [Parameter(Mandatory=$true)]
