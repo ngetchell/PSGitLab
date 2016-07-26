@@ -1,64 +1,155 @@
 Function Get-GitLabProject {
-<#
-.SYNOPSIS
-Gets all of the projects associated with a GitLab domain. 
-.DESCRIPTION
-Gets all of the projects associated with a GitLab domain. Only returns projects you have access to. This uses the v3 GitLab API.  
-.EXAMPLE
-Get-GitLabProject -Search Chef
-id                  : 39
-name                : Chef
-name_with_namespace : HomeLab / Chef
-web_url             : http://example.com/HomeLab/Chef
-created_at          : 2016-02-01T23:55:26.696Z
-last_activity_at    : 2016-04-24T18:42:58.529Z
-#>
-[cmdletbinding()]
-param(
-    [Parameter(Mandatory=$false,
-               HelpMessage='Return only archived projects.')]
-    [ValidateNotNullOrEmpty()]
-    [switch]$archived = $false,
+    <#
+    .SYNOPSIS
+    Retrieve all projects in a GitLab instance. 
+    .DESCRIPTION
+    Retrieve all projects in a GitLab instance. Queries over HTTP and gets back GitLab.Project type.  
+    .EXAMPLE
+    Get-GitLabProject
+    .EXAMPLE
+    Get-GitLabProject -All
+    .EXAMPLE
+    Get-GitLabProject -Owned
+    .EXAMPLE
+    Get-GitLabProject -Id 4
+    .EXAMPLE
+    Get-GitLabProject -Archived
+    .EXAMPLE 
+    Get-GitLabProject -Starred
+    .EXAMPLE
+    Get-GitLabProject -Search 'ngetchell' -Archived
+    #>
+    [cmdletbinding(DefaultParameterSetName='Projects')]
+    [OutputType("GitLab.Project")]
+    param(
 
-    [Parameter(Mandatory=$false,
-               HelpMessage='Choose how the objects are returned by GitLab.',
-               Position=0)]
-    [ValidateSet('id','name','path','created_at','updated_at','last_activity_at')]
-    [string]$order_by = 'created_at',
+        [Parameter(ParameterSetName='Single',
+                   Mandatory=$true)]
+        [int]$Id,
 
-    [Parameter(Mandatory=$false,
-               HelpMessage='Choose ascending or descending.',
-               Position=1)]
-    [ValidateSet('asc','desc')]
-    [string]$sort = 'desc',
+        [Parameter(Mandatory=$false,
+                   ParameterSetName='Projects',
+                   HelpMessage='Return only archived projects')]
+        [Parameter(Mandatory=$false,
+                   ParameterSetName='Owned',
+                   HelpMessage='Return only archived projects')]
+        [Parameter(Mandatory=$false,
+                   ParameterSetName='All',
+                   HelpMessage='Return only archived projects')]
+        [Parameter(Mandatory=$false,
+                   ParameterSetName='Starred',
+                   HelpMessage='Return only archived projects')]
+        [switch]$Archived = $false,
 
-    [Parameter(Mandatory=$false,
-               HelpMessage='Search against GitLab to only return certain projects.',
-               Position=2)]
-    [ValidateNotNullOrEmpty()]
-    [string]$search = $null
-)
+        [Parameter(Mandatory=$false,
+                   HelpMessage='Limit by visibility',
+                   ParameterSetName='Projects')]
+        [Parameter(Mandatory=$false,
+                   HelpMessage='Limit by visibility',
+                   ParameterSetName='Owned')]
+        [Parameter(Mandatory=$false,
+                   HelpMessage='Limit by visibility',
+                   ParameterSetName='All')]
+        [Parameter(Mandatory=$false,
+                   HelpMessage='Limit by visibility',
+                   ParameterSetName='Starred')]
+        [ValidateSet("public", "internal", "private","none")]
+        $Visibility = 'none',
+
+        [Parameter(Mandatory=$false,
+                   HelpMessage='Choose the order in which projects are returned.',
+                   ParameterSetName='Projects')]
+        [Parameter(Mandatory=$false,
+                   HelpMessage='Choose the order in which projects are returned.',
+                   ParameterSetName='Owned')]
+        [Parameter(Mandatory=$false,
+                   HelpMessage='Choose the order in which projects are returned.',
+                   ParameterSetName='All')]
+        [Parameter(Mandatory=$false,
+                   HelpMessage='Choose the order in which projects are returned.',
+                   ParameterSetName='Starred')]
+        [ValidateSet('id','name','path','created_at','updated_at','last_activity_at')]
+        $Order_by = 'created_at',
+        
+
+        [Parameter(Mandatory=$false,
+                   HelpMessage='Ascending or Descending',
+                   ParameterSetName='Projects')]
+        [Parameter(Mandatory=$false,
+                   HelpMessage='Ascending or Descending',
+                   ParameterSetName='Owned')]
+        [Parameter(Mandatory=$false,
+                   HelpMessage='Ascending or Descending',
+                   ParameterSetName='All')]
+        [Parameter(Mandatory=$false,
+                   HelpMessage='Ascending or Descending',
+                   ParameterSetName='Starred')]
+        [ValidateSet('asc','desc')]
+        $Sort = 'desc',
+
+        [Parameter(Mandatory=$false,
+                   HelpMessage='Search for a project.',
+                   ParameterSetName='Projects')]
+        [Parameter(Mandatory=$false,
+                   HelpMessage='Search for a project.',
+                   ParameterSetName='Owned')]
+        [Parameter(Mandatory=$false,
+                   HelpMessage='Search for a project.',
+                   ParameterSetName='All')]
+        [Parameter(Mandatory=$false,
+                   HelpMessage='Search for a project.',
+                   ParameterSetName='Starred')]
+        $Search,
+
+        [Parameter(ParameterSetName='Owned',
+                   Mandatory=$true)]
+        [switch]$Owned,
+
+        [Parameter(ParameterSetName='All',
+                   Mandatory=$true)]
+        [switch]$All,
+
+        [Parameter(ParameterSetName='Starred',
+                   Mandatory=$true)]
+        [switch]$Starred
+
+    )
+
+    if ($PSCmdlet.ParameterSetName -ne 'Single') {
+        Write-Verbose "Create GET Request"
+        $GetUrlParameters = @()
+        if ($archived) {
+            $GetUrlParameters += @{archived='true'}
+        }
+
+        if ($search -ne $null) {
+            $GetUrlParameters += @{search=$search}
+        }
+        $GetUrlParameters += @{order_by=$order_by}
+        $GetUrlParameters += @{sort=$sort}
+        $GetUrlParameters += @{per_page=100}
+        $URLParameters = GetMethodParameters -GetURLParameters $GetUrlParameters
+        #$Request.URI = "$($Request.URI)" + "$URLParameters"
+    }
+
 
     $Request = @{
-        URI='/projects';
-        Method='Get';
+        URI = ''
+        Method = 'GET'
     }
 
-    ## GET Method Paramters
-    $GetUrlParameters = @()
-    if ($archived) {
-        $GetUrlParameters += @{archived='true'}
-    }
+    Write-Verbose "Parameter Set Name: $($PSCmdlet.ParameterSetName)"
 
-    if ($search -ne $null) {
-        $GetUrlParameters += @{search=$search}
-    }
-    $GetUrlParameters += @{order_by=$order_by}
-    $GetUrlParameters += @{sort=$sort}
-    $URLParamters = GetMethodParameters -GetURLParameters $GetUrlParameters
-    $Request.URI = "$($Request.URI)" + "$URLParamters"
+    switch ($PSCmdlet.ParameterSetName) {
+        Projects { $Request.URI = "/projects$URLParameters"; break; }
+        Owned { $Request.URI = "/projects/owned$URLParameters"; break; }
+        All { $Request.URI="/projects/all$URLParameters"; break; }
+        Starred { $Request.URI="/projects/starred$URLParameters"; break; }
+        Single { $Request.URI="/projects/$Id"; break; }
+        default { Write-Error "Incorrect parameter set."; break; }
 
+    }
+    
     QueryGitLabAPI -Request $Request -ObjectType 'GitLab.Project'
-
 
 }
