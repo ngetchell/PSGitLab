@@ -16,7 +16,7 @@ param(
 
 $GitLabConfig = ImportConfig
 $Domain = $GitLabConfig.Domain
-$Token = $GitLabConfig.Token
+$Token = DecryptString -Token $GitLabConfig.Token
 
 $Headers = @{
     'PRIVATE-TOKEN'=$Token;
@@ -28,6 +28,10 @@ $Request.URI = "$Domain/api/v3" + $Request.URI
 try  {
     Write-Verbose "URL: $($Request.URI)"
     $Results = Invoke-RestMethod @Request
+
+    Remove-Variable Token
+    Remove-Variable Headers
+    Remove-Variable Request
 } catch {
     $ErrorMessage = $_.exception.response.statusDescription
     Write-Warning  -Message "$ErrorMessage. See $Domain/help/api/README.md#status-codes for more information."
