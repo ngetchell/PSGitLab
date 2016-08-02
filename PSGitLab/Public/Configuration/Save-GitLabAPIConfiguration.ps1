@@ -26,7 +26,7 @@ param(
 )
 
 $Parameters = @{
-    Token=$Token;
+    Token=(ConvertTo-SecureString -string $Token -AsPlainText -Force)
     Domain=$Domain;
 }
 $ConfigPath = "$env:appdata\PSGitLab\PSGitLabConfiguration.xml"
@@ -35,4 +35,5 @@ if (-not (Test-Path (Split-Path $ConfigPath))) {
 
 }
 $Parameters | Export-Clixml -Path $ConfigPath
+Remove-Variable Parameters
 }
