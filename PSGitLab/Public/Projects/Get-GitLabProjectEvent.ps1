@@ -38,7 +38,7 @@ param(
         Method='Get';
     }
 
-    QueryGitLabAPI -Request $Request -ObjectType 'GitLab.Project.Events'
+    QueryGitLabAPI -Request $Request -ObjectType 'GitLab.Project.Event'
 
 
 }
