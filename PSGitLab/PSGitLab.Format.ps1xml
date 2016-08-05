@@ -35,7 +35,7 @@
       <View>
         <Name>PSGitLab</Name>
     <ViewSelectedBy>
-      <TypeName>GitLab.Project.Events</TypeName>
+      <TypeName>GitLab.Project.Event</TypeName>
     </ViewSelectedBy>
         <ListControl>
           <ListEntries>
@@ -63,6 +63,38 @@
             </ListEntry>
           </ListEntries>
         </ListControl>
-      </View>      
+      </View>
+      <View>
+        <Name>PSGitLab</Name>
+    <ViewSelectedBy>
+      <TypeName>GitLab.User</TypeName>
+    </ViewSelectedBy>
+        <ListControl>
+          <ListEntries>
+            <ListEntry>
+              <ListItems>
+                <ListItem>
+                  <PropertyName>name</PropertyName>
+                </ListItem>
+                <ListItem>
+                  <PropertyName>username</PropertyName>
+                </ListItem>                
+                <ListItem>
+                  <PropertyName>id</PropertyName>
+                </ListItem>
+                <ListItem>
+                  <PropertyName>is_admin</PropertyName>
+                </ListItem>
+                <ListItem>
+                  <PropertyName>email</PropertyName>
+                </ListItem>
+                <ListItem>
+                  <PropertyName>last_sign_in_at</PropertyName>
+                </ListItem>
+              </ListItems>
+            </ListEntry>
+          </ListEntries>
+        </ListControl>
+      </View>            
    </ViewDefinitions>
 </Configuration>
