@@ -22,5 +22,5 @@ param(
         URI="/users?search=$($User)";
         Method='Get';
     }
-    QueryGitLabAPI -Request $Request -ObjectType 'GitLab.Users'
+    QueryGitLabAPI -Request $Request -ObjectType 'GitLab.User'
 }
