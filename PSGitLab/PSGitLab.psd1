@@ -12,7 +12,7 @@
 RootModule = 'PSGitLab.psm1'
 
 # Version number of this module.
-ModuleVersion = '2.1.0'
+ModuleVersion = '2.2.0'
 
 # ID used to uniquely identify this module
 GUID = 'f844db87-fda8-403b-a7da-bdc00a3f5a58'
@@ -66,7 +66,7 @@ FormatsToProcess = @('PSGitLab.format.ps1xml')
 # NestedModules = @()
 
 # Functions to export from this module
-FunctionsToExport = @('Get-GitLabUser','Remove-GitLabUser','New-GitLabUser','Get-GitLabProject','Get-GitLabProjectEvent','New-GitLabFork','New-GitLabProject','Remove-GitLabProject','Save-GitLabAPIConfiguration','Test-GitLabAPI','Search-GitLabNameSpace','Search-GitLabUser','Get-GitLabNamespace','Get-GitLabCommitStats')
+FunctionsToExport = @('Unblock-GitLabUser','Block-GitLabUser','Get-GitLabUser','Remove-GitLabUser','New-GitLabUser','Get-GitLabProject','Get-GitLabProjectEvent','New-GitLabFork','New-GitLabProject','Remove-GitLabProject','Save-GitLabAPIConfiguration','Test-GitLabAPI','Search-GitLabNameSpace','Search-GitLabUser','Get-GitLabNamespace','Get-GitLabCommitStats')
 
 # Cmdlets to export from this module
 #CmdletsToExport = '*'
