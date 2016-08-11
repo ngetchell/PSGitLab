@@ -8,8 +8,8 @@ Function FormatCommits {
     $results = @()
     foreach ($c in $dtCommits) {
         $tempObj = new-object psobject
-        Add-Member -InputObject $tempObj -MemberType NoteProperty -Name Week -Value (Get-Date ([datetime]($c.created_at)) -UFormat %V)
-        Add-Member -InputObject $tempObj -MemberType NoteProperty -Name Day -Value (Get-Date ([datetime]($c.created_at)) -UFormat %u)
+        Add-Member -InputObject $tempObj -MemberType NoteProperty -Name Week -Value (GetWeek -DateTime $c.created_at)
+        Add-Member -InputObject $tempObj -MemberType NoteProperty -Name Day -Value (Get-Date ([datetime]($c.created_at)) -UFormat %w)
         $commits += $tempObj
     }
 
