@@ -15,17 +15,25 @@ param(
                ValueFromPipelineByPropertyName=$true)]
     [string]$Id
 )
+    BEGIN {}
 
-    $Request = @{
-        URI="/projects/$ID";
-        Method='Delete';
+    PROCESS {
+
+        $Request = @{
+            URI="/projects/$ID";
+            Method='Delete';
+        }
+
+        $Project = Get-GitLabProject -Id $Id
+
+        if ($PSCmdlet.ShouldProcess($Project.Name, 'Delete Project')) {
+            $Worked = QueryGitLabAPI -Request $Request -ObjectType 'GitLab.Project'
+        }
+
     }
 
-    $Project = Get-GitLabProject -Id $Id
+    END {}
 
-    if ($PSCmdlet.ShouldProcess($Project.Name, 'Delete Project')) {
-        $Worked = QueryGitLabAPI -Request $Request -ObjectType 'GitLab.Project'
-    }
 
 
 
