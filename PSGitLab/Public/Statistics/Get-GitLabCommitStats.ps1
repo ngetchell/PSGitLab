@@ -5,40 +5,13 @@ Retrieves information about commits to projects
 .DESCRIPTION
 Retrieves information about commits to projects
 .EXAMPLE
-PS U:\> Get-GitLabCommitStats -Id 52 -afterDate "2016-07-01" -author "Test User"
+PS U:\> Get-GitLabCommitStats -Id 52 -afterDate "2016-07-01" -author "Test User" | ft
 
-Week         : 29
-Sun          : 1
-Mon          : 0
-Tue          : 0
-Wed          : 0
-Thu          : 0
-Fri          : 0
-Sat          : 0
-WeeklyTotal  : 1
-RunningTotal : 1
+Week Sun Mon Tue Wed Thu Fri Sat WeeklyTotal RunningTotal
+---- --- --- --- --- --- --- --- ----------- ------------
+30     1   0   0   0   1   0   0           2            2
+31     0   0   0   0   0   2   0           2            4
 
-Week         : 30
-Sun          : 0
-Mon          : 0
-Tue          : 0
-Wed          : 0
-Thu          : 1
-Fri          : 0
-Sat          : 0
-WeeklyTotal  : 1
-RunningTotal : 2
-
-Week         : 31
-Sun          : 0
-Mon          : 0
-Tue          : 0
-Wed          : 0
-Thu          : 0
-Fri          : 2
-Sat          : 0
-WeeklyTotal  : 2
-RunningTotal : 4
 #>
 [cmdletbinding()]
 param(
@@ -66,7 +39,7 @@ param(
     [Parameter(ParameterSetName="AllADate",Mandatory=$false)]
     [Parameter(ParameterSetName="IdBothDate",Mandatory=$false)]
     [Parameter(ParameterSetName="AllBothDate",Mandatory=$false)]
-    [string]$author = "*",
+    [string[]]$author = "*",
     [Parameter(ParameterSetName="IdBDate",Mandatory=$true)]  
     [Parameter(ParameterSetName="AllBDate",Mandatory=$true)]
     [Parameter(ParameterSetName="IdBothDate",Mandatory=$true)]
@@ -82,8 +55,10 @@ param(
     [switch]$lastYear
 )
     try {
+        $commits = @()
+        $dtcommits = @()
         if (!($Id)) {
-            $allProjectsId = (Get-GitLabProject).Id
+            $allProjectsId = (Get-GitLabProject -All).Id
             foreach ($project in $allProjectsId) {
                 $Request = @{
                     URI="/projects/$project/repository/commits";
@@ -98,23 +73,24 @@ param(
             }
             $commits = QueryGitLabAPI -Request $Request -ObjectType 'GitLab.Commit'
         }
-
-        if ($lastYear) {
-            $dtCommits = $commits | Where-Object {[datetime]$_.created_at -ge ((Get-Date).AddDays(-365))} | Where-Object {$_.author_name -like $author}
-        } elseif ($beforeDate) {
-            if ($afterDate) {
-                if ($beforeDate -le $afterDate) {
-                    throw "beforeDate cannot be less than afterDate"
+        foreach ($name in $author) {
+            if ($lastYear) {
+                $dtCommits += $commits | Where-Object {[datetime]$_.created_at -ge ((Get-Date).AddDays(-365))} | Where-Object {$_.author_name -like $name}
+            } elseif ($beforeDate) {
+                if ($afterDate) {
+                    if ($beforeDate -le $afterDate) {
+                        throw "beforeDate cannot be less than afterDate"
+                    } else {
+                        $dtCommits += $commits | Where-Object {([datetime]$_.created_at -le (Get-Date $beforeDate)) -and ([datetime]$_.created_at -ge (Get-Date $afterDate))} | Where-Object {$_.author_name -like $name}
+                    }
                 } else {
-                    $dtCommits = $commits | Where-Object {([datetime]$_.created_at -le (Get-Date $beforeDate)) -and ([datetime]$_.created_at -ge (Get-Date $afterDate))} | Where-Object {$_.author_name -like $author}
+                    $dtCommits += $commits | Where-Object {[datetime]$_.created_at -le (Get-Date $beforeDate)} | Where-Object {$_.author_name -like $name}
                 }
+            } elseif ($afterDate) {
+                $dtCommits += $commits | Where-Object {[datetime]$_.created_at -ge (Get-Date $afterDate)} | Where-Object {$_.author_name -like $name}
             } else {
-                $dtCommits = $commits | Where-Object {[datetime]$_.created_at -le (Get-Date $beforeDate)} | Where-Object {$_.author_name -like $author}
+                $dtCommits += $commits | Where-Object {$_.author_name -like $name}
             }
-        } elseif ($afterDate) {
-            $dtCommits = $commits | Where-Object {[datetime]$_.created_at -ge (Get-Date $afterDate)} | Where-Object {$_.author_name -like $author}
-        } else {
-            $dtCommits = $commits | Where-Object {$_.author_name -like $author}
         }
         if ($dtCommits) {
             FormatCommits -dtCommits $dtCommits
