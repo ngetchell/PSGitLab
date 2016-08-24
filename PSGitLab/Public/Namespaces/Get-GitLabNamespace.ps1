@@ -8,8 +8,19 @@ Retrieves all of the different namespaces in a GitLab instance. Queries over HTT
 Get-GitLabNamespace
 #>
 [cmdletbinding()]
+param (
+    [string]$search
+)
+    $GetUrlParameters = @()
+
+    if ($search -ne $null) {
+        $GetUrlParameters += @{search=$search}
+    }
+    $GetUrlParameters += @{per_page=100}
+    $URLParameters = GetMethodParameters -GetURLParameters $GetUrlParameters
+    #$Request.URI = "$($Request.URI)" + "$URLParameters"
     $Request = @{
-        URI="/namespaces";
+        URI="/namespaces$URLParameters";
         Method='Get';
     }
     QueryGitLabAPI -Request $Request -ObjectType 'GitLab.Namespace'

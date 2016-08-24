@@ -66,7 +66,7 @@ FormatsToProcess = @('PSGitLab.format.ps1xml')
 # NestedModules = @()
 
 # Functions to export from this module
-FunctionsToExport = @('Unblock-GitLabUser','Block-GitLabUser','Get-GitLabUser','Remove-GitLabUser','New-GitLabUser','Get-GitLabProject','Get-GitLabProjectEvent','New-GitLabFork','New-GitLabProject','Remove-GitLabProject','Save-GitLabAPIConfiguration','Test-GitLabAPI','Search-GitLabNameSpace','Search-GitLabUser','Get-GitLabNamespace','Get-GitLabCommitStats')
+FunctionsToExport = @('Unblock-GitLabUser','Block-GitLabUser','Get-GitLabUser','Remove-GitLabUser','New-GitLabUser','Get-GitLabProject','Get-GitLabProjectEvent','New-GitLabFork','New-GitLabProject','Remove-GitLabProject','Save-GitLabAPIConfiguration','Test-GitLabAPI','Search-GitLabUser','Get-GitLabNamespace','Get-GitLabCommitStats','New-GitLabBuild')
 
 # Cmdlets to export from this module
 #CmdletsToExport = '*'
