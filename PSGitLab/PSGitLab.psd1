@@ -116,7 +116,7 @@ PrivateData = @{
             'CI'
             'Continuous Integration',
             'Builds',
-            'Repository',
+            'Repository'
             )
 
         # A URL to the license for this module.
