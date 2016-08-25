@@ -12,7 +12,7 @@
 RootModule = 'PSGitLab.psm1'
 
 # Version number of this module.
-ModuleVersion = '2.3.0'
+ModuleVersion = '2.3.1'
 
 # ID used to uniquely identify this module
 GUID = 'f844db87-fda8-403b-a7da-bdc00a3f5a58'
@@ -66,7 +66,24 @@ FormatsToProcess = @('PSGitLab.format.ps1xml')
 # NestedModules = @()
 
 # Functions to export from this module
-FunctionsToExport = @('Unblock-GitLabUser','Block-GitLabUser','Get-GitLabUser','Remove-GitLabUser','New-GitLabUser','Get-GitLabProject','Get-GitLabProjectEvent','New-GitLabFork','New-GitLabProject','Remove-GitLabProject','Save-GitLabAPIConfiguration','Test-GitLabAPI','Search-GitLabNameSpace','Search-GitLabUser','Get-GitLabNamespace','Get-GitLabCommitStats')
+FunctionsToExport = @(
+    'Unblock-GitLabUser',
+    'Block-GitLabUser',
+    'Get-GitLabUser',
+    'Remove-GitLabUser',
+    'New-GitLabUser',
+    'Get-GitLabProject',
+    'Get-GitLabProjectEvent',
+    'New-GitLabFork'
+    ,'New-GitLabProject',
+    'Remove-GitLabProject',
+    'Save-GitLabAPIConfiguration',
+    'Test-GitLabAPI',
+    'Search-GitLabNameSpace',
+    'Search-GitLabUser',
+    'Get-GitLabNamespace',
+    'Get-GitLabCommitStats'
+    )
 
 # Cmdlets to export from this module
 #CmdletsToExport = '*'
@@ -92,10 +109,18 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        # Tags = @()
+        Tags = @(
+            'PSGitLab',
+            'GitLab',
+            'Git',
+            'CI'
+            'Continuous Integration',
+            'Builds',
+            'Repository',
+            )
 
         # A URL to the license for this module.
-        # LicenseUri = ''
+        LicenseUri = 'https://github.com/ngetchell/PSGitLab/blob/master/LICENSE'
 
         # A URL to the main website for this project.
         ProjectUri = 'https://github.com/ngetchell/PSGitLab'
