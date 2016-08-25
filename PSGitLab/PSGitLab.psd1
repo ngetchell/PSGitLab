@@ -81,7 +81,8 @@ FunctionsToExport = @(
     'Test-GitLabAPI',
     'Search-GitLabUser',
     'Get-GitLabNamespace',
-    'Get-GitLabCommitStats'
+    'Get-GitLabCommitStats',
+    'New-GitLabBuild'
     )
 
 # Cmdlets to export from this module
