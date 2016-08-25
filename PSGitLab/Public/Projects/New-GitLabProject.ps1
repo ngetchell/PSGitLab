@@ -62,6 +62,7 @@ Function New-GitLabProject {
         }
 
         QueryGitLabAPI -Request $Request -ObjectType 'GitLab.Project'
+        }
     }
     catch {
         Write-Error $_
