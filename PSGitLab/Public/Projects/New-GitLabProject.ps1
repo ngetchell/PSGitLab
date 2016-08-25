@@ -34,15 +34,12 @@ Function New-GitLabProject {
 
     try {
         if ($PSBoundParameters.ContainsKey('Namespace')) {
-            $nSpace = Search-GitLabNamespace -Namespace $Namespace
+            $nSpace = Get-GitLabNamespace | Where-Object {$_.path -eq "$Namespace"}
             if ($nSpace.id.Count -eq 1) {
                 $Body.Add('namespace_id', $nSpace.id)
                 $PSBoundParameters.Remove('Namespace') | Out-Null
-            } elseif (!$nSpace.id.Count) {
-                throw "Error: No Namespace found"
             } else {
-                throw "Error: Multiple namespaces found in search"
-            }
+                throw "Error: No Namespace found"
         }
 
         foreach($p in $PSBoundParameters.GetEnumerator()) {
@@ -65,6 +62,7 @@ Function New-GitLabProject {
         }
 
         QueryGitLabAPI -Request $Request -ObjectType 'GitLab.Project'
+        }
     }
     catch {
         Write-Error $_

@@ -79,10 +79,10 @@ FunctionsToExport = @(
     'Remove-GitLabProject',
     'Save-GitLabAPIConfiguration',
     'Test-GitLabAPI',
-    'Search-GitLabNameSpace',
     'Search-GitLabUser',
     'Get-GitLabNamespace',
-    'Get-GitLabCommitStats'
+    'Get-GitLabCommitStats',
+    'New-GitLabBuild'
     )
 
 # Cmdlets to export from this module
