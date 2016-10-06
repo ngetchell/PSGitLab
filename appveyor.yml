@@ -3,13 +3,17 @@
 # Fron https://github.com/RamblingCookieMonster/PSStackExchange/blob/master/appveyor.yml
 
 # Allow WMF5 (i.e. PowerShellGallery functionality)
-os: Unstable
+os: WMF 5
 
-install:
-  - cinst pester -y
+environment:
+  PSGalleryApiKey:
+    secure: VGPEr3cXooAZfvnmzCzZ9i0i1Y2pc7BW2k0bWjCkV7WvD+0vKyiy+WwNH12rEdqc
+
+skip_commits:
+  message: /updated readme.*|update readme.*s/
 
 build: false
 
 test_script:
 # Test with native PS version
-  - ps: Invoke-Pester -EnableExit
+  - ps: . .\build.ps1
