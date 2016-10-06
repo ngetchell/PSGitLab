@@ -74,8 +74,9 @@ FunctionsToExport = @(
     'New-GitLabUser',
     'Get-GitLabProject',
     'Get-GitLabProjectEvent',
-    'New-GitLabFork'
-    ,'New-GitLabProject',
+    'New-GitLabFork',
+    'Set-GitLabUser',
+    'New-GitLabProject',
     'Remove-GitLabProject',
     'Save-GitLabAPIConfiguration',
     'Test-GitLabAPI',

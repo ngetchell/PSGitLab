@@ -13,7 +13,7 @@ Function Set-GitLabUser {
         [Parameter(Mandatory=$true,ParameterSetName='Username')]
         [string]$Username,        
 
-        [string]$NewEmail = $null,     
+        #[string]$NewEmail = $null,     
         [string]$Password = $null,    
         [string]$NewUsername = $null,        
         [string]$Name = $null,
@@ -29,34 +29,36 @@ Function Set-GitLabUser {
         [switch]$Passthru = $false
     )
 
-    #switch ($PScmdlet.ParameterSetName ) {
-    #    'Email' { $User = Get-GitLabUser -Email $Email }
-    #    'Username' { $User = Get-GitLabUser -Username $UserName }
-    #    'ID' { $User = Get-GitLabUser -id $ID }
-    #}
+    switch ($PScmdlet.ParameterSetName ) {
+        'Email' { $User = Get-GitLabUser -Email $Email }
+        'Username' { $User = Get-GitLabUser -Username $UserName }
+        'ID' { $User = Get-GitLabUser -id $ID }
+    }
 
     $Body = @{}
 
-    if ($NewEmail -ne $null ) { $Body.Add('email',$NewEmail) }
-    #if ($Password -ne $null ) { $Body.Add('password',$Password) }
-    #if ($NewUsername -ne $null ) { $Body.Add('username',$NewUsername) }
-    #if ($Name -ne $null ) { $Body.Add('name',$Name) }
-    #if ($SkypeID -ne $null ) { $Body.Add('skype',$SkypeID) }
-    #if ($LinkedIn -ne $null ) { $Body.Add('linkedin',$LinkedIn) }
-    #if ($Twitter -ne $null ) { $Body.Add('twitter',$Twitter) }
-    #if ($WebsiteURL -ne $null ) { $Body.Add('website_url',$WebsiteURL) }
-    #if ($ProjectsLimit -ne 0 ) { $Body.Add('projects_limit',$ProjectsLimit) }
-    #if ($Admin.IsPresent ) { $Body.Add('admin','true') }
-    #if ($CanCreateGroup.IsPresent ) { $Body.Add('can_create_group','true') }
-    #if ($External.IsPresent ) { $Body.Add('external','true') }
+    #if ($NewEmail -ne $null ) { $Body.Add('email',$NewEmail) }
+    if ($Password -ne $null ) { $Body.Add('password',$Password) }
+    if ($NewUsername -ne $null ) { $Body.Add('username',$NewUsername) }
+    if ($Name -ne $null ) { $Body.Add('name',$Name) }
+    if ($SkypeID -ne $null ) { $Body.Add('skype',$SkypeID) }
+    if ($LinkedIn -ne $null ) { $Body.Add('linkedin',$LinkedIn) }
+    if ($Twitter -ne $null ) { $Body.Add('twitter',$Twitter) }
+    if ($WebsiteURL -ne $null ) { $Body.Add('website_url',$WebsiteURL) }
+    if ($ProjectsLimit -ne 0 ) { $Body.Add('projects_limit',$ProjectsLimit) }
+    if ($Admin.IsPresent ) { $Body.Add('admin','true') }
+    if ($CanCreateGroup.IsPresent ) { $Body.Add('can_create_group','true') }
+    if ($External.IsPresent ) { $Body.Add('external','true') }
 
     $Request = @{
-        URI = "/users/$ID"
+        URI = "/users/$($User.ID)"
         Method = 'PUT'
-        Body = $Body
+        Body = $Body 
+        ContentType = 'application/x-www-form-urlencoded'
     }
 
     #Write-Debug -Message "Before Request"
+    Write-Verbose "Body: $( $Body | ConvertTo-Json ) "
 
     $Results = QueryGitLabAPI -Request $Request -ObjectType 'GitLab.User'
     if ($Passthru.IsPresent) {
