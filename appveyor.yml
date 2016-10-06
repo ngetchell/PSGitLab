@@ -5,6 +5,10 @@
 # Allow WMF5 (i.e. PowerShellGallery functionality)
 os: WMF 5
 
+environment:
+  PSGalleryApiKey:
+    secure: VGPEr3cXooAZfvnmzCzZ9i0i1Y2pc7BW2k0bWjCkV7WvD+0vKyiy+WwNH12rEdqc
+
 skip_commits:
   message: /updated readme.*|update readme.*s/
 

@@ -2,7 +2,7 @@
 
 [cmdletbinding()]
 param(
-    [string[]]$Task = 'Test'
+    [string[]]$Task = 'Deploy'
 )
 
 function Resolve-Module {
