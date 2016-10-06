@@ -27,8 +27,14 @@ $Request.URI = "$Domain/api/v3" + $Request.URI
 
 try  {
     Write-Verbose "URL: $($Request.URI)"
-    $Results = Invoke-RestMethod @Request
-
+    $webContent = Invoke-WebRequest @Request
+    $totalPages = ($webContent).Headers['X-Total-Pages']
+    $Results = $webContent.Content | ConvertFrom-Json
+    for ($i=1; $i -lt $totalPages; $i++) {
+        $newRequest = $Request
+        $newRequest.URI = $newRequest.URI + "&page=$($i+1)"
+        $Results += (Invoke-WebRequest @newRequest).Content | ConvertFrom-Json
+    }
     Remove-Variable Token
     Remove-Variable Headers
     Remove-Variable Request
