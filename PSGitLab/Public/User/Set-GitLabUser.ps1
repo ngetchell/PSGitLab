@@ -1,4 +1,14 @@
 Function Set-GitLabUser {
+    <#
+    .SYNOPSIS
+    Modify users already created in your GitLab instance. 
+    .DESCRIPTION
+    Modify users already created in your GitLab instance. Useful for making someone an admin from the command line. 
+    .EXAMPLE
+    Set-GitLabUser -Email FakeEmail@example.com -Twitter 'newtwitterID'
+    .EXAMPLE
+    Set-GitLabUser -Username FakeUserName -Admin
+    #>
     [cmdletbinding()]
     param(
         [ValidateNotNullOrEmpty()]
