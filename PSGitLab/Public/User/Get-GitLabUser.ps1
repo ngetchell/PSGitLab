@@ -25,7 +25,10 @@ Function Get-GitLabUser {
         [string]$Username,
 
         [Parameter(ParameterSetName='Email')]
-        [string]$Email
+        [string]$Email,
+
+        [Parameter(ParameterSetName='CurrentUser')]
+        [switch]$CurrentUser
     )
     $Request = @{
         URI = '/users'
@@ -35,6 +38,7 @@ Function Get-GitLabUser {
     switch ( $PSCmdlet.ParameterSetName) {
         'ID' { $Request.URI = "/users/$ID" }
         'All' { $Request.URI = '/users' }
+        'CurrentUser' { $Request.URI = '/user' }
     }
 
     if ( $PSCmdlet.ParameterSetName -eq 'Username') {
