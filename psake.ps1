@@ -11,7 +11,7 @@ properties {
     $psVersion = $PSVersionTable.PSVersion.Major
 }
 
-task default -depends init
+task default -depends init, test
 
 task Init {
     "`nSTATUS: Testing with PowerShell $psVersion"
@@ -66,6 +66,8 @@ task Pester {
     }
 }
 
+task Build -depends mergePSM1
+
 task mergePSM1 -depends init {
     
     Write-Host "Merging the PSM1"
@@ -103,4 +105,32 @@ task mergePSM1 -depends init {
     }
 
 
+}
+
+task cleanup {
+    $ReleaseDirectory = join-path $projectRoot 'Release'
+    if (Test-Path $ReleaseDirectory) {
+        remove-item -Recurse -Force -Path $ReleaseDirectory
+    }    
+}
+
+task Deploy -depends Test {
+    # Gate deployment
+    if( $ENV:BHBuildSystem -ne 'Unknown' -and
+        $ENV:BHBranchName -eq "master" -and
+        $ENV:BHCommitMessage -match '!deploy'
+    ) {
+        $params = @{
+            Path = "$projectRoot\module.psdeploy.ps1"
+            Force = $true
+            Recurse = $false
+        }
+
+        Invoke-PSDeploy @Params
+    } else {
+        "Skipping deployment: To deploy, ensure that...`n" +
+        "`t* You are in a known build system (Current: $ENV:BHBuildSystem)`n" +
+        "`t* You are committing to the master branch (Current: $ENV:BHBranchName) `n" +
+        "`t* Your commit message includes !deploy (Current: $ENV:BHCommitMessage)"
+    }
 }
