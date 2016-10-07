@@ -1,7 +1,7 @@
 if($ENV:BHProjectName -and $ENV:BHProjectName.Count -eq 1) {
-    Deploy Module {
+    Deploy "$ENV:BHProjectName => PSGallery" {
         By PSGalleryModule {
-            FromSource $ENV:BHProjectName\Release\
+            FromSource $ENV:BHProjectName
             To PSGallery
             WithOptions @{
                 ApiKey = $ENV:PSGalleryApiKey

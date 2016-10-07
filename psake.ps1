@@ -125,7 +125,9 @@ task Deploy -depends Test {
             Force = $true
             Recurse = $false
         }
-
+        
+        Import-Module "$ReleaseDirectory\$ModuleName.psd1"
+        
         Invoke-PSDeploy @Params
     } else {
         "Skipping deployment: To deploy, ensure that...`n" +
