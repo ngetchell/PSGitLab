@@ -8,6 +8,8 @@ properties {
     $sut = "$projectRoot\$ModuleName"
     $tests = "$projectRoot\Tests"
 
+    $ReleaseDirectory = join-path $projectRoot 'Release'
+
     $psVersion = $PSVersionTable.PSVersion.Major
 }
 
@@ -108,13 +110,15 @@ task mergePSM1 -depends init {
 }
 
 task cleanup {
-    $ReleaseDirectory = join-path $projectRoot 'Release'
     if (Test-Path $ReleaseDirectory) {
         remove-item -Recurse -Force -Path $ReleaseDirectory
     }    
 }
 
 task Deploy -depends Test, Build {
+    
+    Import-Module "$ReleaseDirectory\$ModuleName.psd1"
+    
     # Gate deployment
     if( $ENV:BHBuildSystem -ne 'Unknown' -and
         $ENV:BHBranchName -eq "master" -and
@@ -125,8 +129,6 @@ task Deploy -depends Test, Build {
             Force = $true
             Recurse = $false
         }
-        
-        Import-Module "$ReleaseDirectory\$ModuleName.psd1"
         
         Invoke-PSDeploy @Params
     } else {
