@@ -114,7 +114,7 @@ task cleanup {
     }    
 }
 
-task Deploy -depends Test {
+task Deploy -depends Test, Build {
     # Gate deployment
     if( $ENV:BHBuildSystem -ne 'Unknown' -and
         $ENV:BHBranchName -eq "master" -and
