@@ -111,15 +111,14 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        Tags = @(
-            'PSGitLab',
-            'GitLab',
-            'Git',
-            'CI'
-            'Continuous Integration',
-            'Builds',
-            'Repository'
-            )
+        Tags = @('PSGitLab',
+                 'GitLab',
+                 'Git',
+                 'CI'
+                 'ContinuousIntegration',
+                 'Builds',
+                 'Repository'
+        )
 
         # A URL to the license for this module.
         LicenseUri = 'https://github.com/ngetchell/PSGitLab/blob/master/LICENSE'
