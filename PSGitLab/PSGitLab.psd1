@@ -89,7 +89,11 @@ FunctionsToExport = @(
     'Get-GitLabMergeRequest',
     'Set-GitLabMergeRequest',
     'Remove-GitLabMergeRequest',
-    'Close-GitLabMergeRequest'
+    'Close-GitLabMergeRequest',
+    'New-GitLabMilestone',
+    'Get-GitLabMilestone',
+    'Set-GitLabMilestone',
+    'Close-GitLabMilestone'
     )
 
 # Cmdlets to export from this module
