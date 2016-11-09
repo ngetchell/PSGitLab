@@ -1,5 +1,4 @@
-Function Close-GitLabMergeRequest 
-{
+Function Close-GitLabMergeRequest {
     <#
     .SYNOPSIS
     Closes your GitLab merge requests.

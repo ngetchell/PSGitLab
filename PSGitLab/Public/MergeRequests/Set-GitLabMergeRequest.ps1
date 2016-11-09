@@ -1,14 +1,13 @@
-Function Set-GitLabMergeRequest 
-{
+Function Set-GitLabMergeRequest {
     <#
     .SYNOPSIS
     Modify your GitLab merge requests.
     .DESCRIPTION
-    Modify your GitLab merge requests. Useful for changing the names or changing the visibility of your project. 
+    Modify your GitLab merge requests. Useful for changing the names or other parameter of your merge request.
     .EXAMPLE
     Set-GitLabMergeRequest -ProjectId 8 -Id 32 -Name "NewName"
     .EXAMPLE
-    Get-GitLabMergeReqeust -ProjectId 8 | Set-GitLabMergeReqeust -ProjectId 8 -Description 'Fake Description' 
+    Get-GitLabMergeReqeust -ProjectId 8 | Set-GitLabMergeReqeust -Description 'Fake Description' 
     #>
     [cmdletbinding()]
     param(
