@@ -84,7 +84,12 @@ FunctionsToExport = @(
     'Search-GitLabUser',
     'Get-GitLabNamespace',
     'Get-GitLabCommitStats',
-    'New-GitLabBuild'
+    'New-GitLabBuild',
+    'New-GitLabMergeRequest',
+    'Get-GitLabMergeRequest',
+    'Set-GitLabMergeRequest',
+    'Remove-GitLabMergeRequest',
+    'Close-GitLabMergeRequest'
     )
 
 # Cmdlets to export from this module
