@@ -12,7 +12,7 @@
 RootModule = 'PSGitLab.psm1'
 
 # Version number of this module.
-ModuleVersion = '2.4.0'
+ModuleVersion = '2.4.1'
 
 # ID used to uniquely identify this module
 GUID = 'f844db87-fda8-403b-a7da-bdc00a3f5a58'
