@@ -10,7 +10,10 @@ foreach ($Param in $GetUrlParameters) {
         $key = $_
         $value = $Param[$_]
     }
-    $string += "&$key=$value"
+    $string += "&"
+    $string += [uri]::EscapeDataString($key)
+    $string += "="
+    $string += [uri]::EscapeDataString($value)
 }
 $string = $string -replace '\?&','?'
 Write-Output $string
