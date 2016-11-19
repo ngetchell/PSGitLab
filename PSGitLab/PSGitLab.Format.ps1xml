@@ -216,6 +216,47 @@
             </ListEntry>
           </ListEntries>
         </ListControl>
-      </View>            
+      </View>
+      <View>
+        <Name>PSGitLab</Name>
+    <ViewSelectedBy>
+      <TypeName>GitLab.Milestone</TypeName>
+    </ViewSelectedBy>
+        <ListControl>
+          <ListEntries>
+            <ListEntry>
+              <ListItems>
+                <ListItem>
+                  <PropertyName>id</PropertyName>
+                </ListItem>
+                <ListItem>
+                  <PropertyName>iid</PropertyName>
+                </ListItem>                
+                <ListItem>
+                  <PropertyName>project_id</PropertyName>
+                </ListItem>
+                <ListItem>
+                  <PropertyName>title</PropertyName>
+                </ListItem>
+                <ListItem>
+                  <PropertyName>description</PropertyName>
+                </ListItem>
+                <ListItem>
+                  <PropertyName>due_date</PropertyName>
+                </ListItem>
+                <ListItem>
+                  <PropertyName>state</PropertyName>
+                </ListItem>
+                <ListItem>
+                  <PropertyName>updated_at</PropertyName>
+                </ListItem>
+                <ListItem>
+                  <PropertyName>created_at</PropertyName>
+                </ListItem>
+              </ListItems>
+            </ListEntry>
+          </ListEntries>
+        </ListControl>
+      </View>
    </ViewDefinitions>
 </Configuration>
