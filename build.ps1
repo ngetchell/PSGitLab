@@ -2,8 +2,13 @@
 
 [cmdletbinding()]
 param(
-    [string[]]$Task = 'Deploy'
+    [string[]]$Task = 'Pre-Commit'
 )
+
+if ( -not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]"Administrator") ) {
+    Write-Error "Build Script Requires Admin Rights"
+    break;
+}
 
 function Resolve-Module {
     [Cmdletbinding()]
@@ -46,9 +51,8 @@ function Resolve-Module {
 Get-PackageProvider -Name Nuget -ForceBootstrap | Out-Null
 Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
 
-'BuildHelpers', 'psake','Pester', 'PSDeploy', 'PSScriptAnalyzer' | Resolve-Module
+'BuildHelpers', 'InvokeBuild', 'Pester', 'PSDeploy', 'PSScriptAnalyzer' | Resolve-Module
 
 Set-BuildEnvironment
 
-Invoke-psake -buildFile "$PSScriptRoot\psake.ps1" -taskList $Task -nologo -Verbose:$VerbosePreference
-exit ( [int]( -not $psake.build_success ) )
+Invoke-Build $Task

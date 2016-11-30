@@ -16,4 +16,4 @@ build: false
 
 test_script:
 # Test with native PS version
-  - ps: . .\build.ps1
+  - ps: . .\build.ps1 -task Pre-Commit

@@ -1,31 +1,29 @@
-properties {
-    $ModuleName = 'PSGitLab'
-    $projectRoot = $ENV:BHProjectPath
-    if(-not $projectRoot) {
-        $projectRoot = $PSScriptRoot
-    }
+Set-BuildEnvironment
 
-    $sut = "$projectRoot\$ModuleName"
-    $tests = "$projectRoot\Tests"
-
-    $ReleaseDirectory = join-path $projectRoot 'Release'
-
-    $psVersion = $PSVersionTable.PSVersion.Major
+$ModuleName = 'PSGitLab'
+$projectRoot = $ENV:BHProjectPath
+if(-not $projectRoot) {
+	$projectRoot = $PSScriptRoot
 }
 
-task default -depends init, test
+$sut = "$projectRoot\$ModuleName"
+$tests = "$projectRoot\Tests"
 
+$ReleaseDirectory = join-path $projectRoot 'Release'
+
+$psVersion = $PSVersionTable.PSVersion.Major
+
+# Synopsis: Initalize the enviornment
 task Init {
-    "`nSTATUS: Testing with PowerShell $psVersion"
+    "`nSTATUS: Testing with PowerShell {0}" -f $psVersion
     "Build System Details:"
     Get-Item ENV:BH*
 
     $modules = 'Pester', 'PSDeploy', 'PSScriptAnalyzer'
-    Import-Module $modules -Verbose:$false -Force
+    Import-Module $modules -Verbose:$false -Force	
 }
 
-task Test -Depends Init, Analyze, Pester
-
+# Synopsis: PSScriptAnalyzer 
 task Analyze {
     # Modify PSModulePath of the current PowerShell session.
     # We want to make sure we always test the development version of the resource
@@ -51,10 +49,11 @@ task Analyze {
     if ($saResults) {
         $saResults | Format-Table
         Write-Error -Message 'One or more Script Analyzer errors/warnings where found. Build cannot continue!'
-    }
+    }    
 }
 
-task Pester {
+# Synopsis: Pester Tests
+Task Pester {
     if(-not $ENV:BHProjectPath) {
         Set-BuildEnvironment -Path $PSScriptRoot\..
     }
@@ -65,15 +64,11 @@ task Pester {
     if ($testResults.FailedCount -gt 0) {
         $testResults | Format-List
         Write-Error -Message 'One or more Pester tests failed. Build cannot continue!'
-    }
+    }    
 }
-
-task Build -depends mergePSM1
-
-task mergePSM1 -depends init {
+# Synopsis: Merge private and public functions into one .psm1 file
+task mergePSM1 {
     
-    Write-Host "Merging the PSM1"
-
     $ReleaseDirectory = join-path $projectRoot 'Release'
     if (Test-Path $ReleaseDirectory) {
         remove-item -Recurse -Force -Path $ReleaseDirectory
@@ -105,18 +100,23 @@ task mergePSM1 -depends init {
         }
 
     }
-
-
-}
-
-task cleanup {
-    if (Test-Path $ReleaseDirectory) {
-        remove-item -Recurse -Force -Path $ReleaseDirectory
-    }    
-}
-
-task Deploy -depends Test, Build {
     
+}
+
+# Synopsis: Remove the Release directory
+Task Cleanup {
+    if (Test-Path $ReleaseDirectory) {
+        Remove-Item -Recurse -Force -Path $ReleaseDirectory
+    }
+}
+
+# Synopsis: Run before commiting your code
+task Pre-Commit init,pester,analyze
+
+# Synopsis: Default Task - Alias for Pre-Commit
+task . Pre-Commit
+
+task psdeploy {
     Import-Module "$ReleaseDirectory\$ModuleName.psd1"
     
     # Gate deployment
@@ -136,5 +136,8 @@ task Deploy -depends Test, Build {
         "`t* You are in a known build system (Current: $ENV:BHBuildSystem)`n" +
         "`t* You are committing to the master branch (Current: $ENV:BHBranchName) `n" +
         "`t* Your commit message includes !deploy (Current: $ENV:BHCommitMessage)"
-    }
+    }    
 }
+
+# Synopsis: Deploy to Powershell Gallery
+task Deploy cleanup,init,pester,analyze,psdeploy 
