@@ -20,15 +20,15 @@ Function Set-GitLabMilestone {
         [Parameter(ValueFromPipelineByPropertyName,Mandatory)]
         [string[]]$ID,
 
-        [string]$Title = $null,
+        [string]$Title,
 
-        [string]$Description = $null,
+        [string]$Description,
 
-        [Nullable[datetime]]$DueDate = $null,
+        [Nullable[datetime]]$DueDate,
 
         [Alias('state_event')]
         [ValidateSet("close", "activate")]
-        [string]$StateEvent = $null
+        [string]$StateEvent
     )
 
 BEGIN {} 
@@ -44,16 +44,16 @@ PROCESS {
 
         $GetUrlParameters = @()
 
-        if ($Title -ne $null) {
+        if ($Title) {
             $GetUrlParameters += @{title=$Title}
         }
-        if ($Description -ne $null) {
+        if ($Description) {
             $GetUrlParameters += @{description=$Description}
         }
-        if ($DueDate -ne $null) {
+        if ($DueDate) {
             $GetUrlParameters += @{due_date=$DueDate.ToString("yyyy-MM-dd")}
         }
-        if ($StateEvent -ne $null) {
+        if ($StateEvent) {
             $GetUrlParameters += @{state_event=$StateEvent}
         }
 

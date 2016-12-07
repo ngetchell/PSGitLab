@@ -20,20 +20,20 @@ Function Set-GitLabMergeRequest {
         [Parameter(ValueFromPipelineByPropertyName,Mandatory)]
         [string[]]$ID,
 
-        [string]$TargetBranch = $null,
+        [string]$TargetBranch,
 
-        [string]$AssigneeId = $null,
+        [string]$AssigneeId,
 
-        [string]$Title = $null,
+        [string]$Title,
 
-        [string]$Description = $null,
+        [string]$Description,
 
         [ValidateSet("close", "reopen", "merge")]
-        [string]$StateEvent = $null,
+        [string]$StateEvent,
 
-        [string]$Labels = $null,
+        [string]$Labels,
 
-        [string]$MilestoneId = $null,
+        [string]$MilestoneId,
 
         [switch]$Passthru
 
@@ -52,25 +52,25 @@ PROCESS {
 
         $GetUrlParameters = @()
 
-        if ($TargetBranch -ne $null) {
+        if ($TargetBranch) {
             $GetUrlParameters += @{target_branch=$TargetBranch}
         }
-        if ($AssigneeId -ne $null) {
+        if ($AssigneeId) {
             $GetUrlParameters += @{assignee_id=$AssigneeId}
         }
-        if ($Title -ne $null) {
+        if ($Title) {
             $GetUrlParameters += @{title=$Title}
         }
-        if ($Description -ne $null) {
+        if ($Description) {
             $GetUrlParameters += @{description=$Description}
         }
-        if ($StateEvent -ne $null) {
+        if ($StateEvent) {
             $GetUrlParameters += @{state_event=$StateEvent}
         }
-        if ($Labels -ne $null) {
+        if ($Labels) {
             $GetUrlParameters += @{labels=$Labels}
         }
-        if ($MilestoneId -ne $null) {
+        if ($MilestoneId) {
             $GetUrlParameters += @{milestone_id=$MilestoneId}
         }
 
