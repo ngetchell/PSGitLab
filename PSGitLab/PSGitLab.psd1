@@ -12,19 +12,19 @@
 RootModule = 'PSGitLab.psm1'
 
 # Version number of this module.
-ModuleVersion = '2.4.2'
+ModuleVersion = '2.4.3'
 
 # ID used to uniquely identify this module
 GUID = 'f844db87-fda8-403b-a7da-bdc00a3f5a58'
 
 # Author of this module
-Author = 'Nicholas M. Getchell'
+Author = 'Nicholas M. Getchell, Leonhard Schick, and Brooks Collins'
 
 # Company or vendor of this module
 # CompanyName = 'Unknown'
 
 # Copyright statement for this module
-Copyright = '(c) 2016 Nicholas M. Getchell. All rights reserved.'
+Copyright = '(c) 2016 PSGitLab. All rights reserved.'
 
 # Description of the functionality provided by this module
 Description = 'GitLab API accessable from the Windows PowerShell console'

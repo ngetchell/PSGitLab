@@ -2,15 +2,33 @@ An interface for administering GitLab from a Windows PC using PowerShell.
 
 [![Build status](https://ci.appveyor.com/api/projects/status/t7wyv5xim2olu0r7/branch/master?svg=true)](https://ci.appveyor.com/project/ngetchell/psgitlab/branch/master)
 
-## Usage
-Help files on the way. If you'd like to reach out to me start a conversation with me on Twitter [@getch3028](http://twitter.com/getch3028).
+## Installation
+```PowerShell
+Find-Module -Name PSGitLab | Install-Module
+```
+
+## API Requests
+If you think there is an [GitLab API}(https://docs.gitlab.com/ce/api/README.html) I missed make sure to request it as an issue. 
+I added the API calls that I needed to get work done. 
+You might need others.
+Let me know. 
 
 ## Contributing
-I am very interested in collaborating with another developer on this project. I've never worked with someone before on a project of this scope and think it would be rewarding.
+Before issuing a Pull Request make sure to run the following code to make sure your not additions don't get kicked back. 
+
+``` PowerShell
+.\build.ps1 -Task Pre-Commit
+```
+
+This will run your code against the PSScriptAnalyzer and Pester tests. 
 
 ### Milestones
 Milestones will be used for code coverage. Each API call has it's own issue and each group of API calls will be categorized by the corresponding milestone.
-# PSGitLab
 
 ### Issues
 If you find a bug, please let me know through the issue tracker. The more details you provide the better.
+
+### Contributors
+- [Nicholas M. Getchell](https://github.com/ngetchell)
+- [Leonhard Schick](https://github.com/lw-schick)
+- [Brooks Collins](https://github.com/TerrapinStation)
