@@ -140,4 +140,4 @@ task psdeploy {
 }
 
 # Synopsis: Deploy to Powershell Gallery
-task Deploy cleanup,init,pester,analyze,psdeploy 
+task Deploy init,pester,analyze,mergePSM1,psdeploy 
