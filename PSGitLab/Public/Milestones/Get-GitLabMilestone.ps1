@@ -10,8 +10,17 @@ Get-GitLabMilestone -ProjectId 1
 
 # list a specific milestone from the id for the project 1
 Get-GitLabMilestone -ProjectId 1 -Id 20
+.PARAMETER ProjectId
+The project ID.
+.PARAMETER Id
+The ID of the milestone.
+.PARAMETER Iid
+The exacty milestone Id.
+.PARAMETER State
+Return only active or closed milestones.
 #>
 [cmdletbinding(DefaultParameterSetName='MergeRequests')]
+[OutputType('GitLab.Milestone')]
 param (
     [ValidateNotNullOrEmpty()]
     [Parameter(ParameterSetName='Single',Mandatory)]

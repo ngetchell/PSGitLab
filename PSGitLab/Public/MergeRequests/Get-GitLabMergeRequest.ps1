@@ -10,8 +10,21 @@ Get-GitLabMergeRequest -ProjectId 1
 
 # list a specific merge request from the id for the project 1
 Get-GitLabMergeRequest -ProjectId 1 -Id 20
+.PARAMETER ProjectID
+The ID of a project
+.PARAMETER ID
+The ID of the merge request your retrieving.
+.PARAMETER iid
+Return the request having the given iid.
+.PARAMETER State
+Return all requests or just those that are merged, opened or closed.
+.PARAMETER OrderBy
+Return requests ordered by created_at or updated_at fields. Default is created_at.
+.PARAMETER Sort
+Return requests sorted in asc or desc order. Default is desc.
 #>
 [cmdletbinding(DefaultParameterSetName='MergeRequests')]
+[OutputType('GitLab.MergeRequest')]
 param (
     [ValidateNotNullOrEmpty()]
     [Parameter(ParameterSetName='Single',Mandatory)]

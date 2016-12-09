@@ -8,6 +8,18 @@ Function Set-GitLabMilestone {
     Set-GitLabMilestone -ProjectId 8 -Id 32 -Name "NewName"
     .EXAMPLE
     Get-GitLabMilestone -ProjectId 8 | Set-GitLabMilestone -Description 'Fake Description' 
+    .PARAMETER ProjectId
+    The ID of a project.
+    .PARAMETER Id
+    Milestone Id.
+    .PARAMETER Title
+    The title of an milestone.
+    .PARAMETER Description
+    The description of an milestone
+    .PARAMETER DueDate
+    The due date of the milestone.    
+    .PARAMETER StateEvent
+    Whether closed or open.
     #>
     [cmdletbinding()]
     param(

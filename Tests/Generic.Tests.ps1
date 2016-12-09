@@ -6,8 +6,8 @@ Get-Module $ModuleName | Remove-Module
 Import-Module $ModuleManifest
 
 Get-Command -Module $ModuleName | ForEach-Object {
-    Describe 'Help' -Tags 'Help' {
-        Context "Function - $_" { 
+    Describe "$_" -Tags "$_","Help" {
+        Context "Function Help" { 
             It 'Synopsis not empty' {
                 Get-Help $_ | Select-Object -ExpandProperty synopsis | should not benullorempty
             }
@@ -24,6 +24,32 @@ Get-Command -Module $ModuleName | ForEach-Object {
                 $Examples.Count -gt 0 | Should be $true
             }
         }
+
+        Context "Parameter Help" {
+            # Parameter Help
+            $HelpObjects = Get-Help $_ | Select-Object -ExpandProperty Parameters 
+            if ( $HelpObjects -ne $null) {
+                $Parameters = $HelpObjects.Parameter
+                foreach ($Parameter in $Parameters.Name) {
+                    $ParameterHelp = $Parameters | Where-Object { $_.name -eq $Parameter }
+                    
+                    It "Parameter Help for $Parameter" {
+                        $ParameterHelp.description.text | Should not benullorempty
+                    }
+                }
+            }
+
+        }
+
+        # Output Type if Verb is 'Get'
+        if ( $_.Verb -eq "Get") {
+            Context "OutputType - $_" {
+                It "OutputType Present on verb Get" {
+                    (Get-Command $_).OutputType | Should not benullorempty 
+                }
+            }
+        }
+
     }
 }
 

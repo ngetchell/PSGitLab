@@ -12,6 +12,14 @@ Function Block-GitLabUser {
     Block-GitLabUser -ID 22
     .EXAMPLE
     Get-GitLabUser -Username fake | Block-GitLabUser
+    .PARAMETER Id
+    The GitLab user ID.
+    .PARAMETER Username
+    The username of the user to be blocked.
+    .PARAMETER Email
+    The email of the user to be blocked.
+    .PARAMETER Passthru
+    Return the blocked user to the pipeline.
     #> 
     [cmdletbinding(DefaultParameterSetName='ID')]
     param(

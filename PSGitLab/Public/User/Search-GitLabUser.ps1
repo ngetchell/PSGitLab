@@ -11,6 +11,8 @@ username           : ngetchell
 id                 : 2
 state              : active
 is_admin           : true
+.PARAMETER User
+The search criteria for the user.
 #>
 [cmdletbinding()]
 param(

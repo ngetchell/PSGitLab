@@ -6,6 +6,12 @@ Function Close-GitLabMergeRequest {
     Closes your GitLab merge requests. 
     .EXAMPLE
     Close-GitLabMergeRequest -ProjectId 8 -Id 32 
+    .PARAMETER ProjectID
+    The ID of a project.
+    .PARAMETER ID
+    The ID of the Merge request you'd like to close.
+    .PARAMETER Passthru
+    Whether to return closed Merge Request object to the pipeline. 
     #>
     [cmdletbinding()]
     param(

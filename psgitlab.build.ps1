@@ -11,7 +11,7 @@ $tests = "$projectRoot\Tests"
 
 $ReleaseDirectory = join-path $projectRoot 'Release'
 
-$psVersion = $PSVersionTable.PSVersion.Major
+$psVersion = $PSVersionTable.PSVersion.ToString()
 
 # Synopsis: Initalize the enviornment
 task Init {
@@ -48,7 +48,7 @@ task Analyze {
 
     if ($saResults) {
         $saResults | Format-Table
-        Write-Error -Message 'One or more Script Analyzer errors/warnings where found. Build cannot continue!'
+        throw 'One or more Script Analyzer errors/warnings where found. Build cannot continue!'
     }    
 }
 
@@ -60,10 +60,20 @@ Task Pester {
     Remove-Module $ENV:BHProjectName -ErrorAction SilentlyContinue
     Import-Module (Join-Path $ENV:BHProjectPath $ENV:BHProjectName) -Force
 
-    $testResults = Invoke-Pester -Path $tests -PassThru
+    # AppVeyor NUnitXml Upload
+    # Source: https://github.com/pester/Pester/wiki/Showing-Test-Results-in-CI-(TeamCity,-AppVeyor)
+    $PesterResultsFile = ".\PesterResults.xml"
+
+    $testResults = Invoke-Pester -Path $tests -PassThru -OutputFormat NUnitXml -OutputFile $PesterResultsFile
+
+    # Upload to AppVeyor 
+    if ( $env:BHBuildSystem -eq 'AppVeyor' ) {
+        (New-Object 'System.Net.WebClient').UploadFile("https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path $PesterResultsFile))
+    }
+
     if ($testResults.FailedCount -gt 0) {
         $testResults | Format-List
-        Write-Error -Message 'One or more Pester tests failed. Build cannot continue!'
+        throw 'One or more Pester tests failed. Build cannot continue!'
     }    
 }
 # Synopsis: Merge private and public functions into one .psm1 file

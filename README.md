@@ -8,7 +8,7 @@ Find-Module -Name PSGitLab | Install-Module
 ```
 
 ## API Requests
-If you think there is an [GitLab API}(https://docs.gitlab.com/ce/api/README.html) I missed make sure to request it as an issue. 
+If you think there is an [GitLab API](https://docs.gitlab.com/ce/api/README.html) I missed make sure to request it as an issue. 
 I added the API calls that I needed to get work done. 
 You might need others.
 Let me know. 
@@ -21,6 +21,11 @@ Before issuing a Pull Request make sure to run the following code to make sure y
 ```
 
 This will run your code against the PSScriptAnalyzer and Pester tests. 
+If you're writing code against a specific function you can use Pester tags to check against just that one function. 
+
+``` PowerShell
+Invoke-Pester -Tag get-gitlabproject
+```
 
 ### Milestones
 Milestones will be used for code coverage. Each API call has it's own issue and each group of API calls will be categorized by the corresponding milestone.

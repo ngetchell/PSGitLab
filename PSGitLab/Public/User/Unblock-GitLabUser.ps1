@@ -12,6 +12,14 @@ Function Unblock-GitLabUser {
     Unlock-GitLabUser -Username fake
     .EXAMPLE
     Get-GitLabUser -Username fake | Unblock-GitLabUser
+    .PARAMETER ID
+    The user ID.
+    .PARAMETER Username
+    The username for the user.
+    .PARAMETER Email
+    The email address for the user.
+    .PARAMETER Passthru
+    To return the unblocked user to the pipeline.
     #>
     [cmdletbinding(DefaultParameterSetName='ID')]
     param(

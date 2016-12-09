@@ -12,9 +12,13 @@ action_name     : pushed to
 target_id       : 
 target_type     : 
 author_id       : 2
-
+.PARAMETER Id
+The ID or NAMESPACE/PROJECT_NAME of the project.
+.PARAMETER Namespace
+The namespace of the project.
 #>    
 [cmdletbinding()]
+[OutputType('GitLab.Project.Event')]
 param(
     [ValidateNotNull()]
     [ValidateNotNullOrEmpty()]
