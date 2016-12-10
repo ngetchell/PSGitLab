@@ -1,42 +1,4 @@
 Function Get-GitLabProject {
-    <#
-    .SYNOPSIS
-    Retrieve all projects in a GitLab instance. 
-    .DESCRIPTION
-    Retrieve all projects in a GitLab instance. Queries over HTTP and gets back GitLab.Project type.  
-    .EXAMPLE
-    Get-GitLabProject
-    .EXAMPLE
-    Get-GitLabProject -All
-    .EXAMPLE
-    Get-GitLabProject -Owned
-    .EXAMPLE
-    Get-GitLabProject -Id 4
-    .EXAMPLE
-    Get-GitLabProject -Archived
-    .EXAMPLE 
-    Get-GitLabProject -Starred
-    .EXAMPLE
-    Get-GitLabProject -Search 'ngetchell' -Archived
-    .PARAMETER Id
-    The ID or NAMESPACE/PROJECT_NAME of the project.
-    .PARAMETER Archived
-    Limit by archived status.
-    .PARAMETER Visibility
-    Limit by visibility public, internal, or private.
-    .PARAMETER Order_by
-    Return projects ordered by id, name, path, created_at, updated_at, or last_activity_at fields. Default is created_at.
-    .PARAMETER Sort
-    Return projects sorted in asc or desc order. Default is desc.
-    .PARAMETER Search
-    Return list of authorized projects matching the search criteria.
-    .PARAMETER Owned
-    Return all owned projects.
-    .PARAMETER Starred
-    Return all starred projects.
-    .PARAMETER All
-    Return all projects.
-    #>
     [cmdletbinding(DefaultParameterSetName='Projects')]
     [OutputType("GitLab.Project")]
     param(

@@ -1,18 +1,4 @@
 Function Remove-GitLabUser {
-    <#
-    .SYNOPSIS
-    User to get rid of users. 
-    .DESCRIPTION
-    Used to get rid of users.
-    .EXAMPLE
-    Search-GitLabUser -User 'fake' | Remove-GitLabUser
-    .PARAMETER Username
-    The username of the user being removed.
-    .PARAMETER WhatIf
-    Run without making modifications.
-    .PARAMETER Confirm
-    Whether to continue or not.    
-    #>
     [cmdletbinding(SupportsShouldProcess=$True,ConfirmImpact='High')]
     param(
         [ValidateNotNull()]

@@ -1,18 +1,4 @@
 Function Remove-GitLabProject {
-<#
-.SYNOPSIS
-Deletes a GitLab project.
-.DESCRIPTION
-Deletes a GitLab project. Can only be done by ID. Supports should process.
-.EXAMPLE
-Remove-GitLabProject -Id 99
-.PARAMETER Id
-The project Id.
-.PARAMETER WhatIf
-Run without making modifications.
-.PARAMETER Confirm
-Whether to continue or not.
-#>
 [cmdletbinding(SupportsShouldProcess=$True,ConfirmImpact='High')]
 param(
     [ValidateNotNull()]

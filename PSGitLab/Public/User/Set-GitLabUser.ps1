@@ -1,44 +1,4 @@
 Function Set-GitLabUser {
-    <#
-    .SYNOPSIS
-    Modify users already created in your GitLab instance. 
-    .DESCRIPTION
-    Modify users already created in your GitLab instance. Useful for making someone an admin from the command line. 
-    .EXAMPLE
-    Set-GitLabUser -Email FakeEmail@example.com -Twitter 'newtwitterID'
-    .EXAMPLE
-    Set-GitLabUser -Username FakeUserName -Admin
-    .PARAMETER email
-    The email of the user.
-    .PARAMETER Password
-    The password for the user.
-    .PARAMETER Username
-    The username for the user.
-    .PARAMETER Name
-    The full name of the user.
-    .PARAMETER SkypeID
-    The SkypeID of the user.
-    .PARAMETER linkedin
-    The URL for the LinkedIn user profile.
-    .PARAMETER Twitter
-    The twitter handle of the user.
-    .PARAMETER WebsiteURl
-    The URL for the user's website.
-    .PARAMETER ProjectsLimit
-    To limit how many projects a user can have open.
-    .PARAMETER Admin
-    Make a user an admin.
-    .PARAMETER CanCreateGroup
-    Whether a user can create a group.
-    .PARAMETER External
-    External UID.
-    .PARAMETER Passthru
-    To return the user to the pipeline.     
-    .PARAMETER ID
-    The ID of the user.
-    .PARAMETER NewUsername
-    The new username for the given user. 
-    #>
     [cmdletbinding()]
     param(
         [ValidateNotNullOrEmpty()]

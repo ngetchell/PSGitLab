@@ -1,5 +1,5 @@
 ﻿$ModuleName = Split-Path (Resolve-Path "$PSScriptRoot\..\" ) -Leaf
-$ModuleManifest = Resolve-Path "$PSScriptRoot\..\$ModuleName\$ModuleName.psd1"
+$ModuleManifest = Resolve-Path "$PSScriptRoot\..\Release\$ModuleName.psd1"
 
 Get-Module $ModuleName | Remove-Module
 

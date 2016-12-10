@@ -1,18 +1,4 @@
 Function Save-GitLabAPIConfiguration {
-<#
-.Synopsis
-   Used to store information about your GitLab instance.
-.DESCRIPTION
-   Used to store information about your GitLab instance. The domain and api token are given.
-.EXAMPLE
-   Save-GitLabAPIConfiguration -Domain http://gitlab.com -Token "Token"
-.NOTES
-   Implemented using Export-CLIXML saving the configurations. Stores .xml in $env:appdata\GitLabAPI\
-.PARAMETER Token
-   Your private token that can be found under the profile settings.
-.PARAMETER Domain
-   The domain your GitLab instance runs under. Example: http://gitlab.com.
-#>
 [cmdletbinding()]
 param(
     [Parameter(Mandatory=$true,

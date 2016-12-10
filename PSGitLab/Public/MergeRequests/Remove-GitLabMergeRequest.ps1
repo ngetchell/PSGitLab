@@ -1,20 +1,4 @@
 Function Remove-GitLabMergeRequest {
-<#
-.SYNOPSIS
-Deletes a GitLab merge request from project.
-.DESCRIPTION
-Deletes a GitLab merge request from project. Can only be done by ID. Supports should process.
-.EXAMPLE
-Remove-GitLabMergeRequest -ProjectId 8 -Id 99
-.PARAMETER ProjectId
-The project ID.
-.PARAMETER Id
-The id of the merge request. 
-.PARAMETER WhatIf
-Run without making modifications.
-.PARAMETER Confirm
-Whether to continue or not.
-#>
 [cmdletbinding(SupportsShouldProcess,ConfirmImpact='High')]
 param(
     [Alias('project_id')]

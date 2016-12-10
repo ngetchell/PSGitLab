@@ -19,12 +19,12 @@ task Init {
     "Build System Details:"
     Get-Item ENV:BH*
 
-    $modules = 'Pester', 'PSDeploy', 'PSScriptAnalyzer'
+    $modules = 'Pester', 'PSDeploy', 'PSScriptAnalyzer', 'PlatyPS'
     Import-Module $modules -Verbose:$false -Force	
 }
 
 # Synopsis: PSScriptAnalyzer 
-task Analyze {
+task Analyze Build,{
     # Modify PSModulePath of the current PowerShell session.
     # We want to make sure we always test the development version of the resource
     # in the current build directory.
@@ -39,7 +39,7 @@ task Analyze {
         'PSAvoidUsingConvertToSecureStringWithPlainText', # For private token information
         'PSAvoidUsingUserNameAndPassWordParams' # this refers to gitlab users and passwords
     )
-    $saResults = Invoke-ScriptAnalyzer -Path $sut -Severity Error -ExcludeRule $excludedRules -Recurse -Verbose:$false
+    $saResults = Invoke-ScriptAnalyzer -Path $ReleaseDirectory -Severity Error -ExcludeRule $excludedRules -Recurse -Verbose:$false
 
     # Restore PSModulePath
     if ($origModulePath -ne $env:PSModulePath) {
@@ -53,7 +53,7 @@ task Analyze {
 }
 
 # Synopsis: Pester Tests
-Task Pester {
+Task Pester Build, {
     if(-not $ENV:BHProjectPath) {
         Set-BuildEnvironment -Path $PSScriptRoot\..
     }
@@ -112,6 +112,10 @@ task mergePSM1 {
     }
     
 }
+# Synopsis: Generate MAML Help File
+Task GenerateHelp {
+    New-ExternalHelp .\docs\ -OutputPath .\Release\en-us\ -Force
+}
 
 # Synopsis: Remove the Release directory
 Task Cleanup {
@@ -121,7 +125,10 @@ Task Cleanup {
 }
 
 # Synopsis: Run before commiting your code
-task Pre-Commit init,pester,analyze
+task Pre-Commit Build,pester,analyze
+
+# Synopsis: Build Tasks
+task Build init,Cleanup,mergePSM1,GenerateHelp
 
 # Synopsis: Default Task - Alias for Pre-Commit
 task . Pre-Commit
@@ -150,4 +157,4 @@ task psdeploy {
 }
 
 # Synopsis: Deploy to Powershell Gallery
-task Deploy init,pester,analyze,mergePSM1,psdeploy 
+task Deploy build,pester,analyze,psdeploy 

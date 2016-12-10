@@ -1,29 +1,4 @@
 Function Get-GitLabCommitStats {
-<#
-.SYNOPSIS
-Retrieves information about commits to projects
-.DESCRIPTION
-Retrieves information about commits to projects
-.EXAMPLE
-PS U:\> Get-GitLabCommitStats -Id 52 -afterDate "2016-07-01" -author "Test User" | ft
-
-Week Sun Mon Tue Wed Thu Fri Sat WeeklyTotal RunningTotal
----- --- --- --- --- --- --- --- ----------- ------------
-30     1   0   0   0   1   0   0           2            2
-31     0   0   0   0   0   2   0           2            4
-.PARAMETER Id
-The ID of the commit.
-.PARAMETER All
-Show all commits.
-.PARAMETER Author
-The user making the commits.
-.PARAMETER BeforeDate
-Only show commit stats before a certain date.
-.PARAMETER AfterDate
-Only show commit stats after a certain date.
-.PARAMETER LastYear
-Only show in the last year.
-#>
 [cmdletbinding()]
 [OutputType('GitLab.Commit')]
 param(

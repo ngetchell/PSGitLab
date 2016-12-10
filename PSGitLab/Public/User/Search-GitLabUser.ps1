@@ -1,19 +1,4 @@
 Function Search-GitLabUser {
-<#
-.SYNOPSIS
-Retrives a GitLab user. 
-.DESCRIPTION
-Retrives a GitLab user. 
-.EXAMPLE
-Search-GitLabUser ngetchell
-name               : Nicholas Getchell
-username           : ngetchell
-id                 : 2
-state              : active
-is_admin           : true
-.PARAMETER User
-The search criteria for the user.
-#>
 [cmdletbinding()]
 param(
     [Parameter(Mandatory=$true)]

@@ -1,18 +1,4 @@
 Function Close-GitLabMilestone {
-    <#
-    .SYNOPSIS
-    Closes your GitLab milestone.
-    .DESCRIPTION
-    Closes your GitLab milestone. 
-    .EXAMPLE
-    Close-GitLabMilestone -ProjectId 8 -Id 32 
-    .PARAMETER ProjectID
-    The project ID.
-    .PARAMETER ID
-    The ID of the milestone to be closed.
-    .PARAMETER Passthru
-    Return the closed milestone. 
-    #>
     [cmdletbinding()]
     param(
         [Alias('project_id')]

@@ -1,28 +1,4 @@
 Function Get-GitLabUser {
-    <#
-    .SYNOPSIS
-    Get users from the GitLab instance. 
-    .DESCRIPTION
-    Get users from the GitLab instance. 
-    .EXAMPLE
-    Get-GitLabUser -ID 4
-    .EXAMPLE
-    Get-GitLabUser -All
-    .EXAMPLE
-    Get-GitLabUser -Username 'fakeuser'
-    .EXAMPLE
-    Get-GitLabUser -Email 'fake@domain.com'
-    .PARAMETER ID
-    The user ID.
-    .PARAMETER All
-    Return back all users.
-    .PARAMETER Username
-    Return user by username.
-    .PARAMETER Email
-    Return user by email.
-    .PARAMETER CurrentUser
-    Return back the current user.
-    #>
     [cmdletbinding(DefaultParameterSetName='All')]
     [OutputType('GitLab.User')]
     param(

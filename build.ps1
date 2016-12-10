@@ -51,7 +51,7 @@ function Resolve-Module {
 Get-PackageProvider -Name Nuget -ForceBootstrap | Out-Null
 Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
 
-'BuildHelpers', 'InvokeBuild', 'Pester', 'PSDeploy', 'PSScriptAnalyzer' | Resolve-Module
+'BuildHelpers', 'InvokeBuild', 'Pester', 'PSDeploy', 'PSScriptAnalyzer', 'PlatyPS' | Resolve-Module
 
 Set-BuildEnvironment
 

@@ -1,36 +1,4 @@
 Function New-GitLabProject {
-    <#
-    .SYNOPSIS
-    Creates a new GitLab project. Requires a name. 
-    .DESCRIPTION
-    Creates a new GitLab project. Requires a name. 
-    .EXAMPLE
-    New-GitlabProject -Name 'Fake'
-    .PARAMETER Name
-    The name of the new project.
-    .PARAMETER Path
-    Custom repository name for new project. By default generated based on name.
-    .PARAMETER Namespace
-    Namespace for the new project (defaults to the current user's namespace).
-    .PARAMETER Description
-    The description of the project.
-    .PARAMETER Issues_enabled
-    Whether to turn on issues for this project.
-    .PARAMETER Merge_requests_enabled
-    Whether to turn on merge requests for this project.
-    .PARAMETER Builds_enabled
-    Whether to turn on builds for the project.
-    .PARAMETER Wiki_enabled
-    Whether to turn on a wiki for the project.
-    .PARAMETER Snippets_enabled
-    Whether to turn on snippets for the project.
-    .PARAMETER Container_registry_enabled
-    Whether to turn on the container registry. 
-    .PARAMETER Public
-    Whether the project should be public.
-    .PARAMETER visibility_level
-    Whether the project should be private, internal, or public.
-    #>    
     [cmdletbinding()]
     param(
         [ValidateNotNull()]

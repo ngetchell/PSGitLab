@@ -1,30 +1,4 @@
 Function New-GitLabMergeRequest {
-    <#
-    .SYNOPSIS
-    Creates a new merge request. Uses the user namespace. 
-    .DESCRIPTION
-    Creates a new merge request. Uses the user namespace. This uses the v3 GitLab API.  
-    .EXAMPLE
-    New-GitLabMergeRequest -ProjectId 8 -SourceBranch issue-1234 -TargetBranch master -Title "WIP: issue 1234"
-    .PARAMETER ProjectID
-    The ID of a project.
-    .PARAMETER SourceBranch
-    The source branch.
-    .PARAMETER TargetBranch
-    The target branch. 
-    .PARAMETER AssigneeId
-    Assignee user ID.
-    .PARAMETER Title
-    Title of the merge request.
-    .PARAMETER Description
-    Description of the merge request.
-    .PARAMETER TargetProjectID
-    The target project (numeric id).
-    .PARAMETER Labels
-    Labels for MR as a comma-separated list.
-    .PARAMETER MilestoneID
-    Milestone ID.
-    #>
     [cmdletbinding()]
     param(
         [ValidateNotNullOrEmpty()]

@@ -1,38 +1,4 @@
 Function New-GitLabUser {
-    <#
-    .SYNOPSIS
-    Make a new users for your GitLab instance. 
-    .DESCRIPTION
-    Make a new users for your GitLab instance. 
-    .EXAMPLE
-    New-GitLabUser -Email 'fake@domain.com' -username 'fake' -name 'Fake User' -Password 'GitLabPassword'
-    .PARAMETER email
-    The email of the user.
-    .PARAMETER Password
-    The password for the user.
-    .PARAMETER Username
-    The username for the user.
-    .PARAMETER Name
-    The full name of the user.
-    .PARAMETER SkypeID
-    The SkypeID of the user.
-    .PARAMETER linkedin
-    The URL for the LinkedIn user profile.
-    .PARAMETER Twitter
-    The twitter handle of the user.
-    .PARAMETER WebsiteURl
-    The URL for the user's website.
-    .PARAMETER ProjectsLimit
-    To limit how many projects a user can have open.
-    .PARAMETER Admin
-    Make a user an admin.
-    .PARAMETER CanCreateGroup
-    Whether a user can create a group.
-    .PARAMETER External
-    External UID.
-    .PARAMETER Passthru
-    To return the user to the pipeline. 
-    #>
     [CmdletBinding()]
     param (
         [ValidateNotNullOrEmpty()]

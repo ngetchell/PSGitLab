@@ -1,20 +1,4 @@
 Function New-GitLabMilestone {
-    <#
-    .SYNOPSIS
-    Creates a new milestone. Uses the user namespace. 
-    .DESCRIPTION
-    Creates a new milestone. Uses the user namespace. This uses the v3 GitLab API.  
-    .EXAMPLE
-    New-GitLabMilestone -ProjectId 8 -Title "2016-KW30" -Description "MyDescription" -DueDate (Get-Date).AddDays(10)
-    .PARAMETER ProjectId
-    The ID of a project.
-    .PARAMETER Title
-    The title of an milestone.
-    .PARAMETER Description
-    The description of an milestone
-    .PARAMETER DueDate
-    The due date of the milestone.
-    #>
     [cmdletbinding()]
     param(
         [ValidateNotNullOrEmpty()]

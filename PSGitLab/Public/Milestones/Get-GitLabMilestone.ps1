@@ -1,24 +1,4 @@
 Function Get-GitLabMilestone {
-<#
-.SYNOPSIS
-Retrieves all of the different milestones for a project in a GitLab instance.
-.DESCRIPTION
-Retrieves all of the different milestones for a project in a GitLab instance. Queries over HTTP and returns GitLab.MergeRequest type.
-.EXAMPLE
-# list all milestones for the project 1
-Get-GitLabMilestone -ProjectId 1
-
-# list a specific milestone from the id for the project 1
-Get-GitLabMilestone -ProjectId 1 -Id 20
-.PARAMETER ProjectId
-The project ID.
-.PARAMETER Id
-The ID of the milestone.
-.PARAMETER Iid
-The exacty milestone Id.
-.PARAMETER State
-Return only active or closed milestones.
-#>
 [cmdletbinding(DefaultParameterSetName='MergeRequests')]
 [OutputType('GitLab.Milestone')]
 param (
