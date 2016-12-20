@@ -1,6 +1,6 @@
 Set-BuildEnvironment
 
-$ModuleName = 'PSGitLab'
+$ModuleName = $env:BHProjectName
 $projectRoot = $ENV:BHProjectPath
 if(-not $projectRoot) {
 	$projectRoot = $PSScriptRoot
@@ -10,6 +10,9 @@ $sut = "$projectRoot\$ModuleName"
 $tests = "$projectRoot\Tests"
 
 $ReleaseDirectory = join-path $projectRoot 'Release'
+$ResultsDirectory = Join-Path $projectRoot 'Results'
+$PesterResultsFile = Join-Path $ResultsDirectory 'PesterResults.xml'
+$PSScriptResultsFile = Join-Path $ResultsDirectory 'PSScriptAnalyzer.txt'
 
 $psVersion = $PSVersionTable.PSVersion.ToString()
 
@@ -17,14 +20,17 @@ $psVersion = $PSVersionTable.PSVersion.ToString()
 task Init {
     "`nSTATUS: Testing with PowerShell {0}" -f $psVersion
     "Build System Details:"
-    Get-Item ENV:BH*
+    Get-Item ENV:BH* | ft Name,Value -AutoSize
 
     $modules = 'Pester', 'PSDeploy', 'PSScriptAnalyzer', 'PlatyPS'
     Import-Module $modules -Verbose:$false -Force	
+
+    if ( -not ( test-path -Path $ReleaseDirectory ) ) { New-Item -ItemType Directory -Path $projectRoot -Name Release | Out-Null }
+    if ( -not ( test-path -Path $ResultsDirectory ) ) { New-Item -ItemType Directory -Path $projectRoot -Name Results | Out-Null}
 }
 
 # Synopsis: PSScriptAnalyzer 
-task Analyze Build,{
+task Analyze -inputs { gci -Path "$projectRoot\$ModuleName\" -Recurse | Where-Object { -not $_.PSIsContainer } } -outputs $PSScriptResultsFile   Build,{
     # Modify PSModulePath of the current PowerShell session.
     # We want to make sure we always test the development version of the resource
     # in the current build directory.
@@ -39,12 +45,14 @@ task Analyze Build,{
         'PSAvoidUsingConvertToSecureStringWithPlainText', # For private token information
         'PSAvoidUsingUserNameAndPassWordParams' # this refers to gitlab users and passwords
     )
-    $saResults = Invoke-ScriptAnalyzer -Path $ReleaseDirectory -Severity Error -ExcludeRule $excludedRules -Recurse -Verbose:$false
+    $saResults = Invoke-ScriptAnalyzer -Path $ModuleName -Severity Error -ExcludeRule $excludedRules -Recurse -Verbose:$false
 
     # Restore PSModulePath
     if ($origModulePath -ne $env:PSModulePath) {
         $env:PSModulePath = $origModulePath
     }
+
+    $saResults | Select SuggestedCorrections | Format-Custom | Out-File $PSScriptResultsFile -Force
 
     if ($saResults) {
         $saResults | Format-Table
@@ -53,7 +61,7 @@ task Analyze Build,{
 }
 
 # Synopsis: Pester Tests
-Task Pester Build, {
+Task Pester -inputs { gci -Path "$projectRoot\$ModuleName\","$projectRoot\Tests\" -Recurse | Where-Object { -not $_.PSisContainer } } -outputs $PesterResultsFile Build, {
     if(-not $ENV:BHProjectPath) {
         Set-BuildEnvironment -Path $PSScriptRoot\..
     }
@@ -62,7 +70,6 @@ Task Pester Build, {
 
     # AppVeyor NUnitXml Upload
     # Source: https://github.com/pester/Pester/wiki/Showing-Test-Results-in-CI-(TeamCity,-AppVeyor)
-    $PesterResultsFile = ".\PesterResults.xml"
 
     $testResults = Invoke-Pester -Path $tests -PassThru -OutputFormat NUnitXml -OutputFile $PesterResultsFile
 
@@ -76,23 +83,29 @@ Task Pester Build, {
         throw 'One or more Pester tests failed. Build cannot continue!'
     }    
 }
+
+$mergePSM1Parameters = @{
+    inputs = { Get-ChildItem -Path "$projectRoot\$ModuleName\" -Recurse | Where-Object { -not $_.PSisContainer } }
+    outputs = "$ReleaseDirectory\$ModuleName.psm1"
+}
+
 # Synopsis: Merge private and public functions into one .psm1 file
-task mergePSM1 {
+task mergePSM1 @mergePSM1Parameters {
     
     $ReleaseDirectory = join-path $projectRoot 'Release'
-    if (Test-Path $ReleaseDirectory) {
-        remove-item -Recurse -Force -Path $ReleaseDirectory
-    }
+    #if (Test-Path $ReleaseDirectory) {
+    #    remove-item -Recurse -Force -Path $ReleaseDirectory
+    #}
 
     #Create Release Folder
-    New-Item -Path $ReleaseDirectory -ItemType Directory | Out-Null
+    New-Item -Path $ReleaseDirectory -ItemType Directory -Force | Out-Null
     
     #Copy Module Manifest
-    Copy-Item "$projectRoot\$ModuleName\$ModuleName.psd1" -Destination $ReleaseDirectory
+    Copy-Item "$projectRoot\$ModuleName\$ModuleName.psd1" -Destination $ReleaseDirectory -Force
 
     #Copy Formats
     if (Test-Path "$projectRoot\$ModuleName\$ModuleName.Format.ps1xml") {
-        Copy-Item "$projectRoot\$ModuleName\$ModuleName.Format.ps1xml" -Destination $ReleaseDirectory
+        Copy-Item "$projectRoot\$ModuleName\$ModuleName.Format.ps1xml" -Destination $ReleaseDirectory -Force
     }
 
     # Merge PSM1
@@ -105,30 +118,36 @@ task mergePSM1 {
         "##########################" | Add-Content $PSM1Path
 
         foreach ($Function in (Get-ChildItem $projectRoot\$ModuleName\$Folder -Recurse -Include *.ps1) ) {
-            Get-Content $Function.Fullname | Add-Content $PSM1Path
+            Get-Content $Function.Fullname | Add-Content $PSM1Path -Force
             "`r`n" | Add-Content $PSM1Path
         }
 
     }
     
 }
+
+$buildMamlParams = @{
+    Inputs  = { Get-Item docs/*.md }
+    Outputs = "Release/en-US/$ModuleName-help.xml"
+}
+
 # Synopsis: Generate MAML Help File
-Task GenerateHelp {
-    New-ExternalHelp .\docs\ -OutputPath .\Release\en-us\ -Force
+Task GenerateHelp @buildMamlParams  {
+    $Results = New-ExternalHelp .\docs\ -OutputPath .\Release\en-us\ -Force
 }
 
 # Synopsis: Remove the Release directory
-Task Cleanup {
-    if (Test-Path $ReleaseDirectory) {
-        Remove-Item -Recurse -Force -Path $ReleaseDirectory
-    }
-}
+#Task Cleanup {
+#    if (Test-Path $ReleaseDirectory) {
+#        Remove-Item -Recurse -Force -Path $ReleaseDirectory
+#    }
+#}
 
 # Synopsis: Run before commiting your code
 task Pre-Commit Build,pester,analyze
 
 # Synopsis: Build Tasks
-task Build init,Cleanup,mergePSM1,GenerateHelp
+task Build init,mergePSM1,GenerateHelp
 
 # Synopsis: Default Task - Alias for Pre-Commit
 task . Pre-Commit
