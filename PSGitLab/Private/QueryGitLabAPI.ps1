@@ -24,6 +24,7 @@ $Headers = @{
 
 $Request.Add('Headers',$Headers)
 $Request.URI = "$Domain/api/v3" + $Request.URI
+$Request.UseBasicParsing = $true
 
 try  {
     Write-Verbose "URL: $($Request.URI)"
