@@ -16,8 +16,11 @@ param(
 
 $GitLabConfig = ImportConfig
 $Domain = $GitLabConfig.Domain
-$Token = DecryptString -Token $GitLabConfig.Token
-
+if ( $IsWindows -or ( [version]$PSVersionTable.PSVersion -lt [version]"5.99.0" ) ) {
+    $Token = DecryptString -Token $GitLabConfig.Token
+} elseif ( $IsLinux ) {
+    $Token = $GitLabConfig.Token
+}
 $Headers = @{
     'PRIVATE-TOKEN'=$Token;
 }
@@ -29,7 +32,7 @@ $Request.UseBasicParsing = $true
 try  {
     Write-Verbose "URL: $($Request.URI)"
     $webContent = Invoke-WebRequest @Request
-    $totalPages = ($webContent).Headers['X-Total-Pages']
+    $totalPages = ($webContent).Headers['X-Total-Pages'] -as [int]
     $Results = $webContent.Content | ConvertFrom-Json
     for ($i=1; $i -lt $totalPages; $i++) {
         $newRequest = $Request
