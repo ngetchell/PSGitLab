@@ -15,6 +15,10 @@ param(
     $Domain
 )
 
+if ( $Domain -match '^http:\/\/' ) {
+    Write-Warning "All tokens will be sent over HTTP. Recommendation: Use HTTPS."
+}
+
 if ( $IsWindows -or ( [version]$PSVersionTable.PSVersion -lt [version]"5.99.0" ) ) {
     
     $Parameters = @{

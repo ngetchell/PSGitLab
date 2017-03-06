@@ -34,6 +34,6 @@ Milestones will be used for code coverage. Each API call has it's own issue and 
 If you find a bug, please let me know through the issue tracker. The more details you provide the better.
 
 ### Contributors
-- [Nicholas M. Getchell](https://github.com/ngetchell)
+- [Nicholas M. Getchell](https://github.com/ngetchell) - [@getch3028](https://twitter.com/getch3028)
 - [Leonhard Schick](https://github.com/lw-schick)
 - [Brooks Collins](https://github.com/TerrapinStation)

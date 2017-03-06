@@ -177,3 +177,9 @@ task psdeploy {
 
 # Synopsis: Deploy to Powershell Gallery
 task Deploy build,pester,analyze,psdeploy 
+
+# Synopsis: Clean all of the artifacts from the build process
+task Clean {
+    Remove-Item "$ReleaseDirectory" -Recurse
+    Remove-Item "$ResultsDirectory" -Recurse
+}
