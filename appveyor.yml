@@ -17,3 +17,7 @@ build: false
 test_script:
 # Test with native PS version
   - ps: . .\build.ps1 -task Deploy
+
+artifacts:
+  - path: Release
+    name: Release
