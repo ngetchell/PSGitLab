@@ -37,3 +37,4 @@ If you find a bug, please let me know through the issue tracker. The more detail
 - [Nicholas M. Getchell](https://github.com/ngetchell) - [@getch3028](https://twitter.com/getch3028)
 - [Leonhard Schick](https://github.com/lw-schick)
 - [Brooks Collins](https://github.com/TerrapinStation)
+- [Matthew Hilton](https://github.com/matt2005)
