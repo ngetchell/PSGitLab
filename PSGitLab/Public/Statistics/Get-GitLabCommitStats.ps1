@@ -1,19 +1,6 @@
 Function Get-GitLabCommitStats {
-<#
-.SYNOPSIS
-Retrieves information about commits to projects
-.DESCRIPTION
-Retrieves information about commits to projects
-.EXAMPLE
-PS U:\> Get-GitLabCommitStats -Id 52 -afterDate "2016-07-01" -author "Test User" | ft
-
-Week Sun Mon Tue Wed Thu Fri Sat WeeklyTotal RunningTotal
----- --- --- --- --- --- --- --- ----------- ------------
-30     1   0   0   0   1   0   0           2            2
-31     0   0   0   0   0   2   0           2            4
-
-#>
 [cmdletbinding()]
+[OutputType('GitLab.Commit')]
 param(
     [Parameter(ParameterSetName="Id",Mandatory=$true)]
     [Parameter(ParameterSetName="IdAuth",Mandatory=$true)]
@@ -71,14 +58,14 @@ param(
                     URI="/projects/$project/repository/commits?per_page=100";
                     Method='Get';
                 }
-            $commits += QueryGitLabAPI -Request $Request -ObjectType 'GitLab.Commit' -isCommits
+            $commits += QueryGitLabAPI -Request $Request -ObjectType 'GitLab.Commit' -Version "v4"
             }
         } else {
             $Request = @{
                 URI="/projects/$Id/repository/commits?per_page=100";
                 Method='Get';
             }
-            $commits = QueryGitLabAPI -Request $Request -ObjectType 'GitLab.Commit' -isCommits
+            $commits = QueryGitLabAPI -Request $Request -ObjectType 'GitLab.Commit' -Version "v4"
         }
         foreach ($name in $author) {
             if ($lastYear) {

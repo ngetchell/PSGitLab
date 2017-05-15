@@ -1,24 +1,4 @@
 Function Get-GitLabProject {
-    <#
-    .SYNOPSIS
-    Retrieve all projects in a GitLab instance. 
-    .DESCRIPTION
-    Retrieve all projects in a GitLab instance. Queries over HTTP and gets back GitLab.Project type.  
-    .EXAMPLE
-    Get-GitLabProject
-    .EXAMPLE
-    Get-GitLabProject -All
-    .EXAMPLE
-    Get-GitLabProject -Owned
-    .EXAMPLE
-    Get-GitLabProject -Id 4
-    .EXAMPLE
-    Get-GitLabProject -Archived
-    .EXAMPLE 
-    Get-GitLabProject -Starred
-    .EXAMPLE
-    Get-GitLabProject -Search 'ngetchell' -Archived
-    #>
     [cmdletbinding(DefaultParameterSetName='Projects')]
     [OutputType("GitLab.Project")]
     param(

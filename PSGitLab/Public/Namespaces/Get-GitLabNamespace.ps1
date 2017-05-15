@@ -1,13 +1,6 @@
 Function Get-GitLabNamespace {
-<#
-.SYNOPSIS
-Retrieves all of the different namespaces in a GitLab instance.
-.DESCRIPTION
-Retrieves all of the different namespaces in a GitLab instance. Queries over HTTP and returns GitLab.Namespace type.
-.EXAMPLE
-Get-GitLabNamespace
-#>
 [cmdletbinding()]
+[OutputType('GitLab.Namespace')]
 param (
     [string]$search
 )

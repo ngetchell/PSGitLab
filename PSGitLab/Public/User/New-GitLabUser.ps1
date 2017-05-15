@@ -1,12 +1,4 @@
 Function New-GitLabUser {
-    <#
-    .SYNOPSIS
-    Make a new users for your GitLab instance. 
-    .DESCRIPTION
-    Make a new users for your GitLab instance. 
-    .EXAMPLE
-    New-GitLabUser -Email 'fake@domain.com' -username 'fake' -name 'Fake User' -Password 'GitLabPassword'
-    #>
     [CmdletBinding()]
     param (
         [ValidateNotNullOrEmpty()]
@@ -14,6 +6,7 @@ Function New-GitLabUser {
         [string]$Email,
 
         [ValidateNotNullOrEmpty()]
+        [ValidatePattern("(?# Error: Password Must Contain at least 8 characters).{8,}")]
         [Parameter(Mandatory=$true)]
         [string]$Password,
 

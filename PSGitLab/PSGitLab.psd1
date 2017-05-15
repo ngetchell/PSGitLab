@@ -12,19 +12,19 @@
 RootModule = 'PSGitLab.psm1'
 
 # Version number of this module.
-ModuleVersion = '2.3.1'
+ModuleVersion = '2.5.3'
 
 # ID used to uniquely identify this module
 GUID = 'f844db87-fda8-403b-a7da-bdc00a3f5a58'
 
 # Author of this module
-Author = 'Nicholas M. Getchell'
+Author = 'Nicholas M. Getchell, Leonhard Schick, and Brooks Collins'
 
 # Company or vendor of this module
 # CompanyName = 'Unknown'
 
 # Copyright statement for this module
-Copyright = '(c) 2016 Nicholas M. Getchell. All rights reserved.'
+Copyright = '(c) 2016 PSGitLab. All rights reserved.'
 
 # Description of the functionality provided by this module
 Description = 'GitLab API accessable from the Windows PowerShell console'
@@ -60,7 +60,7 @@ Description = 'GitLab API accessable from the Windows PowerShell console'
 # TypesToProcess = @()
 
 # Format files (.ps1xml) to be loaded when importing this module
-FormatsToProcess = @('PSGitLab.format.ps1xml')
+FormatsToProcess = @('PSGitLab.Format.ps1xml')
 
 # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
 # NestedModules = @()
@@ -72,10 +72,22 @@ FunctionsToExport = @(
     'Get-GitLabUser',
     'Remove-GitLabUser',
     'New-GitLabUser',
+    "Get-GitLabUserKey",
     'Get-GitLabProject',
     'Get-GitLabProjectEvent',
-    'New-GitLabFork'
-    ,'New-GitLabProject',
+    'Get-GitLabProjectWebhook',
+    'Get-GitlabProjectServiceSlack',
+    'Set-GitlabProjectServiceSlack',
+    'Remove-GitlabProjectServiceSlack',
+    'Get-GitLabProjectTag',
+    'Get-GitLabProjectCommit',
+    'New-GitLabFork',
+    'Set-GitLabUser',
+    'New-GitLabProject',
+    'New-GitLabProjectWebhook',
+    'Set-GitLabProjectWebhook',
+    'Remove-GitLabProjectWebhook',
+    'Set-GitLabProject',
     'Remove-GitLabProject',
     'Save-GitLabAPIConfiguration',
     'Test-GitLabAPI',
@@ -83,7 +95,18 @@ FunctionsToExport = @(
     'Get-GitLabNamespace',
     'Get-GitLabCommitStats',
     'New-GitLabBuild',
-    'Get-GitLabFile'
+    'New-GitLabMergeRequest',
+    'Get-GitLabMergeRequest',
+    'Set-GitLabMergeRequest',
+    'Remove-GitLabMergeRequest',
+    'Close-GitLabMergeRequest',
+    'New-GitLabMilestone',
+    'Get-GitLabMilestone',
+    'Set-GitLabMilestone',
+    'Close-GitLabMilestone',
+    'New-GitLabUserKey',
+    'Remove-GitLabUserKey',
+    'Push-SSHKeysToGitLab'
     )
 
 # Cmdlets to export from this module
@@ -110,15 +133,14 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        Tags = @(
-            'PSGitLab',
-            'GitLab',
-            'Git',
-            'CI'
-            'Continuous Integration',
-            'Builds',
-            'Repository'
-            )
+        Tags = @('PSGitLab',
+                 'GitLab',
+                 'Git',
+                 'CI'
+                 'ContinuousIntegration',
+                 'Builds',
+                 'Repository'
+        )
 
         # A URL to the license for this module.
         LicenseUri = 'https://github.com/ngetchell/PSGitLab/blob/master/LICENSE'

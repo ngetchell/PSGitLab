@@ -1,17 +1,4 @@
 Function New-GitLabBuild {
-<#
-.SYNOPSIS
-Triggers a build
-.DESCRIPTION
-Triggers a build
-.EXAMPLE
-PS U:\> New-GitLabBuild -Id 18 -Reference 'master' -Variable "GENERATE_SCRIPTS" -Value "true"
-
-id variables               
--- ---------               
- 6 @{GENERATE_SCRIPTS=true}
-#>
-
 [cmdletbinding()]
 param(
     [ValidateNotNullOrEmpty()]

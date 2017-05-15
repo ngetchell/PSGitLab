@@ -1,6 +1,9 @@
-$CommandPath = Split-Path $MyInvocation.MyCommand.Path -Parent
-$ModulePath = "$CommandPath\..\PSGitLab\PSGitLab.psd1"
-Import-Module $ModulePath
+$ModuleName = Split-Path (Resolve-Path "$PSScriptRoot\..\" ) -Leaf
+$ModuleManifest = Resolve-Path "$PSScriptRoot\..\Release\$ModuleName.psd1"
+
+Get-Module $ModuleName | Remove-Module
+
+Import-Module $ModuleManifest
 
 #region Save-GitLabAPIConfiguration
 
@@ -90,4 +93,4 @@ Describe 'Module Information' {
 
 
 #endregion Save-GitLabAPIConfiguration
-Remove-Module [P]SGitLab
+Remove-Module $ModuleName
