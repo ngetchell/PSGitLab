@@ -5,6 +5,7 @@ param(
     [Parameter(ParameterSetName="Id",Mandatory=$true)]
     [Parameter(ParameterSetName="IdAuth",Mandatory=$true)]
     [Parameter(ParameterSetName="IdLastYear",Mandatory=$true)]
+    [Parameter(ParameterSetName="IdByAuthor",Mandatory=$false)]
     [Parameter(ParameterSetName="IdBDate",Mandatory=$true)]
     [Parameter(ParameterSetName="IdADate",Mandatory=$true)]
     [Parameter(ParameterSetName="IdBothDate",Mandatory=$true)]
@@ -12,16 +13,19 @@ param(
     [Parameter(ParameterSetName="All",Mandatory=$true)]
     [Parameter(ParameterSetName="AllAuth",Mandatory=$true)]
     [Parameter(ParameterSetName="AllLastYear",Mandatory=$true)]
+    [Parameter(ParameterSetName="AllByAuthor",Mandatory=$false)]
     [Parameter(ParameterSetName="AllBDate",Mandatory=$true)]
     [Parameter(ParameterSetName="AllADate",Mandatory=$true)] 
     [Parameter(ParameterSetName="AllBothDate",Mandatory=$true)] 
     [switch]$All,
     [Parameter(ParameterSetName="IdAuth",Mandatory=$true)]
     [Parameter(ParameterSetName="IdLastYear",Mandatory=$false)]
+    [Parameter(ParameterSetName="IdByAuthor",Mandatory=$false)]
     [Parameter(ParameterSetName="IdBDate",Mandatory=$false)]
     [Parameter(ParameterSetName="IdADate",Mandatory=$false)]
     [Parameter(ParameterSetName="AllAuth",Mandatory=$true)]
     [Parameter(ParameterSetName="AllLastYear",Mandatory=$false)]
+    [Parameter(ParameterSetName="AllByAuthor",Mandatory=$false)]
     [Parameter(ParameterSetName="AllBDate",Mandatory=$false)]
     [Parameter(ParameterSetName="AllADate",Mandatory=$false)]
     [Parameter(ParameterSetName="IdBothDate",Mandatory=$false)]
@@ -39,7 +43,10 @@ param(
     [datetime]$afterDate,
     [Parameter(ParameterSetName="IdLastYear",Mandatory=$true)]
     [Parameter(ParameterSetName="AllLastYear",Mandatory=$true)]
-    [switch]$lastYear
+    [switch]$lastYear,
+    [Parameter(ParameterSetName="IdByAuthor",Mandatory=$true)]
+    [Parameter(ParameterSetName="AllByAuthor",Mandatory=$true)]
+    [switch]$byAuthor
 )
     try {
         $commits = @()
@@ -48,17 +55,17 @@ param(
             $allProjectsId = (Get-GitLabProject -All).Id
             foreach ($project in $allProjectsId) {
                 $Request = @{
-                    URI="/projects/$project/repository/commits";
+                    URI="/projects/$project/repository/commits?per_page=100";
                     Method='Get';
                 }
-            $commits += QueryGitLabAPI -Request $Request -ObjectType 'GitLab.Commit'
+            $commits += QueryGitLabAPI -Request $Request -ObjectType 'GitLab.Commit' -Version "v4"
             }
         } else {
             $Request = @{
-                URI="/projects/$Id/repository/commits";
+                URI="/projects/$Id/repository/commits?per_page=100";
                 Method='Get';
             }
-            $commits = QueryGitLabAPI -Request $Request -ObjectType 'GitLab.Commit'
+            $commits = QueryGitLabAPI -Request $Request -ObjectType 'GitLab.Commit' -Version "v4"
         }
         foreach ($name in $author) {
             if ($lastYear) {
@@ -80,7 +87,11 @@ param(
             }
         }
         if ($dtCommits) {
-            FormatCommits -dtCommits $dtCommits
+            if ($byAuthor) {
+                FormatCommits -dtCommits $dtCommits -ByAuthor
+            } else {
+                FormatCommits -dtCommits $dtCommits -ByWeek
+            }
         } else {
             Write-Output "No commits found"
         }

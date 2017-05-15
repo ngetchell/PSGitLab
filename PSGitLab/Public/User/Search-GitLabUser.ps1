@@ -9,5 +9,5 @@ param(
         URI="/users?search=$($User)";
         Method='Get';
     }
-    QueryGitLabAPI -Request $Request -ObjectType 'GitLab.User'
+    QueryGitLabAPI -Request $Request -ObjectType 'GitLab.User' -Version "v4"
 }

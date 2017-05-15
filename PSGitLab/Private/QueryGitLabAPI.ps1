@@ -11,7 +11,13 @@ param(
                HelpMessage='Provide a datatype for the returing objects.',
                Position=1)]
     [ValidateNotNullOrEmpty()]
-    [string]$ObjectType
+    [string]$ObjectType,
+
+    [Parameter(Mandatory=$false,
+               HelpMessage='Provide API version to use',
+               Position=2)]
+    [ValidateNotNullOrEmpty()]
+    [string]$Version = 'v3'
 )
 
 $GitLabConfig = ImportConfig
@@ -26,7 +32,7 @@ $Headers = @{
 }
 
 $Request.Add('Headers',$Headers)
-$Request.URI = "$Domain/api/v3" + $Request.URI
+$Request.URI = "$Domain/api/$Version" + $Request.URI
 $Request.UseBasicParsing = $true
 
 try  {
