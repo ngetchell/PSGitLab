@@ -13,5 +13,5 @@ Function Get-GitlabUserPrivateToken {
         Select-Object -ExpandProperty Private_Token
 }
 
-$PrivateToken = Get-GitlabUserPrivateToken -Username root -Password gitlab1234
+$PrivateToken = Get-GitlabUserPrivateToken -Username ******* -Password *********
 Save-GitLabAPIConfiguration -Domain $Domain -Token $PrivateToken
