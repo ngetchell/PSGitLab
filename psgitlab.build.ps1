@@ -1,7 +1,7 @@
-Set-BuildEnvironment
+Set-BuildEnvironment -VariableNamePrefix 'Build' -Force
 
-$ModuleName = $env:BHProjectName
-$projectRoot = $ENV:BHProjectPath
+$ModuleName = $env:BuildProjectName
+$projectRoot = $ENV:BuildProjectPath
 if(-not $projectRoot) {
 	$projectRoot = $PSScriptRoot
 }
@@ -20,7 +20,7 @@ $psVersion = $PSVersionTable.PSVersion.ToString()
 task Init {
     "`nSTATUS: Testing with PowerShell {0}" -f $psVersion
     "Build System Details:"
-    Get-Item ENV:BH* | ft Name,Value -AutoSize
+    Get-Item ENV:Build* | Format-Table Name,Value -AutoSize
 
     $modules = 'Pester', 'PSDeploy', 'PSScriptAnalyzer', 'PlatyPS'
     Import-Module $modules -Verbose:$false -Force	
@@ -52,7 +52,7 @@ task Analyze -inputs { gci -Path "$projectRoot\$ModuleName\" -Recurse | Where-Ob
         $env:PSModulePath = $origModulePath
     }
 
-    $saResults | Select SuggestedCorrections | Format-Custom | Out-File $PSScriptResultsFile -Force
+    $saResults | Select-Object SuggestedCorrections | Format-Custom | Out-File $PSScriptResultsFile -Force
 
     if ($saResults) {
         $saResults | Format-Table
@@ -62,19 +62,19 @@ task Analyze -inputs { gci -Path "$projectRoot\$ModuleName\" -Recurse | Where-Ob
 
 # Synopsis: Pester Tests
 Task Pester -inputs { gci -Path "$projectRoot\$ModuleName\","$projectRoot\Tests\" -Recurse | Where-Object { -not $_.PSisContainer } } -outputs $PesterResultsFile Build, {
-    if(-not $ENV:BHProjectPath) {
+    if(-not $ENV:BuildProjectPath) {
         Set-BuildEnvironment -Path $PSScriptRoot\..
     }
-    Remove-Module $ENV:BHProjectName -ErrorAction SilentlyContinue
-    Import-Module (Join-Path $ENV:BHProjectPath $ENV:BHProjectName) -Force
+    Remove-Module $ENV:BuildProjectName -ErrorAction SilentlyContinue
+    Import-Module (Join-Path $ENV:BuildProjectPath $ENV:BuildProjectName) -Force
 
     # AppVeyor NUnitXml Upload
     # Source: https://github.com/pester/Pester/wiki/Showing-Test-Results-in-CI-(TeamCity,-AppVeyor)
 
-    $testResults = Invoke-Pester -Path $tests -PassThru -OutputFormat NUnitXml -OutputFile $PesterResultsFile
+    $testResults = Invoke-Pester -Path $tests -PassThru -OutputFile $PesterResultsFile
 
     # Upload to AppVeyor 
-    if ( $env:BHBuildSystem -eq 'AppVeyor' ) {
+    if ( $env:BuildBuildSystem -eq 'AppVeyor' ) {
         (New-Object 'System.Net.WebClient').UploadFile("https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path $PesterResultsFile))
     }
 
@@ -156,9 +156,9 @@ task psdeploy {
     Import-Module "$ReleaseDirectory\$ModuleName.psd1"
     
     # Gate deployment
-    if( $ENV:BHBuildSystem -ne 'Unknown' -and
-        $ENV:BHBranchName -eq "master" -and
-        $ENV:BHCommitMessage -match '!deploy'
+    if( $ENV:BuildBuildSystem -ne 'Unknown' -and
+        $ENV:BuildBranchName -eq "master" -and
+        $ENV:BuildCommitMessage -match '!deploy'
     ) {
         $params = @{
             Path = "$projectRoot\module.psdeploy.ps1"
@@ -169,9 +169,9 @@ task psdeploy {
         Invoke-PSDeploy @Params
     } else {
         "Skipping deployment: To deploy, ensure that...`n" +
-        "`t* You are in a known build system (Current: $ENV:BHBuildSystem)`n" +
-        "`t* You are committing to the master branch (Current: $ENV:BHBranchName) `n" +
-        "`t* Your commit message includes !deploy (Current: $ENV:BHCommitMessage)"
+        "`t* You are in a known build system (Current: $ENV:BuildBuildSystem)`n" +
+        "`t* You are committing to the master branch (Current: $ENV:BuildBranchName) `n" +
+        "`t* Your commit message includes !deploy (Current: $ENV:BuildCommitMessage)"
     }    
 }
 
