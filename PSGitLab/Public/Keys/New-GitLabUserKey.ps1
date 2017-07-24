@@ -9,8 +9,22 @@ Function New-GitLabUserKey {
         [string]$Key,
 
         [Parameter(ParameterSetName='File',Mandatory=$true)]
-        [string]$KeyFile = $null
+        [string]$KeyFile = $null,
+
+        [Parameter(Mandatory=$false)]
+        $Username = $null
     )
+
+    if ( $PSBoundParameters.ContainsKey('Username') ) {
+        try {
+            $User = Get-GitLabUser -Username $Username
+        } catch {
+            Write-Error "Unable to find user"
+        }
+        $URI = '/users/{0}/keys' -f $User.ID
+    } else {
+        $URI = "/user/keys"
+    }
 
     if ( $PSCmdlet.ParameterSetName -eq 'File' ) {
         $Contents = Get-Content -Path $KeyFile 
@@ -30,10 +44,11 @@ Function New-GitLabUserKey {
     }
 
     $Request = @{
-        URI="/user/keys";
-        Method='POST';
+        URI=$URI;
+        Method='POST'
         Body = $Body
     }
+
 
    
     QueryGitLabAPI -Request $Request -ObjectType 'GitLab.User.Key'      
