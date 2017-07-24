@@ -32,7 +32,7 @@ function Resolve-Module {
                 if ($Version -lt $GalleryVersion) {                                        
                     Write-Verbose -Message "$($ModuleName) Installed Version [$($Version.tostring())] is outdated. Installing Gallery Version [$($GalleryVersion.tostring())]"
                     
-                    Install-Module -Name $ModuleName -Verbose:$false -Force
+                    Install-Module -Name $ModuleName -Verbose:$false -Force -Repository PSGallery
                     Import-Module -Name $ModuleName -Verbose:$false -Force -RequiredVersion $GalleryVersion
                 }
                 else {
@@ -42,7 +42,7 @@ function Resolve-Module {
             }
             else {
                 Write-Verbose -Message "[$($ModuleName)] Missing, installing Module"
-                Install-Module -Name $ModuleName -Verbose:$false -Force
+                Install-Module -Name $ModuleName -Verbose:$false -Force -Repository PSGallery
                 Import-Module -Name $ModuleName -Verbose:$false -Force -RequiredVersion $Version
             }
         }
@@ -53,7 +53,5 @@ Get-PackageProvider -Name Nuget -ForceBootstrap | Out-Null
 Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
 
 'BuildHelpers', 'InvokeBuild', 'Pester', 'PSDeploy', 'PSScriptAnalyzer', 'PlatyPS' | Resolve-Module
-
-Set-BuildEnvironment
 
 Invoke-Build $Task
