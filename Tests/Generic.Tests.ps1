@@ -14,15 +14,33 @@ Get-Command -Module $ModuleName | Where-Object { $_.CommandType -ne 'Alias' } | 
             It "Synopsis should not be auto-generated" {
                 Get-Help $_ | Select-Object -ExpandProperty synopsis | Should Not BeLike '*`[`<CommonParameters`>`]*'
             }
+
+            It 'Platyps Synopsis Check' {
+                Get-Help $_ | Select-Object -ExpandProperty synopsis | Should Not BeLike '{{Fill in the Synopsis}}'
+            }
         
             It 'Description not empty' {
                 Get-Help $_ | Select-Object -ExpandProperty Description | should not benullorempty
             }
+
+            It 'PlatyPS Default Description' {
+                Get-Help $_ | Select-Object -ExpandProperty Description | Should not belike '*{{Fill*'
+            }
+
             It 'Examples Count greater than 0' {
             
                 $Examples = Get-Help $_ | Select-Object -ExpandProperty Examples | Measure-Object 
                 $Examples.Count -gt 0 | Should be $true
             }
+
+            It 'Not default platyps example code' {
+                ( Get-Help $_ ).Examples.Example.Code | Should not belike '*{{ Add example code here }}*'
+            }
+
+            It 'Not default platyps example description' {
+                ( Get-Help $_ ).Examples.Example.remarks | Should not belike '*{{ Add example description here }}*'
+            }            
+            
         }
 
         Context "Parameter Help" {
@@ -35,6 +53,10 @@ Get-Command -Module $ModuleName | Where-Object { $_.CommandType -ne 'Alias' } | 
                     
                     It "Parameter Help for $Parameter" {
                         $ParameterHelp.description.text | Should not benullorempty
+                    }
+
+                    It "PlatyPS Default Parameter Help for $Parameter" {
+                        $ParameterHelp.description.text | should not belike '*{{Fill*'
                     }
                 }
             }

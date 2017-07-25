@@ -1,5 +1,6 @@
 Function Get-GitLabGroup {
     [cmdletbinding(DefaultParameterSetName='All')]
+    [OutputType('GitLab.Group')]
     param(
         [Parameter(ParameterSetName='ID')]
         $GroupID,
