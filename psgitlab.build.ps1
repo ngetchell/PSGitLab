@@ -93,9 +93,9 @@ $mergePSM1Parameters = @{
 task mergePSM1 @mergePSM1Parameters {
     
     $ReleaseDirectory = join-path $projectRoot 'Release'
-    #if (Test-Path $ReleaseDirectory) {
-    #    remove-item -Recurse -Force -Path $ReleaseDirectory
-    #}
+    if (Test-Path $ReleaseDirectory) {
+        remove-item -Recurse -Force -Path $ReleaseDirectory
+    }
 
     #Create Release Folder
     New-Item -Path $ReleaseDirectory -ItemType Directory -Force | Out-Null
