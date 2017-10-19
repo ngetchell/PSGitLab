@@ -365,6 +365,55 @@
         </ListEntries>
       </ListControl>
     </View>
+
+    <View>
+      <Name>PSGitLab</Name>
+      <ViewSelectedBy>
+        <TypeName>GitLab.Project.Service.MSTeams</TypeName>
+      </ViewSelectedBy>
+      <ListControl>
+        <ListEntries>
+          <ListEntry>
+            <ListItems>
+              <ListItem>
+                <PropertyName>id</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>title</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>push_events</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>issues_events</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>merge_requests_events</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>tag_push_events</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>note_events</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>pipeline_events</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>Webhook</Label>
+                <ScriptBlock>$_.properties.webhook</ScriptBlock>
+              </ListItem>
+              <ListItem>
+                <PropertyName>created_at</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>updated_at</PropertyName>
+              </ListItem>
+            </ListItems>
+          </ListEntry>
+        </ListEntries>
+      </ListControl>
+    </View>
     <View>
       <Name>PSGitLab</Name>
       <ViewSelectedBy>
@@ -440,6 +489,76 @@
               <ListItem>
                 <Label>Committer</Label>
                 <ScriptBlock>$_.committer_name</ScriptBlock>
+              </ListItem>
+            </ListItems>
+          </ListEntry>
+        </ListEntries>
+      </ListControl>
+    </View>
+    <View>
+      <Name>PSGitLab</Name>
+      <ViewSelectedBy>
+        <TypeName>GitLab.Repository.Tree</TypeName>
+      </ViewSelectedBy>
+      <ListControl>
+        <ListEntries>
+          <ListEntry>
+            <ListItems>
+              <ListItem>
+                <PropertyName>id</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>mode</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>name</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>path</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>type</PropertyName>
+              </ListItem>
+            </ListItems>
+          </ListEntry>
+        </ListEntries>
+      </ListControl>
+    </View>
+    <View>
+      <Name>PSGitLab</Name>
+      <ViewSelectedBy>
+        <TypeName>GitLab.Project.Submodule.Information</TypeName>
+      </ViewSelectedBy>
+      <ListControl>
+        <ListEntries>
+          <ListEntry>
+            <ListItems>
+              <ListItem>
+                <PropertyName>ParentProjectID</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>ParentProjectCommitID</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>SubModuleNamespace</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>SubmoduleProjectID</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>SubmoduleProjectName</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>SubmodulePath</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>SubmoduleFoldername</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>SubmoduleURL</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>SubmoduleProjectCommitID</PropertyName>
               </ListItem>
             </ListItems>
           </ListEntry>
