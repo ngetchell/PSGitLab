@@ -79,6 +79,9 @@ FunctionsToExport = @(
     'Get-GitlabProjectServiceSlack',
     'Set-GitlabProjectServiceSlack',
     'Remove-GitlabProjectServiceSlack',
+    'Get-GitlabProjectServiceMSTeams',
+    'Set-GitlabProjectServiceMSTeams',
+    'Remove-GitlabProjectServiceMSTeams',
     'Get-GitLabProjectTag',
     'Get-GitLabProjectCommit',
     'New-GitLabFork',
@@ -106,7 +109,10 @@ FunctionsToExport = @(
     'Close-GitLabMilestone',
     'New-GitLabUserKey',
     'Remove-GitLabUserKey',
-    'Push-SSHKeysToGitLab'
+    'Push-SSHKeysToGitLab',
+    'Get-GitLabProjectSubmodule',
+    'Get-GitLabProjectArchive',
+    'Get-GitLabProjectRepositoryTree'
     )
 
 # Cmdlets to export from this module
