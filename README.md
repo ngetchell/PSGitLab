@@ -13,7 +13,7 @@ Before you start to use PSGitLab you need to
 - save your personal access token and the GitLab URL using Save-GitLabAPIConfiguration
 
 ```PowerShell
-Save-GitLabAPIConfiguration - Domain https://my-gitlab.example.com -Token "mPnTssWyBCMjxxxxxxxJQ"
+Save-GitLabAPIConfiguration -Domain https://my-gitlab.example.com -Token "mPnTssWyBCMjxxxxxxxJQ"
 ```
 
 Your configuration data are saved to the file "$env:appdata\PSGitLab\PSGitLabConfiguration.xml".
