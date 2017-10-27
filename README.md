@@ -7,6 +7,17 @@ An interface for administering GitLab from a Windows PC using PowerShell.
 Find-Module -Name PSGitLab | Install-Module
 ```
 
+## Getting started
+Before you start to use PSGitLab you need to
+- obtain your your [personal access token](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html)
+- save your personal access token and the GitLab URL using Save-GitLabAPIConfiguration
+
+```PowerShell
+Save-GitLabAPIConfiguration -Domain https://my-gitlab.example.com -Token "mPnTssWyBCMjxxxxxxxJQ"
+```
+
+Your configuration data are saved to the file "$env:appdata\PSGitLab\PSGitLabConfiguration.xml".
+
 ## API Requests
 If you think there is an [GitLab API](https://docs.gitlab.com/ce/api/README.html) I missed make sure to request it as an issue. 
 I added the API calls that I needed to get work done. 
