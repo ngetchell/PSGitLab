@@ -1,5 +1,12 @@
 . $PSScriptRoot\Authentication.ps1
 
+$ModuleName = Split-Path (Resolve-Path "$PSScriptRoot\..\..\" ) -Leaf
+$ModuleManifest = Resolve-Path "$PSScriptRoot\..\..\Release\$ModuleName.psd1"
+
+Get-Module $ModuleName | Remove-Module
+
+Import-Module $ModuleManifest
+
 Describe "User" -Tag "Integration" {
     Context "Get-GitLabUser" {
         $User = Get-GitLabUser -ID 1
@@ -35,9 +42,9 @@ Describe "User" -Tag "Integration" {
                 Username = 'gitlab_user'
                 Name = 'Test User'
                 Twitter = 'fake_twitter'
-                SkypeID = 'fakeskype@test.com'
+                #SkypeID = 'fakeskype@test.com'
                 LinkedIn = 'linkedINuser'
-                WebsiteURL = 'http://example.com'
+                #WebsiteURL = 'http://example.com'
             }
             $New = New-GitLabUser -Password 'Example1' -Passthru @Parameters 
             $User = Get-Gitlabuser -ID $new.id
@@ -56,6 +63,15 @@ Describe "User" -Tag "Integration" {
     }
 
     Context 'Remove-GitLabUser' {
+        $Parameters = @{
+            Email = 'newuser@gmail.com'
+            Username = 'gitlab_user'
+            Name = 'Test User'
+            Twitter = 'fake_twitter'
+            SkypeID = 'fakeskype@test.com'
+            LinkedIn = 'linkedINuser'
+            WebsiteURL = 'http://example.com'
+        }        
         $User = Get-GitLabUser -Username gitlab_user
         It "User Doesn't exist" {
             $User.count | should benullorempty

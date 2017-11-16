@@ -1,4 +1,4 @@
-$Domain = 'http://gitlab:5000'
+$Domain = 'http://10.1.1.98:5000'
 
 if ( -not ( Get-Variable -Name GitLabCredential -ErrorAction SilentlyContinue ) ) {
     $GitlabCredential = Get-Credential
