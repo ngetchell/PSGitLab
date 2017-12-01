@@ -12,7 +12,7 @@ Function New-GitLabMergeRequest {
         [ValidateNotNullOrEmpty()]
         [Parameter(Mandatory)]
         [string]$TargetBranch,
-        
+
         [int]$AssigneeId,
 
         [ValidateNotNullOrEmpty()]
@@ -25,7 +25,9 @@ Function New-GitLabMergeRequest {
 
         [string]$Labels,
 
-        [string]$MilestoneId
+        [string]$MilestoneId,
+
+        [switch]$RemoveSourceBranch
     )
 
     $Project = $Project = Get-GitlabProject -Id $ProjectId;
@@ -49,6 +51,9 @@ Function New-GitLabMergeRequest {
     }
     if ($MilestoneId) {
         $GetUrlParameters += @{milestone_id=$MilestoneId}
+    }
+    if ($RemoveSourceBranch) {
+        $GetUrlParameters += @{remove_source_branch=$true}
     }
 
     $URLParameters = GetMethodParameters -GetURLParameters $GetUrlParameters
