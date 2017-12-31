@@ -12,7 +12,9 @@ param(
                Position=1)]
     [ValidateNotNullOrEmpty()]
     [ValidatePattern("^(?:http|https):\/\/(?:[\w\.\-\+]+:{0,1}[\w\.\-\+]*@)?(?:[a-z0-9\-\.]+)(?::[0-9]+)?(?:\/|\/(?:[\w#!:\.\?\+=&%@!\-\/\(\)]+)|\?(?:[\w#!:\.\?\+=&%@!\-\/\(\)]+))?$")]
-    $Domain
+    $Domain,
+
+    $APIVersion = 3
 )
 
 if ( $Domain -match '^http:\/\/' ) {
@@ -24,6 +26,7 @@ if ( $IsWindows -or ( [version]$PSVersionTable.PSVersion -lt [version]"5.99.0" )
     $Parameters = @{
         Token=(ConvertTo-SecureString -string $Token -AsPlainText -Force)
         Domain=$Domain;
+        APIVersion=$APIVersion;
     }
     
     $ConfigFile = "$env:appdata\PSGitLab\PSGitLabConfiguration.xml"
@@ -35,6 +38,7 @@ if ( $IsWindows -or ( [version]$PSVersionTable.PSVersion -lt [version]"5.99.0" )
     $Parameters = @{
         Token=$Token
         Domain=$Domain;
+        APIVersion=$APIVersion;
     }
     
     $ConfigFile = "{0}/.psgitlab/PSGitLabConfiguration.xml" -f $HOME

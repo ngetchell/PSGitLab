@@ -21,6 +21,9 @@ param(
 )
 
 $GitLabConfig = ImportConfig
+
+if ($GitLabConfig.APIVersion) { $Version = "v$($GitLabConfig.APIVersion)" }
+
 $Domain = $GitLabConfig.Domain
 if ( $IsWindows -or ( [version]$PSVersionTable.PSVersion -lt [version]"5.99.0" ) ) {
     $Token = DecryptString -Token $GitLabConfig.Token
@@ -41,8 +44,8 @@ try  {
     $totalPages = ($webContent).Headers['X-Total-Pages'] -as [int]
     $Results = $webContent.Content | ConvertFrom-Json
     for ($i=1; $i -lt $totalPages; $i++) {
-        $newRequest = $Request
-        $newRequest.URI = $newRequest.URI + "&page=$($i+1)"
+        $newRequest = $Request.PSObject.Copy()
+        $newRequest.URI = $newRequest.URI + "?&page=$($i+1)"
         $Results += (Invoke-WebRequest @newRequest).Content | ConvertFrom-Json
     }
     Remove-Variable Token

@@ -4,6 +4,9 @@
     [string]$Version = 'v3'
 )
     $GitLabConfig = ImportConfig
+
+    if ($GitLabConfig.APIVersion) { $Version = "v$($GitLabConfig.APIVersion)" }
+
     $Domain = $GitLabConfig.Domain
     $Token = DecryptString -Token $GitLabConfig.Token
     
