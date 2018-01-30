@@ -114,7 +114,13 @@ FunctionsToExport = @(
     'Get-GitLabProjectArchive',
     'Get-GitLabProjectRepositoryTree',
     'Get-GitLabSetting',
-    'Get-GitLabVersion'
+    'Get-GitLabVersion',
+    'Add-GitLabProjectRunner',
+    'Get-GitLabRunner',
+    'New-GitLabRunner',
+    'Remove-GitLabProjectRunner', 
+    'Remove-GitLabRunner',
+    'Set-GitLabRunner' 
     )
 
 # Cmdlets to export from this module
