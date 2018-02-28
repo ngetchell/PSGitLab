@@ -8,7 +8,7 @@ schema: 2.0.0
 # Set-GitLabProjectServiceMSTeams
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+Set and adding the Teams service for a project. 
 
 ## SYNTAX
 
@@ -17,21 +17,21 @@ Set-GitLabProjectServiceMSTeams [-Id <String>] [-Namespace <String>] -webhook <S
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+Set and adding the Teams service for a project. 
 
 ## EXAMPLES
 
 ### Example 1
 ```
-PS C:\> {{ Add example code here }}
+PS C:\> Set-GitLabProjectServiceMSTeams -Id 12 -Webhook 'http://example.hook'
 ```
 
-{{ Add example description here }}
+Add the Example webhook to project 12. 
 
 ## PARAMETERS
 
 ### -Id
-{{Fill Id Description}}
+Project ID
 
 ```yaml
 Type: String
@@ -46,7 +46,7 @@ Accept wildcard characters: False
 ```
 
 ### -Namespace
-{{Fill Namespace Description}}
+Name of the project in namespace format.
 
 ```yaml
 Type: String

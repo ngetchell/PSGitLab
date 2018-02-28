@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-GitLabProjectServiceMSTeams
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+Get the Microsoft Teams Service from GitLab.
 
 ## SYNTAX
 
@@ -17,21 +17,21 @@ Get-GitLabProjectServiceMSTeams [-Id <String>] [-Namespace <String>]
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+Get the Microsoft Teams Service from GitLab. The configurations can be found at Admin > Service Templates > Microsoft Teams Notification. 
 
 ## EXAMPLES
 
 ### Example 1
 ```
-PS C:\> {{ Add example code here }}
+PS C:\> Get-GitLabProjectServiceMSTeams -id 12 
 ```
 
-{{ Add example description here }}
+Get the MS Team configuration for the Project 12
 
 ## PARAMETERS
 
 ### -Id
-{{Fill Id Description}}
+Project ID
 
 ```yaml
 Type: String
@@ -46,7 +46,7 @@ Accept wildcard characters: False
 ```
 
 ### -Namespace
-{{Fill Namespace Description}}
+The name of the project.
 
 ```yaml
 Type: String

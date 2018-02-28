@@ -25,6 +25,18 @@ Get-Command -Module $ModuleName | Where-Object { $_.CommandType -ne 'Alias' } | 
             }
         }
 
+        Context "PlatyPS Default Help" {
+            It "Synopsis should not be auto-generated - Platyps default" {
+                Get-Help $_ | Select-Object -ExpandProperty synopsis | Should Not BeLike '*{{Fill in the Synopsis}}*'
+            }      
+            It "Description should not be auto-generated - Platyps default" {
+                Get-Help $_ | Select-Object -ExpandProperty Description | Should Not BeLike '*{{Fill in the Description}}*'
+            }   
+            It "Example should not be auto-generated - Platyps default" {
+                Get-Help $_ | Select-Object -ExpandProperty Examples | Should Not BeLike '*{{ Add example code here }}*'
+            }                           
+        }
+
         Context "Parameter Help" {
             # Parameter Help
             $HelpObjects = Get-Help $_ | Select-Object -ExpandProperty Parameters 

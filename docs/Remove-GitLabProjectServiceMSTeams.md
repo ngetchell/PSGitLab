@@ -8,7 +8,7 @@ schema: 2.0.0
 # Remove-GitLabProjectServiceMSTeams
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+Get rid of the service.
 
 ## SYNTAX
 
@@ -17,21 +17,21 @@ Remove-GitLabProjectServiceMSTeams [-Id <String>] [-Namespace <String>]
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+Get rid of the service. The configurations can be found at Admin > Service Templates > Microsoft Teams Notification. 
 
 ## EXAMPLES
 
 ### Example 1
 ```
-PS C:\> {{ Add example code here }}
+PS C:\> Remove-GitLabProjectServiceMSTeams -Id 12
 ```
 
-{{ Add example description here }}
+Removes the service from project 12. 
 
 ## PARAMETERS
 
 ### -Id
-{{Fill Id Description}}
+ProjectID
 
 ```yaml
 Type: String
@@ -46,7 +46,7 @@ Accept wildcard characters: False
 ```
 
 ### -Namespace
-{{Fill Namespace Description}}
+The name of the project in namespace format. 
 
 ```yaml
 Type: String
