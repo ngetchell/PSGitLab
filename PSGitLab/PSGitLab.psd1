@@ -24,7 +24,7 @@ Author = 'Nicholas M. Getchell, Leonhard Schick, and Brooks Collins'
 # CompanyName = 'Unknown'
 
 # Copyright statement for this module
-Copyright = '(c) 2017 PSGitLab. All rights reserved.'
+Copyright = '(c) 2018 PSGitLab. All rights reserved.'
 
 # Description of the functionality provided by this module
 Description = 'GitLab API accessable from the Windows PowerShell console'
