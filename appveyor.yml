@@ -20,6 +20,7 @@ test_script:
 # Test with native PS version
   - pwsh: . .\build.ps1 -task Clean,Pester
   - ps: . .\build.ps1 -task Clean,Deploy
+  - sh: sudo pwsh -command ". .\build.ps1 -task Clean,Pester "
 
 artifacts:
   - path: Release
