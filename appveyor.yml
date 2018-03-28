@@ -3,6 +3,10 @@
 # Fron https://github.com/RamblingCookieMonster/PSStackExchange/blob/master/appveyor.yml
 # Additional: https://dfinke.github.io/powershell/2018/01/23/PowerShell-Testing-Your-Scripts-For-v5-and-v6.html
 
+image:
+  - Visual Studio 2017
+  - Ubuntu
+
 environment:
   PSGalleryApiKey:
     secure: VGPEr3cXooAZfvnmzCzZ9i0i1Y2pc7BW2k0bWjCkV7WvD+0vKyiy+WwNH12rEdqc
