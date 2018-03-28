@@ -24,7 +24,7 @@ InModuleScope PSGitLab {
         }
 
 
-        It -TestCases $TestCase "<TestName>" {
+        It -TestCases $TestCase "<TestName>" -Skip:$( $IsLinux ) {
             param(
                 $Domain,
                 $Token,
@@ -37,7 +37,7 @@ InModuleScope PSGitLab {
             $Results = Import-Clixml "$TestDrive\PesterTest.xml" 
             $Results.Domain | Should be $Domain
             $Results.APIVersion | Should be $APIVersion
-            $Results.Token.GetType() | Should be 'SecureString'
+            if ( $isWindows ) { $Results.Token.GetType() | Should be 'SecureString' }
             DecryptString -Token $Results.Token | Should be $Token
         }
 
@@ -61,7 +61,7 @@ InModuleScope PSGitLab {
         }
 
         Context 'Using Configuration File' {
-            It '<TestName>' -TestCases $TestCase {
+            It '<TestName>' -TestCases $TestCase -Skip:$( $isLinux ) {
                 param(
                     $Domain,
                     $Token,
@@ -74,14 +74,14 @@ InModuleScope PSGitLab {
                 # Assert
                 $Results.Domain | Should be $Domain
                 $Results.APIVersion | Should be $APIVersion
-                $Results.Token.GetType() | Should be 'SecureString'
+                if ( $isWindows ) { $Results.Token.GetType() | Should be 'SecureString' }
                 DecryptString -Token $Results.Token | Should be $Token
             }
 
         }
 
         Context "Using Environment" {
-            It '<TestName>' -TestCases $TestCase {
+            It '<TestName>' -TestCases $TestCase -skip:$( $isLinux ) {
                 param(
                     $Domain,
                     $Token,
@@ -99,11 +99,11 @@ InModuleScope PSGitLab {
                 # Assert 
                 $Results.Domain | Should be $Domain
                 $Results.APIVersion | Should be $APIVersion
-                $Results.Token.GetType() | Should be 'SecureString'
+                if ( $isWindows ) {  $Results.Token.GetType() | Should be 'SecureString' }
                 DecryptString -Token $Results.Token | Should be $Token
             }
 
-            It 'Missing Domain' {
+            It 'Missing Domain' -Skip:$( $isLinux ) {
                 # Arrange - Continued
                 Remove-Item Env:\PSGitLabDomain
                 $env:PSGitLabToken = 'ENV'
@@ -116,7 +116,7 @@ InModuleScope PSGitLab {
                 # Assert
                 $Results.Domain | Should be 'https://FileDomain'
                 $Results.APIVersion | Should be 3
-                $Results.Token.GetType() | Should be 'SecureString'
+                if ( $isWindows ) {  $Results.Token.GetType() | Should be 'SecureString' }
                 DecryptString -Token $Results.Token | Should be 'File'
             }
         }
@@ -172,7 +172,7 @@ InModuleScope PSGitLab {
             & $ImportCLIXML $FilePath
         }        
         
-        It "<TestName>" -TestCases $DecryptTestCase {
+        It "<TestName>" -TestCases $DecryptTestCase -Skip:$( $isLinux ) {
             param(
                 $Token
             )
@@ -181,7 +181,7 @@ InModuleScope PSGitLab {
             $Results = ImportConfig $FilePath
 
             # Assert
-            DecryptString -Token $Results.Token | Should be $Token
+            if ( $isWindows ) {  DecryptString -Token $Results.Token | Should be $Token }
 
         }
         
