@@ -27,7 +27,7 @@ if ($GitLabConfig.APIVersion) { $Version = "v$($GitLabConfig.APIVersion)" }
 $Domain = $GitLabConfig.Domain
 if ( $IsWindows -or ( [version]$PSVersionTable.PSVersion -lt [version]"5.99.0" ) ) {
     $Token = DecryptString -Token $GitLabConfig.Token
-} elseif ( $IsLinux ) {
+} elseif ( $IsLinux -or $IsMacOS ) {
     $Token = $GitLabConfig.Token
 }
 $Headers = @{

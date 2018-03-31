@@ -12,7 +12,7 @@
     if ( $isWindows -or ( [version]$PSVersionTable.PSVersion -lt [version]"5.99.0") ) {
 
         $Token = DecryptString -Token $GitLabConfig.Token
-    } elseif ( $isLinux ) {
+    } elseif ( $isLinux  -or $IsMacOS ) {
         $Token = $GitLabConfig.Token
     }
     
