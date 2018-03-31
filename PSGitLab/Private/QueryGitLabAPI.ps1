@@ -41,7 +41,7 @@ $Request.UseBasicParsing = $true
 try  {
     Write-Verbose "URL: $($Request.URI)"
     $webContent = Invoke-WebRequest @Request
-    $totalPages = ($webContent).Headers['X-Total-Pages'] -as [int]
+    $totalPages = ($webContent).Headers['X-Total-Pages'][0] -as [int]
     $Results = $webContent.Content | ConvertFrom-Json
     for ($i=1; $i -lt $totalPages; $i++) {
         $newRequest = $Request.PSObject.Copy()
