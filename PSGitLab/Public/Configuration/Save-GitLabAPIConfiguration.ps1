@@ -31,7 +31,7 @@ if ( $IsWindows -or ( [version]$PSVersionTable.PSVersion -lt [version]"5.99.0" )
     
     $ConfigFile = "$env:appdata\PSGitLab\PSGitLabConfiguration.xml"
 
-} elseif ( $IsLinux ) {
+} elseif ( $IsLinux -or $IsMacOS ) {
 
     Write-Warning "Warning: Your GitLab token will be stored in plain-text on non-Windows platforms."
 

@@ -27,7 +27,7 @@ if ($GitLabConfig.APIVersion) { $Version = "v$($GitLabConfig.APIVersion)" }
 $Domain = $GitLabConfig.Domain
 if ( $IsWindows -or ( [version]$PSVersionTable.PSVersion -lt [version]"5.99.0" ) ) {
     $Token = DecryptString -Token $GitLabConfig.Token
-} elseif ( $IsLinux ) {
+} elseif ( $IsLinux -or $IsMacOS ) {
     $Token = $GitLabConfig.Token
 }
 $Headers = @{
@@ -41,7 +41,7 @@ $Request.UseBasicParsing = $true
 try  {
     Write-Verbose "URL: $($Request.URI)"
     $webContent = Invoke-WebRequest @Request
-    $totalPages = ($webContent).Headers['X-Total-Pages'] -as [int]
+    $totalPages = ($webContent).Headers['X-Total-Pages'][0] -as [int]
     $Results = $webContent.Content | ConvertFrom-Json
     for ($i=1; $i -lt $totalPages; $i++) {
         $newRequest = $Request.PSObject.Copy()
