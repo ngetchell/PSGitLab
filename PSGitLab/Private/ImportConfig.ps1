@@ -20,7 +20,7 @@ if ( ( $null -ne $env:PSGitLabDomain) -and ( $null -ne $env:PSGitLabToken ) -and
 
 if ( $IsWindows -or ( [version]$PSVersionTable.PSVersion -lt [version]"5.99.0" ) ) {
     $ConfigFile = "{0}\PSGitLab\PSGitLabConfiguration.xml" -f $env:appdata
-} elseif ( $IsLinux ) {
+} elseif ( $IsLinux -or $IsMacOS ) {
     $ConfigFile = "{0}/.psgitlab/PSGitLabConfiguration.xml" -f $HOME
 } else {
     Write-Error "Unknown Platform"
