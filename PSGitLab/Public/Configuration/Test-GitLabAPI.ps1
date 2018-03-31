@@ -8,7 +8,13 @@
     if ($GitLabConfig.APIVersion) { $Version = "v$($GitLabConfig.APIVersion)" }
 
     $Domain = $GitLabConfig.Domain
-    $Token = DecryptString -Token $GitLabConfig.Token
+
+    if ( $isWindows -or ( [version]$PSVersionTable.PSVersion -lt [version]"5.99.0") ) {
+
+        $Token = DecryptString -Token $GitLabConfig.Token
+    } elseif ( $isLinux ) {
+        $Token = $GitLabConfig.Token
+    }
     
     $Result = Invoke-WebRequest -UseBasicParsing -Uri "$Domain/api/$Version/projects?private_token=$Token"
     Remove-Variable Token
