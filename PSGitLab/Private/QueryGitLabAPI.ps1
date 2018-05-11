@@ -17,7 +17,7 @@ param(
                HelpMessage='Provide API version to use',
                Position=2)]
     [ValidateNotNullOrEmpty()]
-    [string]$Version = 'v3'
+    [string]$Version = 'v4'
 )
 
 $GitLabConfig = ImportConfig
@@ -42,7 +42,8 @@ try  {
     Write-Verbose "URL: $($Request.URI)"
     $webContent = Invoke-WebRequest @Request
     $totalPages = ($webContent).Headers['X-Total-Pages'][0] -as [int]
-    $Results = $webContent.Content | ConvertFrom-Json
+    $bytes = $webContent.Content.ToCharArray() | Foreach-Object{ [byte]$_ }
+    $Results = [Text.Encoding]::UTF8.GetString($bytes) | ConvertFrom-Json
     for ($i=1; $i -lt $totalPages; $i++) {
         $newRequest = $Request.PSObject.Copy()
         $newRequest.URI = $newRequest.URI + "?&page=$($i+1)"
