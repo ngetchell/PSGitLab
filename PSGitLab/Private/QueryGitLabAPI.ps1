@@ -41,7 +41,9 @@ $Request.UseBasicParsing = $true
 try  {
     Write-Verbose "URL: $($Request.URI)"
     $webContent = Invoke-WebRequest @Request
-    $totalPages = ($webContent).Headers['X-Total-Pages'][0] -as [int]
+    $totalPages = if ($webContent.Headers.ContainsKey('X-Total-Pages')) {
+        ($webContent).Headers['X-Total-Pages'][0] -as [int]
+    } else { 0 }        
     $bytes = $webContent.Content.ToCharArray() | Foreach-Object{ [byte]$_ }
     $Results = [Text.Encoding]::UTF8.GetString($bytes) | ConvertFrom-Json
     for ($i=1; $i -lt $totalPages; $i++) {
