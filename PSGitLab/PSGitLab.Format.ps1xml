@@ -365,7 +365,6 @@
         </ListEntries>
       </ListControl>
     </View>
-
     <View>
       <Name>PSGitLab</Name>
       <ViewSelectedBy>
@@ -565,5 +564,47 @@
         </ListEntries>
       </ListControl>
     </View>
-  </ViewDefinitions>
+    <View>
+      <Name>PSGitLab</Name>
+      <ViewSelectedBy>
+        <TypeName>GitLab.Project.Pipeline</TypeName>
+      </ViewSelectedBy>
+      <ListControl>
+        <ListEntries>
+          <ListEntry>
+            <ListItems>
+              <ListItem>
+                <PropertyName>id</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>status</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>ref</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>sha</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>tag</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>created_at</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>started_at</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>finished_at</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>UserName</Label>
+                <ScriptBlock>$_.user.username</ScriptBlock>
+              </ListItem>
+            </ListItems>
+          </ListEntry>
+        </ListEntries>
+      </ListControl>
+    </View>
+  </ViewDefinitions>  
 </Configuration>
