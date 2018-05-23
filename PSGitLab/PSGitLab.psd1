@@ -74,6 +74,9 @@ FunctionsToExport = @(
     'New-GitLabUser',
     "Get-GitLabUserKey",
     "Get-GitLabPipeline",
+    "Restart-GitLabPipeline"
+    "Start-GitLabPipeline",
+    "Stop-GitLabPipeline",
     'Get-GitLabProject',
     'Get-GitLabProjectEvent',
     'Get-GitLabProjectWebhook',
@@ -119,9 +122,9 @@ FunctionsToExport = @(
     'Add-GitLabProjectRunner',
     'Get-GitLabRunner',
     'New-GitLabRunner',
-    'Remove-GitLabProjectRunner', 
+    'Remove-GitLabProjectRunner',
     'Remove-GitLabRunner',
-    'Set-GitLabRunner' 
+    'Set-GitLabRunner'
     )
 
 # Cmdlets to export from this module

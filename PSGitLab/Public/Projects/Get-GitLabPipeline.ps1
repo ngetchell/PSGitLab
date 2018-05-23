@@ -3,26 +3,39 @@ Function Get-GitLabPipeline {
     [OutputType("GitLab.Project.Pipeline")]
     param(    
 
-        [Parameter(Mandatory=$true,ParameterSetName='Single')]
-        [Parameter(Mandatory=$true,ParameterSetName='Pipelines')]
+        [Parameter(Mandatory=$true)]
+
         [int]$ProjectID,
 
-        [Parameter(ParameterSetName='Single',
-                   Mandatory=$true)]
+        [Parameter(Mandatory=$true,ParameterSetName='Single')]
         [int]$Id,
 
+        [Parameter(Mandatory=$false, ParameterSetName='ByBranch')]
+        [Parameter(Mandatory=$false, ParameterSetName='ByTag')]
         [Parameter(Mandatory=$false,ParameterSetName='Pipelines')]
         [ValidateSet("running","pending","finished","branches","tags","all")]
         $Scope = 'all',
 
+        [Parameter(Mandatory=$false, ParameterSetName='ByBranch')]
+        [Parameter(Mandatory=$false, ParameterSetName='ByTag')]
         [Parameter(Mandatory=$false, ParameterSetName='Pipelines')]
         [ValidateSet("running","pending","success","failed","canceled","skipped","all")]
         $Status = 'all',
 
+        [Parameter(Mandatory=$true, ParameterSetName='ByBranch')]
+        [String]$Branch,
+
+        [Parameter(Mandatory=$true, ParameterSetName='ByTag')]
+        [String]$Tag,
+
+        [Parameter(Mandatory=$false, ParameterSetName='ByBranch')]
+        [Parameter(Mandatory=$false, ParameterSetName='ByTag')]
         [Parameter(Mandatory=$false,ParameterSetName='Pipelines')]
         [ValidateSet("id","status","ref","user_id")]
-        $order_by = "id",
+        $Order_by = "id",
 
+        [Parameter(Mandatory=$false, ParameterSetName='ByBranch')]
+        [Parameter(Mandatory=$false, ParameterSetName='ByTag')]
         [Parameter(Mandatory=$false,ParameterSetName='Pipelines')]
         [ValidateSet('asc','desc')]
         $Sort = 'desc'       
@@ -35,11 +48,20 @@ Function Get-GitLabPipeline {
     }
 
     $Project = Get-GitlabProject -Id $ProjectId
+    
+    Write-Verbose -Message "Returning a pipeline(s) for the project $($Project.Name) and id $($Project.Id)"
 
     if ($PSCmdlet.ParameterSetName -ne 'Single') {
-        Write-Verbose "Create GET Request"
 
         $GetUrlParameters = @()
+
+        if ($PSCmdlet.ParameterSetName -eq 'ByBranch') {
+            $GetUrlParameters += @{ref=$Branch}
+        }
+        elseif ($PSCmdlet.ParameterSetName -eq 'ByTag') {
+            $GetUrlParameters += @{ref=$Tag}
+        }
+
         if ($Scope -ne 'all') {
             $GetUrlParameters += @{scope='all'}
         }
@@ -47,16 +69,12 @@ Function Get-GitLabPipeline {
         if ($Status -ne 'all') {
             $GetUrlParameters += @{status=$Status}
         }
+
         $GetUrlParameters += @{order_by=$order_by}
         $GetUrlParameters += @{sort=$sort}
         $GetUrlParameters += @{per_page=100}
         $URLParameters = GetMethodParameters -GetURLParameters $GetUrlParameters
 
-    }
-
-    $Request = @{
-        URI = ''
-        Method = 'GET'
     }
 
     Write-Verbose -Message "Parameter Set Name: $($PSCmdlet.ParameterSetName)"
@@ -65,9 +83,10 @@ Function Get-GitLabPipeline {
         Pipelines { $Request.URI="/projects/$($Project.id)/pipelines$URLParameters"; break; }
         Single { $Request.URI= "/projects/$($Project.id)/pipelines/$($Id)"; break; }
         default { Write-Error "Incorrect parameter set."; break; }
-
     }
 
-    QueryGitLabAPI -Request $Request -ObjectType 'GitLab.Project.Pipeline'
+    Write-Verbose -Message "A prepared API request: $($($Request.URI).ToString())"
+
+    QueryGitLabAPI -Request $Request -ObjectType 'GitLab.Project.Pipeline' -Verbose
 
 }

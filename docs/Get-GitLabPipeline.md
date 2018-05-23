@@ -8,13 +8,25 @@ schema: 2.0.0
 # Get-GitLabPipeline
 
 ## SYNOPSIS
-Retrieve all pipelines for a provided GitLab project.
+Retrieves all pipelines for a provided GitLab project.
 
 ## SYNTAX
 
 ### Pipelines (Default)
 ```
 Get-GitLabPipeline -ProjectID <Int32> [-Scope <Object>] [-Status <Object>] [-order_by <Object>]
+ [-Sort <Object>] [<CommonParameters>]
+```
+
+### ByBranch
+```
+Get-GitLabPipeline -ProjectID <Int32> -Branch <String> [-Scope <Object>] [-Status <Object>] [-order_by <Object>]
+ [-Sort <Object>] [<CommonParameters>]
+```
+
+### ByTag
+```
+Get-GitLabPipeline -ProjectID <Int32> -Tag <String> [-Scope <Object>] [-Status <Object>] [-order_by <Object>]
  [-Sort <Object>] [<CommonParameters>]
 ```
 
@@ -38,6 +50,21 @@ It returns all pipelines created previously for the project with the Id 63.
 
 ## PARAMETERS
 
+### -Branch
+A branch name for which pipelines has to be returned.
+
+```yaml
+Type: String
+Parameter Sets: ByBranch
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Id
 The unique pipeline Id. If will be provided only the one project will be returned.
 
@@ -53,9 +80,24 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Order_by
+Return projects ordered by id, status, ref or user_id.
+
+```yaml
+Type: Object
+Parameter Sets: ByBranch, ByTag, Pipelines
+Aliases:
+Accepted values: id, status, ref, user_id
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -ProjectID
 The ID or NAMESPACE/PROJECT_NAME of the project.
-
 
 ```yaml
 Type: Int32
@@ -74,7 +116,7 @@ Scope of returned pipelines.
 
 ```yaml
 Type: Object
-Parameter Sets: Pipelines
+Parameter Sets: ByBranch, ByTag, Pipelines
 Aliases:
 Accepted values: running, pending, finished, branches, tags, all
 
@@ -91,7 +133,7 @@ Default is desc.
 
 ```yaml
 Type: Object
-Parameter Sets: Pipelines
+Parameter Sets:  ByBranch, ByTag, Pipelines
 Aliases:
 Accepted values: asc, desc
 
@@ -107,7 +149,7 @@ Returns of pipelines only with a status.
 
 ```yaml
 Type: Object
-Parameter Sets: Pipelines
+Parameter Sets: ByBranch, ByTag, Pipelines
 Aliases:
 Accepted values: running, pending, success, failed, canceled, skipped, all
 
@@ -118,16 +160,15 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -order_by
-Return projects ordered by id, status, ref or user_id.
+### -Tag
+A tag for which pipelines has to be returned.
 
 ```yaml
-Type: Object
-Parameter Sets: Pipelines
+Type: String
+Parameter Sets: ByTag
 Aliases:
-Accepted values: id, status, ref, user_id
 
-Required: False
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
