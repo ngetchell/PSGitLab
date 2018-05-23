@@ -23,22 +23,22 @@ The domain and api token are given.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Save-GitLabAPIConfiguration -Domain http://gitlab.com -Token "Token"
+Save-GitLabAPIConfiguration -Domain http://gitlab.com -Token "mPnTssWyBCMjxxxxxxxJQ"
 ```
 
 ## PARAMETERS
 
-### -Token
-Your private token that can be found under the profile settings.
+### -APIVersion
+The version of API used to execute calls.
 
 ```yaml
 Type: Object
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
-Required: True
-Position: 1
-Default value: None
+Required: False
+Position: Named
+Default value: 4
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -59,6 +59,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Token
+Your private token that can be found under the profile settings.
+
+```yaml
+Type: Object
+Parameter Sets: (All)
+Aliases: 
+
+Required: True
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ## INPUTS
 
 ## OUTPUTS
@@ -68,4 +83,5 @@ Implemented using Export-CLIXML saving the configurations.
 Stores .xml in $env:appdata\GitLabAPI\
 
 ## RELATED LINKS
-
+[GitLab API](https://docs.gitlab.com/ee/api/README.html)
+[Personal access tokens](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html)
