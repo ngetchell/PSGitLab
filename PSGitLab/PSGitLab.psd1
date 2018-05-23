@@ -157,7 +157,9 @@ PrivateData = @{
                  'CI'
                  'ContinuousIntegration',
                  'Builds',
-                 'Repository'
+                 'Repository',
+                 'PSEdition_Core',
+                 'PSEdition_Desktop'
         )
 
         # A URL to the license for this module.
