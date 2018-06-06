@@ -37,6 +37,16 @@ Function QueryGitLabAPI {
     $Request.Add('Headers',$Headers)
     $Request.URI = "$Domain/api/$Version" + $Request.URI
     $Request.UseBasicParsing = $true
+
+    try {
+        #https://docs.microsoft.com/en-us/dotnet/api/system.net.securityprotocoltype?view=netcore-2.0#System_Net_SecurityProtocolType_SystemDefault
+        if ($PSVersionTable.PSVersion.Major -lt 6 -and [Net.ServicePointManager]::SecurityProtocol -notmatch 'Tls12') {
+            [Net.ServicePointManager]::SecurityProtocol += [Net.SecurityProtocolType]::Tls12
+        }
+    }
+    catch {
+        Write-Warning -Message 'Adding TLS 1.2 to supported security protocols was unsuccessful.'
+    }
     
     try  {
         Write-Verbose "URL: $($Request.URI)"
