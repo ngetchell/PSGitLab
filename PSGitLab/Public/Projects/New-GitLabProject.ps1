@@ -4,8 +4,9 @@ Function New-GitLabProject {
         [ValidateNotNull()]
         [ValidateNotNullOrEmpty()]
         [Parameter(Mandatory=$true)]
+        [Alias('Path')]
         [string]$name,
-        [string]$path,
+        [Parameter(Mandatory=$true)]
         [string]$namespace,
         [string]$description,
         [switch]$issues_enabled,
