@@ -70,8 +70,8 @@ Function QueryGitLabAPI {
         Remove-Variable -Name Headers
         Remove-Variable -Name Request
     } catch {
-        $ErrorMessage = $_.exception.response.statusDescription
-        Write-Warning  -Message "$ErrorMessage. See $Domain/help/api/README.md#status-codes for more information."
+        $GitLabErrorText = $_.errordetails.message | ConvertFrom-Json
+        Write-Error -Message "$($GitlabErrorText.message.base)"
     }
     finally {
         Remove-Variable -Name newRequest -ErrorAction SilentlyContinue
