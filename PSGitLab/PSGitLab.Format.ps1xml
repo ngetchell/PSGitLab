@@ -606,5 +606,37 @@
         </ListEntries>
       </ListControl>
     </View>
+    <View>
+      <Name>PSGitLab</Name>
+      <ViewSelectedBy>
+        <TypeName>GitLab.Issue</TypeName>
+      </ViewSelectedBy>
+      <ListControl>
+        <ListEntries>
+          <ListEntry>
+            <ListItems>
+              <ListItem>
+                <PropertyName>title</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>state</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>id</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>assignee</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>created_at</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>updated_at</PropertyName>
+              </ListItem>
+            </ListItems>
+          </ListEntry>
+        </ListEntries>
+      </ListControl>
+    </View>
   </ViewDefinitions>  
 </Configuration>
