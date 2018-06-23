@@ -52,7 +52,7 @@ Function QueryGitLabAPI {
         Write-Verbose "URL: $($Request.URI)"
         $webContent = Invoke-WebRequest @Request
         $totalPages = if ($webContent.Headers.ContainsKey('X-Total-Pages')) {
-            ($webContent).Headers['X-Total-Pages'][0] -as [int]
+            (($webContent).Headers['X-Total-Pages'][0]).tostring() -as [int]
         } else { 0 }        
         $bytes = $webContent.Content.ToCharArray() | Foreach-Object{ [byte]$_ }
         $Results = [Text.Encoding]::UTF8.GetString($bytes) | ConvertFrom-Json
@@ -70,8 +70,8 @@ Function QueryGitLabAPI {
         Remove-Variable -Name Headers
         Remove-Variable -Name Request
     } catch {
-        $ErrorMessage = $_.exception.response.statusDescription
-        Write-Warning  -Message "$ErrorMessage. See $Domain/help/api/README.md#status-codes for more information."
+        $GitLabErrorText = $_.errordetails.message | ConvertFrom-Json
+        Write-Error -Message "$($GitlabErrorText.message.base)"
     }
     finally {
         Remove-Variable -Name newRequest -ErrorAction SilentlyContinue
