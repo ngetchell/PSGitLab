@@ -8,7 +8,7 @@
 
         [Parameter(Mandatory=$true)]
         [string] $Tags,
-        
+
         [bool] $RunUntagged = $false,
         [bool] $Locked = $true,
 
@@ -17,7 +17,7 @@
 
         [Parameter(Mandatory=$true)]
         [string] $Architecture = "amd64",
-        
+
         [Parameter(Mandatory=$true)]
         [ValidateSet("shell", "docker", "docker-ssh", "ssh", "parallels", "virtualbox", "docker+machine", "docker-ssh+machine", "kubernetes")]
         [string] $Executor = "shell",
@@ -28,13 +28,13 @@
         [bool] $Services = $true,
         [bool] $Shared = $true,
         [bool] $Variables = $true,
-        
+
         [Parameter(Mandatory=$true)]
         [string] $Name,
-        
+
         [Parameter(Mandatory=$true)]
         [string] $Revision = "c1ecf97f",
-        
+
         [Parameter(Mandatory=$true)]
         [string] $Version = "10.1.0"
     )

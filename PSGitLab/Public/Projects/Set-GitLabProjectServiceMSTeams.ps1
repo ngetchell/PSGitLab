@@ -12,17 +12,17 @@ Function Set-GitLabProjectServiceMSTeams
     [ValidateNotNullOrEmpty()]
     #[Parameter(ParameterSetName='Namespace')]
     [string]$Namespace,
-    [parameter(mandatory,HelpMessage='MSTeams Webhook')][string]$webhook 
+    [parameter(mandatory,HelpMessage='MSTeams Webhook')][string]$webhook
   )
-  
+
   $Project = $null
   switch ($PSCmdlet.ParameterSetName) {
-    'Id' 
+    'Id'
     {
       $Project = Get-GitLabProject -Id $Id
       $null = $PSBoundParameters.Remove('Id')
     }
-    'Namespace' 
+    'Namespace'
     {
       $Project = Get-GitLabProject -Namespace $Namespace
       $null = $PSBoundParameters.Remove('Namespace')
@@ -36,7 +36,7 @@ Function Set-GitLabProjectServiceMSTeams
     webhook = $webhook
   }
   $null = $PSBoundParameters.Remove('webhook')
-  try 
+  try
   {
     $Request = @{
       URI         = "/projects/$($Project.id)/services/microsoft-teams"
@@ -47,7 +47,7 @@ Function Set-GitLabProjectServiceMSTeams
     $Body
     QueryGitLabAPI -Request $Request -ObjectType 'GitLab.Project.Service.MSTeams'
   }
-  catch 
+  catch
   {
     Write-Error -Message $_
   }

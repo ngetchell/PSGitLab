@@ -22,34 +22,34 @@
 
     [datetime]
     $Before
-    
+
   )
 
   $Project = $null
   switch ($PSCmdlet.ParameterSetName) {
-    'Id' 
+    'Id'
     {
-      $Project = Get-GitLabProject -Id $Id 
+      $Project = Get-GitLabProject -Id $Id
     }
-    'Namespace' 
+    'Namespace'
     {
-      $Project = Get-GitLabProject -Namespace $Namespace 
+      $Project = Get-GitLabProject -Namespace $Namespace
     }
   }
 
   $Body = @{}
 
   switch ($PsBoundParameters.Keys) {
-    'Branch' 
-    { 
-      $Body.Add('ref_name',$Branch) 
+    'Branch'
+    {
+      $Body.Add('ref_name',$Branch)
     }
-    'After'  
-    { 
-      $Body.Add('since',(Get-Date $After -Format s)) 
+    'After'
+    {
+      $Body.Add('since',(Get-Date $After -Format s))
     }
     'Before'
-    { 
+    {
       $Body.Add('until',(Get-Date $Before -Format s))
     }
   }

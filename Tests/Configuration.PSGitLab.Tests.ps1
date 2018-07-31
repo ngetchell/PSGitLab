@@ -30,11 +30,11 @@ InModuleScope PSGitLab {
                 $Token,
                 $APIVersion
             )
-            # Act 
+            # Act
             Save-GitLabAPIConfiguration -Token $Token -Domain $Domain -APIVersion $APIVersion
 
             # Assert
-            $Results = Import-Clixml "$TestDrive\PesterTest.xml" 
+            $Results = Import-Clixml "$TestDrive\PesterTest.xml"
             $Results.Domain | Should be $Domain
             $Results.APIVersion | Should be $APIVersion
             if ( $isWindows ) { $Results.Token.GetType() | Should be 'SecureString' }
@@ -55,7 +55,7 @@ InModuleScope PSGitLab {
         Mock Test-Path {
             return $true
         }
-        
+
         Mock Import-Clixml -Verifiable {
             & $ImportCLIXML $FilePath
         }
@@ -66,11 +66,11 @@ InModuleScope PSGitLab {
                     $Domain,
                     $Token,
                     $APIVersion
-                )  
-                # Act           
+                )
+                # Act
                 Save-GitLabAPIConfiguration -Token $Token -Domain $Domain -APIVersion $APIVersion
                 $Results = ImportConfig $FilePath
-                
+
                 # Assert
                 $Results.Domain | Should be $Domain
                 $Results.APIVersion | Should be $APIVersion
@@ -92,11 +92,11 @@ InModuleScope PSGitLab {
                 $env:PSGitLabToken = $Token
                 $env:PSGitLabAPIVersion = $APIVersion
 
-                # Act 
+                # Act
                 Save-GitLabAPIConfiguration -Token 'IgnoredToken' -Domain 'https://IgnoredDomain' -APIVersion 1
                 $Results = ImportConfig $FilePath
 
-                # Assert 
+                # Assert
                 $Results.Domain | Should be $Domain
                 $Results.APIVersion | Should be $APIVersion
                 if ( $isWindows ) {  $Results.Token.GetType() | Should be 'SecureString' }
@@ -109,10 +109,10 @@ InModuleScope PSGitLab {
                 $env:PSGitLabToken = 'ENV'
                 $env:PSGitLabAPIVersion = 4
 
-                # Act 
+                # Act
                 Save-GitLabAPIConfiguration -Token 'File' -Domain 'https://FileDomain' -APIVersion 3
                 $Results = ImportConfig $FilePath
-                
+
                 # Assert
                 $Results.Domain | Should be 'https://FileDomain'
                 $Results.APIVersion | Should be 3
@@ -167,11 +167,11 @@ InModuleScope PSGitLab {
         Mock Test-Path {
             return $true
         }
-        
+
         Mock Import-Clixml -Verifiable {
             & $ImportCLIXML $FilePath
-        }        
-        
+        }
+
         It "<TestName>" -TestCases $DecryptTestCase -Skip:$( $isLinux ) {
             param(
                 $Token
@@ -184,7 +184,7 @@ InModuleScope PSGitLab {
             if ( $isWindows ) {  DecryptString -Token $Results.Token | Should be $Token }
 
         }
-        
+
     }
 
     Describe 'GetMethodParameters' {

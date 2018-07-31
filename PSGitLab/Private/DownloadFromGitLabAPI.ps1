@@ -15,7 +15,7 @@
 
     .EXAMPLE
     DownloadFromGitLabAPI -RequestURI /projects/1/repository/archive.zip -OutFile C:\Temp\temp.zip
-    Downloads the whole repo in a zip file for project id 1 
+    Downloads the whole repo in a zip file for project id 1
     .NOTES
 
     .LINK
@@ -42,17 +42,17 @@
   )
   $GitLabConfig = ImportConfig
   $Domain = $GitLabConfig.Domain
-  if ( $IsWindows -or ( [version]$PSVersionTable.PSVersion -lt [version]'5.99.0' ) ) 
+  if ( $IsWindows -or ( [version]$PSVersionTable.PSVersion -lt [version]'5.99.0' ) )
   {
     $Token = DecryptString -Token $GitLabConfig.Token
   }
-  elseif ( $IsLinux ) 
+  elseif ( $IsLinux )
   {
     $Token = $GitLabConfig.Token
   }
 
   $RequestURI = ('{0}/api/v3{1}' -f $Domain, $RequestURI)
-  try  
+  try
   {
     Write-Verbose -Message ('URL: {0}' -f $RequestURI)
     $wc = New-Object -TypeName System.Net.WebClient
@@ -62,7 +62,7 @@
     Remove-Variable -Name Token
     Remove-Variable -Name RequestURI
   }
-  catch 
+  catch
   {
     $ErrorMessage = $_.exception.response.statusDescription
     Write-Warning  -Message ('{0}. See {1}/help/api/README.md#status-codes for more information.' -f $ErrorMessage, $Domain)

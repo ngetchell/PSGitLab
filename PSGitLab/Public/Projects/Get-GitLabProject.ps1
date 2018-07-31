@@ -50,7 +50,7 @@ Function Get-GitLabProject {
                    ParameterSetName='Starred')]
         [ValidateSet('id','name','path','created_at','updated_at','last_activity_at')]
         $Order_by = 'created_at',
-        
+
 
         [Parameter(Mandatory=$false,
                    HelpMessage='Ascending or Descending',
@@ -129,7 +129,7 @@ Function Get-GitLabProject {
         default { Write-Error "Incorrect parameter set."; break; }
 
     }
-    
+
     QueryGitLabAPI -Request $Request -ObjectType 'GitLab.Project'
 
 }

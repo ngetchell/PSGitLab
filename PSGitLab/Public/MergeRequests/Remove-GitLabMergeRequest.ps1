@@ -14,7 +14,7 @@ param(
 
     PROCESS {
         $Project = $Project = Get-GitlabProject -Id $ProjectId;
-        
+
         $Request = @{
             URI="/projects/$($Project.id)/merge_requests/$Id";
             Method='Delete';

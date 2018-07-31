@@ -44,9 +44,9 @@ Import-Module $ModuleManifest
 #}
 
 Describe 'Module Information' {
-    
+
     #$ModuleManifest = "$PSScriptRoot\..\PSGitlab\PSGitlab.psd1"
-    
+
     Context 'Module Manifest' {
         $Script:Manifest = $null
         It 'Valid Manifest File' {

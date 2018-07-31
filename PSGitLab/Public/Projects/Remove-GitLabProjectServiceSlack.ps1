@@ -12,17 +12,17 @@ Function Remove-GitLabProjectServiceSlack
     [ValidateNotNullOrEmpty()]
     #[Parameter(ParameterSetName='Namespace')]
     [string]$Namespace
-        
+
   )
-  
+
   $Project = $null
   switch ($PSCmdlet.ParameterSetName) {
-    'Id' 
+    'Id'
     {
       $Project = Get-GitLabProject -Id $Id
       $null = $PSBoundParameters.Remove('Id')
     }
-    'Namespace' 
+    'Namespace'
     {
       $Project = Get-GitLabProject -Namespace $Namespace
       $null = $PSBoundParameters.Remove('Namespace')
@@ -33,7 +33,7 @@ Function Remove-GitLabProjectServiceSlack
     $null = $PSBoundParameters.Remove('verbose')
   }
 
-  try 
+  try
   {
     $Request = @{
       URI    = "/projects/$($Project.id)/services/slack"
@@ -41,7 +41,7 @@ Function Remove-GitLabProjectServiceSlack
     }
     QueryGitLabAPI -Request $Request -ObjectType 'GitLab.Project.Services.Slack'
   }
-  catch 
+  catch
   {
     Write-Error -Message $_
   }

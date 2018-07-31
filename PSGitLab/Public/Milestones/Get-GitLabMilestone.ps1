@@ -17,10 +17,10 @@ param (
     [Parameter(ParameterSetName='MergeRequests')]
     # possible values: active, closed
     [string]$State
-    
+
 )
     $Project = Get-GitlabProject -Id $ProjectId;
-    
+
     if($PSCmdlet.ParameterSetName -ne 'Single') {
         $GetUrlParameters = @()
 

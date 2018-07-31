@@ -10,7 +10,7 @@ Function Push-SSHKeysToGitLab {
     if ($PublicKeyFiles.count -gt 0 ) {
 
         $PublicKeyFiles | ForEach-Object {
-            if ( $PSCmdlet.ShouldProcess("Push SSH Key $_ to GitLab Instance") ) {  
+            if ( $PSCmdlet.ShouldProcess("Push SSH Key $_ to GitLab Instance") ) {
                 Write-Verbose "Uploading $($_.Fullname)"
                 New-GitLabUserKey -KeyFile $_.FullName
             }

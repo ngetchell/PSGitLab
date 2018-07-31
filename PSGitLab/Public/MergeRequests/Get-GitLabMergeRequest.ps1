@@ -19,16 +19,16 @@ param (
     [string]$State,
 
     [Parameter(ParameterSetName='MergeRequests')]
-    # possible values: created_at (default) and updated_at 
+    # possible values: created_at (default) and updated_at
     [string]$OrderBy,
 
     [Parameter(ParameterSetName='MergeRequests')]
     # possible values: asc and desc (default)
     [string]$Sort
-    
+
 )
     $Project = Get-GitlabProject -Id $ProjectId;
-    
+
     if($PSCmdlet.ParameterSetName -ne 'Single') {
         $GetUrlParameters = @()
 

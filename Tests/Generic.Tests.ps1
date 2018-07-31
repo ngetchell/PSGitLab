@@ -7,20 +7,20 @@ Import-Module $ModuleManifest
 
 Get-Command -Module $ModuleName | Where-Object { $_.CommandType -ne 'Alias' } | ForEach-Object {
     Describe "$_" -Tags "$_","Help" {
-        Context "Function Help" { 
+        Context "Function Help" {
             It 'Synopsis not empty' {
                 Get-Help $_ | Select-Object -ExpandProperty synopsis | should not benullorempty
             }
             It "Synopsis should not be auto-generated" -Skip:$( $isLinux ){
                 Get-Help $_ | Select-Object -ExpandProperty synopsis | Should Not BeLike '*`[`<CommonParameters`>`]*'
             }
-        
+
             It 'Description not empty' -Skip:$( $isLinux ) {
                 Get-Help $_ | Select-Object -ExpandProperty Description | should not benullorempty
             }
             It 'Examples Count greater than 0' -Skip:$( $isLinux ) {
-            
-                $Examples = Get-Help $_ | Select-Object -ExpandProperty Examples | Measure-Object 
+
+                $Examples = Get-Help $_ | Select-Object -ExpandProperty Examples | Measure-Object
                 $Examples.Count -gt 0 | Should be $true
             }
         }
@@ -28,23 +28,23 @@ Get-Command -Module $ModuleName | Where-Object { $_.CommandType -ne 'Alias' } | 
         Context "PlatyPS Default Help" {
             It "Synopsis should not be auto-generated - Platyps default"  {
                 Get-Help $_ | Select-Object -ExpandProperty synopsis | Should Not BeLike '*{{Fill in the Synopsis}}*'
-            }      
+            }
             It "Description should not be auto-generated - Platyps default" {
                 Get-Help $_ | Select-Object -ExpandProperty Description | Should Not BeLike '*{{Fill in the Description}}*'
-            }   
+            }
             It "Example should not be auto-generated - Platyps default" {
                 Get-Help $_ | Select-Object -ExpandProperty Examples | Should Not BeLike '*{{ Add example code here }}*'
-            }                           
+            }
         }
 
         Context "Parameter Help" {
             # Parameter Help
-            $HelpObjects = Get-Help $_ | Select-Object -ExpandProperty Parameters 
+            $HelpObjects = Get-Help $_ | Select-Object -ExpandProperty Parameters
             if ( $HelpObjects -ne $null) {
                 $Parameters = $HelpObjects.Parameter
                 foreach ($Parameter in $Parameters.Name) {
                     $ParameterHelp = $Parameters | Where-Object { $_.name -eq $Parameter }
-                    
+
                     It "Parameter Help for $Parameter" -Skip:$( $isLinux ) {
                         $ParameterHelp.description.text | Should not benullorempty
                     }
@@ -57,7 +57,7 @@ Get-Command -Module $ModuleName | Where-Object { $_.CommandType -ne 'Alias' } | 
         if ( $_.Verb -eq "Get") {
             Context "OutputType - $_" {
                 It "OutputType Present on verb Get" {
-                    (Get-Command $_).OutputType | Should not benullorempty 
+                    (Get-Command $_).OutputType | Should not benullorempty
                 }
             }
         }
@@ -66,18 +66,18 @@ Get-Command -Module $ModuleName | Where-Object { $_.CommandType -ne 'Alias' } | 
 }
 
 Describe 'Module Information' -Tags 'Command'{
-    Context 'Manifest Testing' { 
+    Context 'Manifest Testing' {
         It 'Valid Module Manifest' {
             {
                 $Script:Manifest = Test-ModuleManifest -Path $ModuleManifest -ErrorAction Stop -WarningAction SilentlyContinue
             } | Should Not Throw
         }
-        
+
         It 'Test-ModuleManifest' {
           Test-ModuleManifest -Path $ModuleManifest
           $? | Should Be $true
         }
-        
+
         It 'Valid Manifest Name' {
             $Script:Manifest.Name | Should be $ModuleName
         }
@@ -112,6 +112,6 @@ Describe 'Module Information' -Tags 'Command'{
         }
     }
 
-}    
+}
 
 Remove-Module $ModuleName

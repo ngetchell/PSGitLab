@@ -4,7 +4,7 @@ Function Get-GitLabUser {
     param(
         [Parameter(ParameterSetName='ID')]
         [string]$ID,
-        
+
         [Parameter(ParameterSetName='All')]
         [switch]$All,
 
@@ -29,15 +29,15 @@ Function Get-GitLabUser {
     }
 
     if ( $PSCmdlet.ParameterSetName -eq 'Username') {
-    
+
         QueryGitLabAPI -Request $Request -ObjectType 'GitLab.User' | where-object { $_.username -eq $Username }
-    
+
     } elseif ( $PSCmdlet.ParameterSetName -eq 'Email') {
-    
-        QueryGitLabAPI -Request $Request -ObjectType 'GitLab.User' | where-object { $_.email -eq $email } 
-    
+
+        QueryGitLabAPI -Request $Request -ObjectType 'GitLab.User' | where-object { $_.email -eq $email }
+
     } else {
-    
+
         QueryGitLabAPI -Request $Request -ObjectType 'GitLab.User'
     }
 }

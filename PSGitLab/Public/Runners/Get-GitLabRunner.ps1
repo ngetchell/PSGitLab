@@ -17,7 +17,7 @@
         [Parameter(ParameterSetName='All',
                    Mandatory=$true)]
         [switch]$All,
-        
+
         [Parameter(Mandatory=$false,
                    HelpMessage='Limit by scope',
                    ParameterSetName='Owned')]
@@ -52,6 +52,6 @@
         All { $Request.URI="/runners/all$URLParameters"; break; }
         Project { $Request.URI="/projects/$ProjectId/runners"; break; }
     }
-    
+
     QueryGitLabAPI -Request $Request -ObjectType 'GitLab.Runner'
 }

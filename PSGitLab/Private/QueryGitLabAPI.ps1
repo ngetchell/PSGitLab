@@ -6,24 +6,24 @@ Function QueryGitLabAPI {
                    Position=0)]
         [ValidateNotNullOrEmpty()]
         $Request,
-    
+
         [Parameter(Mandatory=$false,
                    HelpMessage='Provide a datatype for the returing objects.',
                    Position=1)]
         [ValidateNotNullOrEmpty()]
         [string]$ObjectType,
-    
+
         [Parameter(Mandatory=$false,
                    HelpMessage='Provide API version to use',
                    Position=2)]
         [ValidateNotNullOrEmpty()]
         [string]$Version = 'v4'
     )
-    
+
     $GitLabConfig = ImportConfig
-    
+
     if ($GitLabConfig.APIVersion) { $Version = "v$($GitLabConfig.APIVersion)" }
-    
+
     $Domain = $GitLabConfig.Domain
     if ( $IsWindows -or ( [version]$PSVersionTable.PSVersion -lt [version]"5.99.0" ) ) {
         $Token = DecryptString -Token $GitLabConfig.Token
@@ -33,7 +33,7 @@ Function QueryGitLabAPI {
     $Headers = @{
         'PRIVATE-TOKEN'=$Token;
     }
-    
+
     $Request.Add('Headers',$Headers)
     $Request.URI = "$Domain/api/$Version" + $Request.URI
     $Request.UseBasicParsing = $true
@@ -47,13 +47,13 @@ Function QueryGitLabAPI {
     catch {
         Write-Warning -Message 'Adding TLS 1.2 to supported security protocols was unsuccessful.'
     }
-    
+
     try  {
         Write-Verbose "URL: $($Request.URI)"
         $webContent = Invoke-WebRequest @Request
         $totalPages = if ($webContent.Headers.ContainsKey('X-Total-Pages')) {
             (($webContent).Headers['X-Total-Pages'][0]).tostring() -as [int]
-        } else { 0 }        
+        } else { 0 }
         $bytes = $webContent.Content.ToCharArray() | Foreach-Object{ [byte]$_ }
         $Results = [Text.Encoding]::UTF8.GetString($bytes) | ConvertFrom-Json
         for ($i=1; $i -lt $totalPages; $i++) {
@@ -76,7 +76,7 @@ Function QueryGitLabAPI {
     finally {
         Remove-Variable -Name newRequest -ErrorAction SilentlyContinue
     }
-    
+
     foreach ($Result in $Results) {
         $Result.pstypenames.insert(0,$ObjectType)
         Write-Output $Result

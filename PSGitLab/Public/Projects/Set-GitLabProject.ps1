@@ -1,8 +1,8 @@
-Function Set-GitLabProject 
+Function Set-GitLabProject
 {
     [cmdletbinding()]
     param(
-        
+
         [ValidateNotNullOrEmpty()]
         [Parameter(
             Mandatory=$true,
@@ -25,7 +25,7 @@ Function Set-GitLabProject
         #$wiki_enabled,
         #$snippets_enabled,
         #$public,
-        
+
         [Alias('visibility_level')]
         [ValidateSet("Public", "Internal", "Private")]
         $VisabilityLevel = $null,
@@ -34,7 +34,7 @@ Function Set-GitLabProject
 
     )
 
-BEGIN {} 
+BEGIN {}
 
 PROCESS {
 

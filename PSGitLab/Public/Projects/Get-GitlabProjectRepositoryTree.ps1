@@ -20,7 +20,7 @@
   {
     Write-Verbose -Message ('Commit id OK')
   }
-  Else 
+  Else
   {
     Throw 'Commit ID bad'
   }

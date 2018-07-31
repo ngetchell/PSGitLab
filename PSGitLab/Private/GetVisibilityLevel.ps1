@@ -1,10 +1,10 @@
 function GetVisibilityLevel {
     param(
         [ValidateSet("Public", "Internal", "Private")]
-        $String 
+        $String
     )
 
-    switch ($String) 
+    switch ($String)
     {
         'Public' { 20; break; }
         'Internal' { 10; break; }

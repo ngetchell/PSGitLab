@@ -11,9 +11,9 @@ Import-Module $ModuleManifest
 #    Describe 'Get-GitLabAllProject'  {
 #        It 'QueryGitLabAPI Calls' {
 #            # Arrange
-#            Mock QueryGitLabAPI {} 
+#            Mock QueryGitLabAPI {}
 #
-#            # Act 
+#            # Act
 #            $Results = Get-GitLabAllProject
 #
 #            # Assert
@@ -46,7 +46,7 @@ Import-Module $ModuleManifest
 #            It 'Name' {
 #                $Parameters['Archived'].Name | Should be 'Archived'
 #            }
-#            
+#
 #        }
 #    }
 #}
@@ -55,9 +55,9 @@ Import-Module $ModuleManifest
 #    Describe 'Get-GitLabOwnedProject'  {
 #        It 'QueryGitLabAPI Calls' {
 #            # Arrange
-#            Mock QueryGitLabAPI {} 
+#            Mock QueryGitLabAPI {}
 #
-#            # Act 
+#            # Act
 #            $Results = Get-GitLabOwnedProject
 #
 #            # Assert
@@ -71,9 +71,9 @@ Import-Module $ModuleManifest
 #    Describe 'Get-GitLabProjectEvent'  {
 #        It 'QueryGitLabAPI Calls' {
 #            # Arrange
-#            Mock QueryGitLabAPI {} 
+#            Mock QueryGitLabAPI {}
 #
-#            # Act 
+#            # Act
 #            $Results = Get-GitLabProjectEvent -id 12
 #
 #            # Assert
@@ -87,9 +87,9 @@ Import-Module $ModuleManifest
 #    Describe 'Get-GitLabProject'  {
 #        It 'QueryGitLabAPI Calls' {
 #            # Arrange
-#            Mock QueryGitLabAPI {} 
+#            Mock QueryGitLabAPI {}
 #
-#            # Act 
+#            # Act
 #            $Results = Get-GitLabProject
 #
 #            # Assert
@@ -103,9 +103,9 @@ Import-Module $ModuleManifest
 #    Describe 'Get-GitlabSingleProject'  {
 #        It 'QueryGitLabAPI Calls' {
 #            # Arrange
-#            Mock QueryGitLabAPI {} 
+#            Mock QueryGitLabAPI {}
 #
-#            # Act 
+#            # Act
 #            $Results = Get-GitlabSingleProject -ID 12
 #
 #            # Assert
@@ -119,9 +119,9 @@ Import-Module $ModuleManifest
 #    Describe 'New-GitLabFork'  {
 #        It 'QueryGitLabAPI Calls' {
 #            # Arrange
-#            Mock QueryGitLabAPI {} 
+#            Mock QueryGitLabAPI {}
 #
-#            # Act 
+#            # Act
 #            $Results = New-GitLabFork -Id 12
 #
 #            # Assert
@@ -135,9 +135,9 @@ Import-Module $ModuleManifest
 #    Describe 'New-GitLabProject'  {
 #        It 'QueryGitLabAPI Calls' {
 #            # Arrange
-#            Mock QueryGitLabAPI {} 
+#            Mock QueryGitLabAPI {}
 #
-#            # Act 
+#            # Act
 #            $Results = New-GitLabProject -Name 'Pester Test'
 #
 #            # Assert
@@ -151,9 +151,9 @@ Import-Module $ModuleManifest
 #    Describe 'Remove-GitLabProject'  {
 #        It 'QueryGitLabAPI Calls' {
 #            # Arrange
-#            Mock QueryGitLabAPI {} 
+#            Mock QueryGitLabAPI {}
 #
-#            # Act 
+#            # Act
 #            $Results = Remove-GitLabProject -ID 12 -Confirm:$false
 #
 #            # Assert

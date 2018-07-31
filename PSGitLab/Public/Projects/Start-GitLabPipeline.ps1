@@ -1,17 +1,17 @@
 Function Start-GitLabPipeline {
     [OutputType("GitLab.Project.Pipeline")]
-    param(    
+    param(
 
         [Parameter(Mandatory=$true)]
-        [int]$ProjectID, 
-        
+        [int]$ProjectID,
+
         [Parameter(Mandatory=$true, ParameterSetName='ByBranch')]
         [String]$Branch,
 
         [Parameter(Mandatory=$true, ParameterSetName='ByTag')]
         [String]$Tag
 
-    )    
+    )
 
     $Request = @{
         URI = ''

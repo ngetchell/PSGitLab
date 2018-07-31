@@ -22,16 +22,16 @@ function Resolve-Module {
         foreach ($ModuleName in $Name) {
             $Module = Get-Module -Name $ModuleName -ListAvailable
             Write-Verbose -Message "Resolving Module [$($ModuleName)]"
-            
+
             if ($Module) {
                 $Version = $Module | Measure-Object -Property Version -Maximum | Select-Object -ExpandProperty Maximum
-                $GalleryVersion = Find-Module -Name $ModuleName -Repository PSGallery -Verbose:$false | 
-                    Measure-Object -Property Version -Maximum | 
+                $GalleryVersion = Find-Module -Name $ModuleName -Repository PSGallery -Verbose:$false |
+                    Measure-Object -Property Version -Maximum |
                     Select-Object -ExpandProperty Maximum
 
-                if ($Version -lt $GalleryVersion) {                                        
+                if ($Version -lt $GalleryVersion) {
                     Write-Verbose -Message "$($ModuleName) Installed Version [$($Version.tostring())] is outdated. Installing Gallery Version [$($GalleryVersion.tostring())]"
-                    
+
                     Install-Module -Name $ModuleName -Verbose:$false -Force -Repository PSGallery
                     Import-Module -Name $ModuleName -Verbose:$false -Force -RequiredVersion $GalleryVersion
                 }

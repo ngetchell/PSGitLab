@@ -1,7 +1,7 @@
 Function Get-GitLabPipeline {
     [cmdletbinding(DefaultParameterSetName='Pipelines')]
     [OutputType("GitLab.Project.Pipeline")]
-    param(    
+    param(
 
         [Parameter(Mandatory=$true)]
 
@@ -38,9 +38,9 @@ Function Get-GitLabPipeline {
         [Parameter(Mandatory=$false, ParameterSetName='ByTag')]
         [Parameter(Mandatory=$false,ParameterSetName='Pipelines')]
         [ValidateSet('asc','desc')]
-        $Sort = 'desc'       
+        $Sort = 'desc'
 
-    )    
+    )
 
     $Request = @{
         URI = ''
@@ -48,7 +48,7 @@ Function Get-GitLabPipeline {
     }
 
     $Project = Get-GitlabProject -Id $ProjectId
-    
+
     Write-Verbose -Message "Returning a pipeline(s) for the project $($Project.Name) and id $($Project.Id)"
 
     if ($PSCmdlet.ParameterSetName -ne 'Single') {

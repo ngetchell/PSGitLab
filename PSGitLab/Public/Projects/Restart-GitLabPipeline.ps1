@@ -1,6 +1,6 @@
 Function Restart-GitLabPipeline {
     [OutputType("GitLab.Project.Pipeline")]
-    param(    
+    param(
 
         [Parameter(Mandatory=$true)]
         [int]$ProjectID,
@@ -8,7 +8,7 @@ Function Restart-GitLabPipeline {
         [Parameter(Mandatory=$true)]
         [int]$Id
 
-    )    
+    )
 
     $Request = @{
         URI = ''

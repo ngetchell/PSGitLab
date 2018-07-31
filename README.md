@@ -19,20 +19,20 @@ Save-GitLabAPIConfiguration -Domain https://my-gitlab.example.com -Token "mPnTss
 Your configuration data are saved to the file "$env:appdata\PSGitLab\PSGitLabConfiguration.xml".
 
 ## API Requests
-If you think there is an [GitLab API](https://docs.gitlab.com/ce/api/README.html) I missed make sure to request it as an issue. 
-I added the API calls that I needed to get work done. 
+If you think there is an [GitLab API](https://docs.gitlab.com/ce/api/README.html) I missed make sure to request it as an issue.
+I added the API calls that I needed to get work done.
 You might need others.
-Let me know. 
+Let me know.
 
 ## Contributing
-Before issuing a Pull Request make sure to run the following code to make sure your not additions don't get kicked back. 
+Before issuing a Pull Request make sure to run the following code to make sure your not additions don't get kicked back.
 
 ``` PowerShell
 .\build.ps1 -Task Pre-Commit
 ```
 
-This will run your code against the PSScriptAnalyzer and Pester tests. 
-If you're writing code against a specific function you can use Pester tags to check against just that one function. 
+This will run your code against the PSScriptAnalyzer and Pester tests.
+If you're writing code against a specific function you can use Pester tags to check against just that one function.
 
 ``` PowerShell
 Invoke-Pester -Tag get-gitlabproject
@@ -49,3 +49,4 @@ If you find a bug, please let me know through the issue tracker. The more detail
 - [Leonhard Schick](https://github.com/lw-schick)
 - [Brooks Collins](https://github.com/TerrapinStation)
 - [Matthew Hilton](https://github.com/matt2005)
+- [Wojciech Sciesinski](https://github.com/it-praktyk) - [ITpraktyk](https://twitter.com/ITpraktyk)

@@ -18,7 +18,7 @@ ModuleVersion = '3.0.0'
 GUID = 'f844db87-fda8-403b-a7da-bdc00a3f5a58'
 
 # Author of this module
-Author = 'Nicholas M. Getchell, Leonhard Schick, and Brooks Collins'
+Author = 'Nicholas M. Getchell, Leonhard Schick, Brooks Collins, and Wojciech Sciesinski'
 
 # Company or vendor of this module
 # CompanyName = 'Unknown'

@@ -1,4 +1,4 @@
-﻿Function GetGitLabStatusCode { 
+﻿Function GetGitLabStatusCode {
     param(
         [Parameter(Mandatory=$true)]
         [int]$StatusCode

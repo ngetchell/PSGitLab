@@ -1,11 +1,11 @@
-Function Get-GitLabVersion 
+Function Get-GitLabVersion
 {
-    [OutputType('GitLab.Version')]  
+    [OutputType('GitLab.Version')]
     [cmdletbinding()]
     param(
     )
 
-BEGIN {} 
+BEGIN {}
 
 PROCESS {
     Write-Verbose ( $PSBoundParameters | ConvertTo-Json )

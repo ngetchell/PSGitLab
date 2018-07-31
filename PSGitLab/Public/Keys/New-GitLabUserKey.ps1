@@ -27,7 +27,7 @@ Function New-GitLabUserKey {
     }
 
     if ( $PSCmdlet.ParameterSetName -eq 'File' ) {
-        $Contents = Get-Content -Path $KeyFile 
+        $Contents = Get-Content -Path $KeyFile
         $Title = ($Contents -split " ")[2]
         $Key = "{0} {1}" -f ($Contents -split " ")[0],($Contents -split " ")[1]
 
@@ -50,6 +50,6 @@ Function New-GitLabUserKey {
     }
 
 
-   
-    QueryGitLabAPI -Request $Request -ObjectType 'GitLab.User.Key'      
+
+    QueryGitLabAPI -Request $Request -ObjectType 'GitLab.User.Key'
 }

@@ -1,5 +1,5 @@
 Function Get-GitLabUserKey {
-    
+
     [cmdletbinding(DefaultParameterSetName='All')]
     [OutputType('GitLab.User.Key')]
     param(
@@ -14,7 +14,7 @@ Function Get-GitLabUserKey {
 
         [Parameter(ParameterSetName='UserID')]
         [int]$UserId
-        
+
     )
 
     $Request = @{
@@ -25,7 +25,7 @@ Function Get-GitLabUserKey {
     if ( $PSCmdlet.ParameterSetName -eq 'Username' ) {
         $UserID = Get-GitLabUser -Username $Username | Select-Object -ExpandProperty Id -First 1
     }
-    
+
     switch ( $PSCmdlet.ParameterSetName) {
         'Key' { $Request.URI = "/user/keys/$Key" }
         'All' { $Request.URI = "/user/keys/" }
@@ -33,6 +33,6 @@ Function Get-GitLabUserKey {
         'UserID' { $Request.URI = "/users/$UserID/keys" }
     }
 
-    
-    QueryGitLabAPI -Request $Request -ObjectType 'GitLab.User.Key'   
+
+    QueryGitLabAPI -Request $Request -ObjectType 'GitLab.User.Key'
 }
