@@ -49,6 +49,7 @@ Function QueryGitLabAPI {
     }
 
     try  {
+        $ProgressPreference = 'SilentlyContinue'
         Write-Verbose "URL: $($Request.URI)"
         $webContent = Invoke-WebRequest @Request
         $totalPages = if ($webContent.Headers.ContainsKey('X-Total-Pages')) {
@@ -74,6 +75,7 @@ Function QueryGitLabAPI {
         Write-Error -Message "$($GitlabErrorText.message.base)"
     }
     finally {
+        $ProgressPreference = 'Continue'
         Remove-Variable -Name newRequest -ErrorAction SilentlyContinue
     }
 
