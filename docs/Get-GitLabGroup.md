@@ -4,112 +4,92 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-GitLabProject
+# Get-GitLabGroup
 
 ## SYNOPSIS
-Retrieve all projects in a GitLab instance.
+Retrieve all groups in a GitLab instance.
 
 ## SYNTAX
 
-### Projects (Default)
+### Groups (Default)
 ```
-Get-GitLabProject [-Archived] [-Visibility <Object>] [-Order_by <Object>] [-Sort <Object>] [-Search <Object>]
+Get-GitLabGroup [-Archived] [-Visibility <Object>] [-Order_by <Object>] [-Sort <Object>] [-Search <Object>]
 ```
 
 ### Single
 ```
-Get-GitLabProject -Id <Int32>
+Get-GitLabGroup -Id <Int32>
 ```
 
 ### Per Group
 ```
-Get-GitLabProject -GroupId <Int32> [-Archived] [-Visibility <Object>] [-Order_by <Object>] [-Sort <Object>]
+Get-GitLabGroup -GroupId <Int32> [-Archived] [-Visibility <Object>] [-Order_by <Object>] [-Sort <Object>]
  [-Search <Object>]
 ```
 
 ### Starred
 ```
-Get-GitLabProject [-Archived] [-Visibility <Object>] [-Order_by <Object>] [-Sort <Object>] [-Search <Object>]
+Get-GitLabGroup [-Archived] [-Visibility <Object>] [-Order_by <Object>] [-Sort <Object>] [-Search <Object>]
  [-Starred]
 ```
 
 ### All
 ```
-Get-GitLabProject [-Archived] [-Visibility <Object>] [-Order_by <Object>] [-Sort <Object>] [-Search <Object>]
+Get-GitLabGroup [-Archived] [-Visibility <Object>] [-Order_by <Object>] [-Sort <Object>] [-Search <Object>]
  [-All]
 ```
 
 ### Owned
 ```
-Get-GitLabProject [-Archived] [-Visibility <Object>] [-Order_by <Object>] [-Sort <Object>] [-Search <Object>]
+Get-GitLabGroup [-Archived] [-Visibility <Object>] [-Order_by <Object>] [-Sort <Object>] [-Search <Object>]
  [-Owned]
 ```
 
 ## DESCRIPTION
-Retrieve all projects in a GitLab instance.
-Queries over HTTP and gets back GitLab.Project type.
+Retrieve all groups in a GitLab instance.
+Queries over HTTP and gets back GitLab.Group type.
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Get-GitLabProject
+Get-GitLabGroup
 ```
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
-Get-GitLabProject -All
+Get-GitLabGroup -All
 ```
 
 ### -------------------------- EXAMPLE 3 --------------------------
 ```
-Get-GitLabProject -Owned
+Get-GitLabGroup -Owned
 ```
 
 ### -------------------------- EXAMPLE 4 --------------------------
 ```
-Get-GitLabProject -Id 4
+Get-GitLabGroup -Id 4
 ```
 
 ### -------------------------- EXAMPLE 5 --------------------------
 ```
-Get-GitLabProject -Archived
+Get-GitLabGroup -Archived
 ```
 
 ### -------------------------- EXAMPLE 6 --------------------------
 ```
-Get-GitLabProject -Starred
+Get-GitLabGroup -Starred
 ```
 
 ### -------------------------- EXAMPLE 7 --------------------------
 ```
-Get-GitLabProject -Search 'ngetchell' -Archived
-```
-
-### -------------------------- EXAMPLE 8 --------------------------
-```
-Get-GitLabProject  -Id 59 -Sort asc
+Get-GitLabGroup -Search 'ngetchell' -Archived
 ```
 
 ## PARAMETERS
 
 ### -Id
-The ID or NAMESPACE/PROJECT_NAME of the project.
-
-```yaml
-Type: Int32
-Parameter Sets: Single
-Aliases:
-
-Required: True
-Position: Named
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -GroupId
-The ID of the group to list projects.
+The ID of the group.
 
 ```yaml
 Type: Int32
@@ -128,7 +108,7 @@ Limit by archived status.
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: Projects, Starred, All, Owned
+Parameter Sets: Groups, Starred, All, Owned
 Aliases:
 
 Required: False
@@ -143,7 +123,7 @@ Limit by visibility public, internal, or private.
 
 ```yaml
 Type: Object
-Parameter Sets: Projects, Starred, All, Owned
+Parameter Sets: Groups, Starred, All, Owned
 Aliases:
 
 Required: False
@@ -154,12 +134,12 @@ Accept wildcard characters: False
 ```
 
 ### -Order_by
-Return projects ordered by id, name, path, created_at, updated_at, or last_activity_at fields.
+Return groups ordered by id, name, path, created_at, updated_at, or last_activity_at fields.
 Default is created_at.
 
 ```yaml
 Type: Object
-Parameter Sets: Projects, Starred, All, Owned
+Parameter Sets: Groups, Starred, All, Owned
 Aliases:
 
 Required: False
@@ -170,12 +150,12 @@ Accept wildcard characters: False
 ```
 
 ### -Sort
-Return projects sorted in asc or desc order.
+Return groups sorted in asc or desc order.
 Default is desc.
 
 ```yaml
 Type: Object
-Parameter Sets: Projects, Starred, All, Owned
+Parameter Sets: Groups, Starred, All, Owned
 Aliases:
 
 Required: False
@@ -186,11 +166,11 @@ Accept wildcard characters: False
 ```
 
 ### -Search
-Return list of authorized projects matching the search criteria.
+Return list of authorized groups matching the search criteria.
 
 ```yaml
 Type: Object
-Parameter Sets: Projects, Starred, All, Owned
+Parameter Sets: Groups, Starred, All, Owned
 Aliases:
 
 Required: False
@@ -201,7 +181,7 @@ Accept wildcard characters: False
 ```
 
 ### -Owned
-Return all owned projects.
+Return all owned groups.
 
 ```yaml
 Type: SwitchParameter
@@ -216,7 +196,7 @@ Accept wildcard characters: False
 ```
 
 ### -All
-Return all projects.
+Return all groups.
 
 ```yaml
 Type: SwitchParameter
@@ -231,7 +211,7 @@ Accept wildcard characters: False
 ```
 
 ### -Starred
-Return all starred projects.
+Return all starred groups.
 
 ```yaml
 Type: SwitchParameter
@@ -249,7 +229,7 @@ Accept wildcard characters: False
 
 ## OUTPUTS
 
-### GitLab.Project
+### GitLab.Group
 
 ## NOTES
 

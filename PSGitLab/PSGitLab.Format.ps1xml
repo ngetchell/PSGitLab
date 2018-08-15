@@ -4,6 +4,41 @@
     <View>
       <Name>PSGitLab</Name>
       <ViewSelectedBy>
+        <TypeName>GitLab.Group</TypeName>
+      </ViewSelectedBy>
+      <ListControl>
+        <ListEntries>
+          <ListEntry>
+            <ListItems>
+              <ListItem>
+                <PropertyName>id</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>name</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>path</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>full_path</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>web_url</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>visibility</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>parent_id</PropertyName>
+              </ListItem>
+            </ListItems>
+          </ListEntry>
+        </ListEntries>
+      </ListControl>
+    </View>
+    <View>
+      <Name>PSGitLab</Name>
+      <ViewSelectedBy>
         <TypeName>GitLab.Project</TypeName>
       </ViewSelectedBy>
       <ListControl>
@@ -11,13 +46,22 @@
           <ListEntry>
             <ListItems>
               <ListItem>
-                <PropertyName>Id</PropertyName>
+                <PropertyName>id</PropertyName>
               </ListItem>
               <ListItem>
-                <PropertyName>Name</PropertyName>
+                <PropertyName>name</PropertyName>
               </ListItem>
               <ListItem>
-                <PropertyName>Name_With_Namespace</PropertyName>
+                <PropertyName>name_with_namespace</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>path_with_namespace</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>ssh_url_to_repo</PropertyName>
+              </ListItem>
+              <ListItem>
+                <PropertyName>http_url_to_repo</PropertyName>
               </ListItem>
               <ListItem>
                 <PropertyName>web_url</PropertyName>
@@ -638,5 +682,5 @@
         </ListEntries>
       </ListControl>
     </View>
-  </ViewDefinitions>  
+  </ViewDefinitions>
 </Configuration>

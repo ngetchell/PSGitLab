@@ -72,6 +72,7 @@ FunctionsToExport = @(
     'Close-GitLabMergeRequest',
     'Close-GitLabMilestone',
     'Get-GitLabCommitStats',
+    'Get-GitLabGroup',
     'Get-GitLabIssue',
     'Get-GitLabMergeRequest',
     'Get-GitLabMilestone',
