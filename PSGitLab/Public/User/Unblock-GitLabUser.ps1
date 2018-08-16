@@ -30,7 +30,7 @@ Function Unblock-GitLabUser {
 
         $request = @{
             URI = "/users/$($User.ID)/unblock"
-            Method = 'PUT'
+            Method = 'POST'
         }
 
         $null = QueryGitLabAPI -Request $Request -ObjectType 'GitLab.User'
