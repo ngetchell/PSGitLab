@@ -41,6 +41,7 @@ Function QueryGitLabAPI {
     try {
         #https://docs.microsoft.com/en-us/dotnet/api/system.net.securityprotocoltype?view=netcore-2.0#System_Net_SecurityProtocolType_SystemDefault
         if ($PSVersionTable.PSVersion.Major -lt 6 -and [Net.ServicePointManager]::SecurityProtocol -notmatch 'Tls12') {
+            Write-Verbose "Enabling TLS 1.2"
             [Net.ServicePointManager]::SecurityProtocol += [Net.SecurityProtocolType]::Tls12
         }
     }
@@ -53,13 +54,13 @@ Function QueryGitLabAPI {
         Write-Verbose "URL: $($Request.URI)"
         $webContent = Invoke-WebRequest @Request
         $totalPages = if ($webContent.Headers.ContainsKey('X-Total-Pages')) {
-            (($webContent).Headers['X-Total-Pages'][0]).tostring() -as [int]
+            (($webContent).Headers['X-Total-Pages']).tostring() -as [int]
         } else { 0 }
         $bytes = $webContent.Content.ToCharArray() | Foreach-Object{ [byte]$_ }
         $Results = [Text.Encoding]::UTF8.GetString($bytes) | ConvertFrom-Json
         for ($i=1; $i -lt $totalPages; $i++) {
             $newRequest = $Request.PSObject.Copy()
-            if ( $newRequest['URI'] -match '`?') {
+            if ( $newRequest['URI'] -match '\?') {
                 $newRequest.URI = $newRequest.URI + "&page=$($i+1)"
             }
             else {

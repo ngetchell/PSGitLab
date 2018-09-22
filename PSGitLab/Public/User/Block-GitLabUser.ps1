@@ -30,7 +30,7 @@ Function Block-GitLabUser {
 
         $request = @{
             URI = "/users/$($User.ID)/block"
-            Method = 'PUT'
+            Method = 'POST'
         }
 
         $null = QueryGitLabAPI -Request $Request -ObjectType 'GitLab.User'
