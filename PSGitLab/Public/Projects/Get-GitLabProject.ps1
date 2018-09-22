@@ -119,7 +119,10 @@ Function Get-GitLabProject {
         if ($archived) {
             $GetUrlParameters += @{archived='true'}
         }
-
+        else {
+            $GetUrlParameters += @{archived='false'}
+        }
+        
         if ($search -ne $null) {
             $GetUrlParameters += @{search=$search}
         }
