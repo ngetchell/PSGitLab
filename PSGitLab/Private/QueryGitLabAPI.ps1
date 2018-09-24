@@ -56,8 +56,12 @@ Function QueryGitLabAPI {
         $totalPages = if ($webContent.Headers.ContainsKey('X-Total-Pages')) {
             (($webContent).Headers['X-Total-Pages']).tostring() -as [int]
         } else { 0 }
-        $bytes = $webContent.Content.ToCharArray() | Foreach-Object{ [byte]$_ }
-        $Results = [Text.Encoding]::UTF8.GetString($bytes) | ConvertFrom-Json
+        if ( $null -eq $webContent.Content ) {
+            $bytes = $webContent.Content.ToCharArray() | Foreach-Object{ [byte]$_ }
+            $Results = [Text.Encoding]::UTF8.GetString($bytes) | ConvertFrom-Json
+        } else {
+            $Results = $null
+        }
         for ($i=1; $i -lt $totalPages; $i++) {
             $newRequest = $Request.PSObject.Copy()
             if ( $newRequest['URI'] -match '\?') {
@@ -68,9 +72,6 @@ Function QueryGitLabAPI {
             }
             $Results += (Invoke-WebRequest @newRequest).Content | ConvertFrom-Json
         }
-        Remove-Variable -Name Token
-        Remove-Variable -Name Headers
-        Remove-Variable -Name Request
     } catch {
         $GitLabErrorText = $_.errordetails.message | ConvertFrom-Json
         Write-Error -Message "$($GitlabErrorText.message.base)"
@@ -78,6 +79,9 @@ Function QueryGitLabAPI {
     finally {
         $ProgressPreference = 'Continue'
         Remove-Variable -Name newRequest -ErrorAction SilentlyContinue
+        Remove-Variable -Name Token
+        Remove-Variable -Name Headers
+        Remove-Variable -Name Request
     }
 
     foreach ($Result in $Results) {
