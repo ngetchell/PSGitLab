@@ -173,7 +173,9 @@ PrivateData = @{
         # A URL to an icon representing this module.
         # IconUri = ''
 
-        # ReleaseNotes of this module
+        # ReleaseNotes of this module 
+        # Generate list 
+        # # git log v2.7.1...master --pretty=format:"%h - %an : %s"
         # ReleaseNotes = ''
 
     } # End of PSData hashtable
