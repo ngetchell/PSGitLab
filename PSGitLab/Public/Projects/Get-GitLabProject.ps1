@@ -145,7 +145,7 @@ Function Get-GitLabProject {
         Projects { $Request.URI = "/projects$URLParameters"; break; }
         PerGroup { $Request.URI = "/groups/$GroupId/projects$URLParameters"; break; }
         Owned { $Request.URI = "/projects/owned$URLParameters"; break; }
-        All { $Request.URI="/projects/all$URLParameters"; break; }
+        All { $Request.URI="/projects$URLParameters"; break; }
         Starred { $Request.URI="/projects/starred$URLParameters"; break; }
         Single { $Request.URI="/projects/$Id"; break; }
         default { Write-Error "Incorrect parameter set."; break; }
