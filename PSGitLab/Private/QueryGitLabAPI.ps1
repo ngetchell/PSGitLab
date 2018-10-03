@@ -56,12 +56,11 @@ Function QueryGitLabAPI {
         $totalPages = if ($webContent.Headers.ContainsKey('X-Total-Pages')) {
             (($webContent).Headers['X-Total-Pages']).tostring() -as [int]
         } else { 0 }
-        if ( $null -eq $webContent.Content ) {
-            $bytes = $webContent.Content.ToCharArray() | Foreach-Object{ [byte]$_ }
-            $Results = [Text.Encoding]::UTF8.GetString($bytes) | ConvertFrom-Json
-        } else {
-            $Results = $null
-        }
+
+        if ($webContent.rawcontentlength -eq 0 ) { break; }
+
+        $bytes = $webContent.Content.ToCharArray() | Foreach-Object{ [byte]$_ }
+        $Results = [Text.Encoding]::UTF8.GetString($bytes) | ConvertFrom-Json
         for ($i=1; $i -lt $totalPages; $i++) {
             $newRequest = $Request.PSObject.Copy()
             if ( $newRequest['URI'] -match '\?') {
@@ -73,8 +72,8 @@ Function QueryGitLabAPI {
             $Results += (Invoke-WebRequest @newRequest).Content | ConvertFrom-Json
         }
     } catch {
-        $GitLabErrorText = $_.errordetails.message | ConvertFrom-Json
-        Write-Error -Message "$($GitlabErrorText.message.base)"
+        $GitLabErrorText = "{0} - {1}" -f $webcontent.statuscode,$webcontent.StatusDescription
+        Write-Error -Message $GitLabErrorText
     }
     finally {
         $ProgressPreference = 'Continue'
