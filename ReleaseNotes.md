@@ -1,3 +1,10 @@
+## 3.0.1 (2018-10-02)
+
+### Changes
+
+* 7f4fbef - Nicholas M. Getchell : Fixes the null length return for all 204 status codes and fixes the ALL 404 (#197)
+
+
 ## 3.0.0 (2018-09-24)
 
 ### Changes

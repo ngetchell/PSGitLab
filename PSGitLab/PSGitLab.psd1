@@ -12,7 +12,7 @@
 RootModule = 'PSGitLab.psm1'
 
 # Version number of this module.
-ModuleVersion = '3.0.0'
+ModuleVersion = '3.0.1'
 
 # ID used to uniquely identify this module
 GUID = 'f844db87-fda8-403b-a7da-bdc00a3f5a58'
@@ -176,7 +176,7 @@ PrivateData = @{
         # ReleaseNotes of this module 
         # Generate list 
         # # git log v2.7.1...master --pretty=format:"%h - %an : %s"
-        # ReleaseNotes = ''
+        ReleaseNotes = 'https://github.com/ngetchell/PSGitLab/blob/master/ReleaseNotes.md'
 
     } # End of PSData hashtable
 
