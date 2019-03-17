@@ -1,6 +1,7 @@
 ---
 external help file: PSGitLab-help.xml
-online version: 
+Module Name: PSGitLab
+online version:
 schema: 2.0.0
 ---
 
@@ -12,7 +13,10 @@ Creates a new GitLab runner.
 ## SYNTAX
 
 ```
-New-GitLabRunner -Token <string> -Description <string> -Tags <string> [-RunUntagged <bool>] [-Locked <bool>] [-Platform <string>] [-Architecture <string>] [-Executor <string>] [-Artifacts <bool>] [-Cache <bool>] [-Image <bool>] [-Services <bool>] [-Shared <bool>] [-Variables <bool>] -Name <string> -Revision <string> -Version <string>
+New-GitLabRunner -Token <String> -Description <String> -Tags <String> [-RunUntagged <Boolean>]
+ [-Locked <Boolean>] -Platform <String> -Architecture <String> -Executor <String> [-Artifacts <Boolean>]
+ [-Cache <Boolean>] [-Image <Boolean>] [-Services <Boolean>] [-Shared <Boolean>] [-Variables <Boolean>]
+ -Name <String> -Revision <String> -Version <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -20,54 +24,270 @@ Creates a new GitLab runner.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 New-GitLabRunner -Token T0k3n -Name "Quamotion" -Description "Quamotion" -Tags "quamotion" -Platform linux -Architecture amd64 -Executor shell -Revision c1ecf97f -Version "10.1.0"
 ```
 
 ## PARAMETERS
 
-### -token
-The runner registration token.
-
-### -name
-The name for the runner.
-
-### -description
-A description of the runner.
-
-### -tags
-A comma-delimited list of tags to assign to the runner.
-
-### -platform
-The platform which hosts this runner, such as Windows or Linux.
-
-### -architecture
+### -Architecture
 The CPU architecture of the platform which hosts this runner, such as AMD64.
 
-### -executor
-The executor which this runner uses.
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
 
-### -artifacts
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Artifacts
 Whether this runner supports artifacts.
 
-### -cache
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Cache
 Whether this runner supports caching.
 
-### -image
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Description
+A description of the runner.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Executor
+The executor which this runner uses.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Image
 Whether this runner support images.
 
-### -shared
-Whether this runner is shared.
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
 
-### -variables
-Whether this runner supports variables.
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
-### -revision
+### -Locked
+{{Fill Locked Description}}
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Name
+The name for the runner.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Platform
+The platform which hosts this runner, such as Windows or Linux.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Revision
 The revision of the runner software.
 
-### -version
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -RunUntagged
+{{Fill RunUntagged Description}}
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Services
+{{Fill Services Description}}
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Shared
+Whether this runner is shared.
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Tags
+A comma-delimited list of tags to assign to the runner.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Token
+The runner registration token.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Variables
+Whether this runner supports variables.
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Version
 The version of the runner software.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -76,4 +296,3 @@ The version of the runner software.
 ## NOTES
 
 ## RELATED LINKS
-

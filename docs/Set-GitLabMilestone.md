@@ -1,6 +1,7 @@
 ---
 external help file: PSGitLab-help.xml
-online version: 
+Module Name: PSGitLab
+online version:
 schema: 2.0.0
 ---
 
@@ -13,7 +14,7 @@ Modify your GitLab milestone.
 
 ```
 Set-GitLabMilestone [-ProjectId] <String> [-ID] <String[]> [[-Title] <String>] [[-Description] <String>]
- [[-DueDate] <DateTime>] [[-StateEvent] <String>]
+ [[-DueDate] <DateTime>] [[-StateEvent] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -22,12 +23,12 @@ Useful for changing the names or other parameter of your milestone.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 Set-GitLabMilestone -ProjectId 8 -Id 32 -Name "NewName"
 ```
 
-### -------------------------- EXAMPLE 2 --------------------------
+### EXAMPLE 2
 ```
 Get-GitLabMilestone -ProjectId 8 | Set-GitLabMilestone -Description 'Fake Description'
 ```
@@ -55,7 +56,7 @@ Milestone Id.
 ```yaml
 Type: String[]
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: 2
@@ -70,7 +71,7 @@ The title of an milestone.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: 3
@@ -85,7 +86,7 @@ The description of an milestone
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: 4
@@ -100,7 +101,7 @@ The due date of the milestone.
 ```yaml
 Type: DateTime
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: 5
@@ -124,6 +125,9 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
 ## INPUTS
 
 ## OUTPUTS
@@ -131,4 +135,3 @@ Accept wildcard characters: False
 ## NOTES
 
 ## RELATED LINKS
-

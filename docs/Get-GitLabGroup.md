@@ -1,5 +1,6 @@
 ---
 external help file: PSGitLab-help.xml
+Module Name: PSGitLab
 online version:
 schema: 2.0.0
 ---
@@ -14,35 +15,30 @@ Retrieve all groups in a GitLab instance.
 ### Groups (Default)
 ```
 Get-GitLabGroup [-Archived] [-Visibility <Object>] [-Order_by <Object>] [-Sort <Object>] [-Search <Object>]
+ [<CommonParameters>]
 ```
 
 ### Single
 ```
-Get-GitLabGroup -Id <Int32>
-```
-
-### Per Group
-```
-Get-GitLabGroup -GroupId <Int32> [-Archived] [-Visibility <Object>] [-Order_by <Object>] [-Sort <Object>]
- [-Search <Object>]
+Get-GitLabGroup -Id <Int32> [<CommonParameters>]
 ```
 
 ### Starred
 ```
 Get-GitLabGroup [-Archived] [-Visibility <Object>] [-Order_by <Object>] [-Sort <Object>] [-Search <Object>]
- [-Starred]
+ [-Starred] [<CommonParameters>]
 ```
 
 ### All
 ```
 Get-GitLabGroup [-Archived] [-Visibility <Object>] [-Order_by <Object>] [-Sort <Object>] [-Search <Object>]
- [-All]
+ [-All] [<CommonParameters>]
 ```
 
 ### Owned
 ```
 Get-GitLabGroup [-Archived] [-Visibility <Object>] [-Order_by <Object>] [-Sort <Object>] [-Search <Object>]
- [-Owned]
+ [-Owned] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -51,37 +47,37 @@ Queries over HTTP and gets back GitLab.Group type.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 Get-GitLabGroup
 ```
 
-### -------------------------- EXAMPLE 2 --------------------------
+### EXAMPLE 2
 ```
 Get-GitLabGroup -All
 ```
 
-### -------------------------- EXAMPLE 3 --------------------------
+### EXAMPLE 3
 ```
 Get-GitLabGroup -Owned
 ```
 
-### -------------------------- EXAMPLE 4 --------------------------
+### EXAMPLE 4
 ```
 Get-GitLabGroup -Id 4
 ```
 
-### -------------------------- EXAMPLE 5 --------------------------
+### EXAMPLE 5
 ```
 Get-GitLabGroup -Archived
 ```
 
-### -------------------------- EXAMPLE 6 --------------------------
+### EXAMPLE 6
 ```
 Get-GitLabGroup -Starred
 ```
 
-### -------------------------- EXAMPLE 7 --------------------------
+### EXAMPLE 7
 ```
 Get-GitLabGroup -Search 'ngetchell' -Archived
 ```
@@ -225,6 +221,9 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
 ## INPUTS
 
 ## OUTPUTS
@@ -234,4 +233,3 @@ Accept wildcard characters: False
 ## NOTES
 
 ## RELATED LINKS
-

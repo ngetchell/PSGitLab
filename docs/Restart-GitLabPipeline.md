@@ -25,6 +25,7 @@ Restart a pipeline what is not currently running or pending.
 ```powershell
 PS C:\> Restart-GitLabPipeline -ProjectID 1 -Id 17
 ```
+
 Restart the pipeline 17 for the project identified by Id 1
 
 ## PARAMETERS
@@ -60,20 +61,18 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
-For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### None
 
-
 ## OUTPUTS
 
 ### GitLab.Project.Pipeline
 
-
 ## NOTES
 
 ## RELATED LINKS
+
 [GitLab pipelines API](https://docs.gitlab.com/ee/api/pipelines.html)

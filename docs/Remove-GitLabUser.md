@@ -1,6 +1,7 @@
 ---
 external help file: PSGitLab-help.xml
-online version: 
+Module Name: PSGitLab
+online version:
 schema: 2.0.0
 ---
 
@@ -12,7 +13,7 @@ User to get rid of users.
 ## SYNTAX
 
 ```
-Remove-GitLabUser [-Username] <String[]> [-WhatIf] [-Confirm]
+Remove-GitLabUser [-Username] <String[]> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -20,7 +21,7 @@ Used to get rid of users.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 Search-GitLabUser -User 'fake' | Remove-GitLabUser
 ```
@@ -33,7 +34,7 @@ The username of the user being removed.
 ```yaml
 Type: String[]
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: 1
@@ -72,6 +73,9 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
 ## INPUTS
 
 ## OUTPUTS
@@ -79,4 +83,3 @@ Accept wildcard characters: False
 ## NOTES
 
 ## RELATED LINKS
-

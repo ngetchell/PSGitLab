@@ -1,6 +1,7 @@
 ---
 external help file: PSGitLab-help.xml
-online version: 
+Module Name: PSGitLab
+online version:
 schema: 2.0.0
 ---
 
@@ -15,7 +16,7 @@ Uses the user namespace.
 ```
 New-GitLabMergeRequest [-ProjectId] <String> [-SourceBranch] <String> [-TargetBranch] <String>
  [[-AssigneeId] <Int32>] [-Title] <String> [[-Description] <String>] [[-TargetProjectId] <String>]
- [[-Labels] <String>] [[-MilestoneId] <String>]
+ [[-Labels] <String>] [[-MilestoneId] <String>] [-RemoveSourceBranch] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,7 +26,7 @@ This uses the v3 GitLab API.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 New-GitLabMergeRequest -ProjectId 8 -SourceBranch issue-1234 -TargetBranch master -Title "WIP: issue 1234"
 ```
@@ -38,7 +39,7 @@ The ID of a project.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: 1
@@ -53,7 +54,7 @@ The source branch.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: 2
@@ -68,7 +69,7 @@ The target branch.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: 3
@@ -83,7 +84,7 @@ Assignee user ID.
 ```yaml
 Type: Int32
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: 4
@@ -98,7 +99,7 @@ Title of the merge request.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: 5
@@ -113,7 +114,7 @@ Description of the merge request.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: 6
@@ -128,7 +129,7 @@ The target project (numeric id).
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: 7
@@ -143,7 +144,7 @@ Labels for MR as a comma-separated list.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: 8
@@ -158,7 +159,7 @@ Milestone ID.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: 9
@@ -167,6 +168,24 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -RemoveSourceBranch
+{{Fill RemoveSourceBranch Description}}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
 ## INPUTS
 
 ## OUTPUTS
@@ -174,4 +193,3 @@ Accept wildcard characters: False
 ## NOTES
 
 ## RELATED LINKS
-

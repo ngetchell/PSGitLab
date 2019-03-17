@@ -1,5 +1,6 @@
 ---
 external help file: PSGitLab-help.xml
+Module Name: PSGitLab
 online version:
 schema: 2.0.0
 ---
@@ -14,35 +15,36 @@ Retrieve all projects in a GitLab instance.
 ### Projects (Default)
 ```
 Get-GitLabProject [-Archived] [-Visibility <Object>] [-Order_by <Object>] [-Sort <Object>] [-Search <Object>]
+ [<CommonParameters>]
 ```
 
 ### Single
 ```
-Get-GitLabProject -Id <Int32>
+Get-GitLabProject -Id <Int32> [<CommonParameters>]
 ```
 
-### Per Group
+### PerGroup
 ```
 Get-GitLabProject -GroupId <Int32> [-Archived] [-Visibility <Object>] [-Order_by <Object>] [-Sort <Object>]
- [-Search <Object>]
+ [-Search <Object>] [<CommonParameters>]
 ```
 
 ### Starred
 ```
 Get-GitLabProject [-Archived] [-Visibility <Object>] [-Order_by <Object>] [-Sort <Object>] [-Search <Object>]
- [-Starred]
+ [-Starred] [<CommonParameters>]
 ```
 
 ### All
 ```
 Get-GitLabProject [-Archived] [-Visibility <Object>] [-Order_by <Object>] [-Sort <Object>] [-Search <Object>]
- [-All]
+ [-All] [<CommonParameters>]
 ```
 
 ### Owned
 ```
 Get-GitLabProject [-Archived] [-Visibility <Object>] [-Order_by <Object>] [-Sort <Object>] [-Search <Object>]
- [-Owned]
+ [-Owned] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -51,42 +53,42 @@ Queries over HTTP and gets back GitLab.Project type.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 Get-GitLabProject
 ```
 
-### -------------------------- EXAMPLE 2 --------------------------
+### EXAMPLE 2
 ```
 Get-GitLabProject -All
 ```
 
-### -------------------------- EXAMPLE 3 --------------------------
+### EXAMPLE 3
 ```
 Get-GitLabProject -Owned
 ```
 
-### -------------------------- EXAMPLE 4 --------------------------
+### EXAMPLE 4
 ```
 Get-GitLabProject -Id 4
 ```
 
-### -------------------------- EXAMPLE 5 --------------------------
+### EXAMPLE 5
 ```
 Get-GitLabProject -Archived
 ```
 
-### -------------------------- EXAMPLE 6 --------------------------
+### EXAMPLE 6
 ```
 Get-GitLabProject -Starred
 ```
 
-### -------------------------- EXAMPLE 7 --------------------------
+### EXAMPLE 7
 ```
 Get-GitLabProject -Search 'ngetchell' -Archived
 ```
 
-### -------------------------- EXAMPLE 8 --------------------------
+### EXAMPLE 8
 ```
 Get-GitLabProject  -Id 59 -Sort asc
 ```
@@ -113,7 +115,7 @@ The ID of the group to list projects.
 
 ```yaml
 Type: Int32
-Parameter Sets: Single
+Parameter Sets: PerGroup
 Aliases:
 
 Required: True
@@ -128,7 +130,7 @@ Limit by archived status.
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: Projects, Starred, All, Owned
+Parameter Sets: Projects, PerGroup, Starred, All, Owned
 Aliases:
 
 Required: False
@@ -143,7 +145,7 @@ Limit by visibility public, internal, or private.
 
 ```yaml
 Type: Object
-Parameter Sets: Projects, Starred, All, Owned
+Parameter Sets: Projects, PerGroup, Starred, All, Owned
 Aliases:
 
 Required: False
@@ -159,7 +161,7 @@ Default is created_at.
 
 ```yaml
 Type: Object
-Parameter Sets: Projects, Starred, All, Owned
+Parameter Sets: Projects, PerGroup, Starred, All, Owned
 Aliases:
 
 Required: False
@@ -175,7 +177,7 @@ Default is desc.
 
 ```yaml
 Type: Object
-Parameter Sets: Projects, Starred, All, Owned
+Parameter Sets: Projects, PerGroup, Starred, All, Owned
 Aliases:
 
 Required: False
@@ -190,7 +192,7 @@ Return list of authorized projects matching the search criteria.
 
 ```yaml
 Type: Object
-Parameter Sets: Projects, Starred, All, Owned
+Parameter Sets: Projects, PerGroup, Starred, All, Owned
 Aliases:
 
 Required: False
@@ -245,6 +247,9 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
 ## INPUTS
 
 ## OUTPUTS
@@ -254,4 +259,3 @@ Accept wildcard characters: False
 ## NOTES
 
 ## RELATED LINKS
-

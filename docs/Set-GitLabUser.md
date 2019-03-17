@@ -1,6 +1,7 @@
 ---
 external help file: PSGitLab-help.xml
-online version: 
+Module Name: PSGitLab
+online version:
 schema: 2.0.0
 ---
 
@@ -15,21 +16,21 @@ Modify users already created in your GitLab instance.
 ```
 Set-GitLabUser -ID <String> [-Password <String>] [-NewUsername <String>] [-Name <String>] [-SkypeID <String>]
  [-LinkedIn <String>] [-Twitter <String>] [-WebsiteURL <String>] [-ProjectsLimit <Int32>] [-Admin]
- [-CanCreateGroup] [-External] [-Passthru]
+ [-CanCreateGroup] [-External] [-Passthru] [<CommonParameters>]
 ```
 
 ### Email
 ```
 Set-GitLabUser -Email <String> [-Password <String>] [-NewUsername <String>] [-Name <String>]
  [-SkypeID <String>] [-LinkedIn <String>] [-Twitter <String>] [-WebsiteURL <String>] [-ProjectsLimit <Int32>]
- [-Admin] [-CanCreateGroup] [-External] [-Passthru]
+ [-Admin] [-CanCreateGroup] [-External] [-Passthru] [<CommonParameters>]
 ```
 
 ### Username
 ```
 Set-GitLabUser -Username <String> [-Password <String>] [-NewUsername <String>] [-Name <String>]
  [-SkypeID <String>] [-LinkedIn <String>] [-Twitter <String>] [-WebsiteURL <String>] [-ProjectsLimit <Int32>]
- [-Admin] [-CanCreateGroup] [-External] [-Passthru]
+ [-Admin] [-CanCreateGroup] [-External] [-Passthru] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -38,12 +39,12 @@ Useful for making someone an admin from the command line.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 Set-GitLabUser -Email FakeEmail@example.com -Twitter 'newtwitterID'
 ```
 
-### -------------------------- EXAMPLE 2 --------------------------
+### EXAMPLE 2
 ```
 Set-GitLabUser -Username FakeUserName -Admin
 ```
@@ -56,7 +57,7 @@ The ID of the user.
 ```yaml
 Type: String
 Parameter Sets: ID
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -71,7 +72,7 @@ The email of the user.
 ```yaml
 Type: String
 Parameter Sets: Email
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -86,7 +87,7 @@ The username for the user.
 ```yaml
 Type: String
 Parameter Sets: Username
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -101,7 +102,7 @@ The password for the user.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -116,7 +117,7 @@ The new username for the given user.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -131,7 +132,7 @@ The full name of the user.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -146,7 +147,7 @@ The SkypeID of the user.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -161,7 +162,7 @@ The URL for the LinkedIn user profile.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -176,7 +177,7 @@ The twitter handle of the user.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -191,7 +192,7 @@ The URL for the user's website.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -206,7 +207,7 @@ To limit how many projects a user can have open.
 ```yaml
 Type: Int32
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -221,7 +222,7 @@ Make a user an admin.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -236,7 +237,7 @@ Whether a user can create a group.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -251,7 +252,7 @@ External UID.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -266,7 +267,7 @@ To return the user to the pipeline.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -275,6 +276,9 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
 ## INPUTS
 
 ## OUTPUTS
@@ -282,4 +286,3 @@ Accept wildcard characters: False
 ## NOTES
 
 ## RELATED LINKS
-

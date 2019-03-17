@@ -1,6 +1,7 @@
 ---
 external help file: PSGitLab-help.xml
-online version: 
+Module Name: PSGitLab
+online version:
 schema: 2.0.0
 ---
 
@@ -12,7 +13,7 @@ Get the Project Tags
 ## SYNTAX
 
 ```
-Get-GitLabProjectTag [-Id <String>] [-Namespace <String>]
+Get-GitLabProjectTag [-Id <String>] [-Namespace <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -20,7 +21,7 @@ Get the Project Tags
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 Get-GitLabProjectTag -id 1
 ```
@@ -35,7 +36,7 @@ Project Id.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -50,7 +51,7 @@ Project Namespace.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -58,6 +59,9 @@ Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
+
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -68,4 +72,3 @@ Accept wildcard characters: False
 ## NOTES
 
 ## RELATED LINKS
-

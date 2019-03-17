@@ -1,6 +1,7 @@
 ---
 external help file: PSGitLab-help.xml
-online version: 
+Module Name: PSGitLab
+online version:
 schema: 2.0.0
 ---
 
@@ -14,6 +15,7 @@ Uses the user namespace.
 
 ```
 New-GitLabMilestone [-ProjectId] <String> [-Title] <String> [[-Description] <String>] [[-DueDate] <DateTime>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,7 +25,7 @@ This uses the v3 GitLab API.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 New-GitLabMilestone -ProjectId 8 -Title "2016-KW30" -Description "MyDescription" -DueDate (Get-Date).AddDays(10)
 ```
@@ -36,7 +38,7 @@ The ID of a project.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: 1
@@ -51,7 +53,7 @@ The title of an milestone.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: 2
@@ -66,7 +68,7 @@ The description of an milestone
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: 3
@@ -81,7 +83,7 @@ The due date of the milestone.
 ```yaml
 Type: DateTime
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: 4
@@ -90,6 +92,9 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
 ## INPUTS
 
 ## OUTPUTS
@@ -97,4 +102,3 @@ Accept wildcard characters: False
 ## NOTES
 
 ## RELATED LINKS
-

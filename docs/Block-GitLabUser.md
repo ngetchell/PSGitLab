@@ -1,6 +1,7 @@
 ---
 external help file: PSGitLab-help.xml
-online version: 
+Module Name: PSGitLab
+online version:
 schema: 2.0.0
 ---
 
@@ -13,17 +14,17 @@ Gives you the ability to block users in GitLab.
 
 ### ID (Default)
 ```
-Block-GitLabUser -ID <String> [-Passthru]
+Block-GitLabUser -ID <String> [-Passthru] [<CommonParameters>]
 ```
 
 ### Username
 ```
-Block-GitLabUser -Username <String> [-Passthru]
+Block-GitLabUser -Username <String> [-Passthru] [<CommonParameters>]
 ```
 
 ### Email
 ```
-Block-GitLabUser -Email <String> [-Passthru]
+Block-GitLabUser -Email <String> [-Passthru] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -32,22 +33,22 @@ Can be done by parameter or by pipeline.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 Block-GitLabUser -Username fake
 ```
 
-### -------------------------- EXAMPLE 2 --------------------------
+### EXAMPLE 2
 ```
 Block-GitLabUser -Email fake@email.com
 ```
 
-### -------------------------- EXAMPLE 3 --------------------------
+### EXAMPLE 3
 ```
 Block-GitLabUser -ID 22
 ```
 
-### -------------------------- EXAMPLE 4 --------------------------
+### EXAMPLE 4
 ```
 Get-GitLabUser -Username fake | Block-GitLabUser
 ```
@@ -60,7 +61,7 @@ The GitLab user ID.
 ```yaml
 Type: String
 Parameter Sets: ID
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -75,7 +76,7 @@ The username of the user to be blocked.
 ```yaml
 Type: String
 Parameter Sets: Username
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -90,7 +91,7 @@ The email of the user to be blocked.
 ```yaml
 Type: String
 Parameter Sets: Email
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -105,7 +106,7 @@ Return the blocked user to the pipeline.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -114,6 +115,9 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
 ## INPUTS
 
 ## OUTPUTS
@@ -121,4 +125,3 @@ Accept wildcard characters: False
 ## NOTES
 
 ## RELATED LINKS
-

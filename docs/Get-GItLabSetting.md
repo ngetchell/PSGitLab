@@ -1,6 +1,7 @@
 ---
 external help file: PSGitLab-help.xml
-online version: 
+Module Name: PSGitLab
+online version:
 schema: 2.0.0
 ---
 
@@ -12,7 +13,7 @@ Get all of the GitLab instance global settings.
 ## SYNTAX
 
 ```
-Get-GitLabSetting
+Get-GitLabSetting [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -21,12 +22,15 @@ Uses the appliation API endpoint.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 Get-GitLabSetting
 ```
 
 ## PARAMETERS
+
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -35,4 +39,3 @@ Get-GitLabSetting
 ## NOTES
 
 ## RELATED LINKS
-

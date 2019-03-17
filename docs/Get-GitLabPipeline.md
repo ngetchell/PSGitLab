@@ -14,25 +14,25 @@ Retrieves all pipelines for a provided GitLab project.
 
 ### Pipelines (Default)
 ```
-Get-GitLabPipeline -ProjectID <Int32> [-Scope <Object>] [-Status <Object>] [-order_by <Object>]
- [-Sort <Object>] [<CommonParameters>]
-```
-
-### ByBranch
-```
-Get-GitLabPipeline -ProjectID <Int32> -Branch <String> [-Scope <Object>] [-Status <Object>] [-order_by <Object>]
- [-Sort <Object>] [<CommonParameters>]
-```
-
-### ByTag
-```
-Get-GitLabPipeline -ProjectID <Int32> -Tag <String> [-Scope <Object>] [-Status <Object>] [-order_by <Object>]
+Get-GitLabPipeline -ProjectID <Int32> [-Scope <Object>] [-Status <Object>] [-Order_by <Object>]
  [-Sort <Object>] [<CommonParameters>]
 ```
 
 ### Single
 ```
 Get-GitLabPipeline -ProjectID <Int32> -Id <Int32> [<CommonParameters>]
+```
+
+### ByTag
+```
+Get-GitLabPipeline -ProjectID <Int32> [-Scope <Object>] [-Status <Object>] -Tag <String> [-Order_by <Object>]
+ [-Sort <Object>] [<CommonParameters>]
+```
+
+### ByBranch
+```
+Get-GitLabPipeline -ProjectID <Int32> [-Scope <Object>] [-Status <Object>] -Branch <String>
+ [-Order_by <Object>] [-Sort <Object>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -85,7 +85,7 @@ Return projects ordered by id, status, ref or user_id.
 
 ```yaml
 Type: Object
-Parameter Sets: ByBranch, ByTag, Pipelines
+Parameter Sets: Pipelines, ByTag, ByBranch
 Aliases:
 Accepted values: id, status, ref, user_id
 
@@ -116,7 +116,7 @@ Scope of returned pipelines.
 
 ```yaml
 Type: Object
-Parameter Sets: ByBranch, ByTag, Pipelines
+Parameter Sets: Pipelines, ByTag, ByBranch
 Aliases:
 Accepted values: running, pending, finished, branches, tags, all
 
@@ -133,7 +133,7 @@ Default is desc.
 
 ```yaml
 Type: Object
-Parameter Sets:  ByBranch, ByTag, Pipelines
+Parameter Sets: Pipelines, ByTag, ByBranch
 Aliases:
 Accepted values: asc, desc
 
@@ -149,7 +149,7 @@ Returns of pipelines only with a status.
 
 ```yaml
 Type: Object
-Parameter Sets: ByBranch, ByTag, Pipelines
+Parameter Sets: Pipelines, ByTag, ByBranch
 Aliases:
 Accepted values: running, pending, success, failed, canceled, skipped, all
 
@@ -176,20 +176,18 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
-For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### None
 
-
 ## OUTPUTS
 
 ### GitLab.Project.Pipeline
 
-
 ## NOTES
 
 ## RELATED LINKS
+
 [GitLab pipelines API](https://docs.gitlab.com/ee/api/pipelines.html)
