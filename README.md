@@ -50,3 +50,4 @@ If you find a bug, please let me know through the issue tracker. The more detail
 - [Brooks Collins](https://github.com/TerrapinStation)
 - [Matthew Hilton](https://github.com/matt2005)
 - [Wojciech Sciesinski](https://github.com/it-praktyk) - [ITpraktyk](https://twitter.com/ITpraktyk)
+- [Robin Malik](https://github.com/robinmalik) - [@robinmalik](https://twitter.com/robinmalik)

@@ -18,7 +18,7 @@ ModuleVersion = '3.0.1'
 GUID = 'f844db87-fda8-403b-a7da-bdc00a3f5a58'
 
 # Author of this module
-Author = 'Nicholas M. Getchell, Leonhard Schick, Brooks Collins, and Wojciech Sciesinski'
+Author = 'Nicholas M. Getchell, Leonhard Schick, Brooks Collins, Wojciech Sciesinski and Robin Malik'
 
 # Company or vendor of this module
 # CompanyName = 'Unknown'
@@ -95,6 +95,7 @@ FunctionsToExport = @(
     'Get-GitLabVersion',
     'New-GitLabBuild',
     'New-GitLabFork',
+    'New-GitLabGroup',
     'New-GitLabMergeRequest',
     'New-GitLabMilestone',
     'New-GitLabProject',
