@@ -1,0 +1,4 @@
+/opt/gitlab/bin/gitlab-rails error: could not load /opt/gitlab/etc/gitlab-rails/gitlab-rails-rc
+Either you are not allowed to read the file, or it does not exist yet.
+You can generate it with:   sudo gitlab-ctl reconfigure
+xd9hzGybN2WrTZZg7tuv

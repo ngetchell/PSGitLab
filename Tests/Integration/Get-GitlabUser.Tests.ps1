@@ -5,6 +5,11 @@ Get-Module $ModuleName | Remove-Module
 
 Import-Module $ModuleManifest
 
+if ($env:TRAVIS -eq 'true') {
+    $token = Get-Content /config/token | Select -Last 1
+    $url = "http://gitlab"
+    Save-GitLabAPIConfiguration -Token $token -Domain $url -APIVersion 4
+}
 
 Describe 'Initial Test' -Tag 'Integration' {
     It 'Test' {
