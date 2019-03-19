@@ -1,9 +1,8 @@
-$ModuleName = Split-Path (Resolve-Path "$PSScriptRoot\..\..\" ) -Leaf
-$ModuleManifest = Resolve-Path "$PSScriptRoot\..\..\PSGitLab\$ModuleName.psd1"
+$ModuleName = 'PSGitLab'
 
 Get-Module $ModuleName | Remove-Module
 
-Import-Module $ModuleManifest
+Import-Module "$PSScriptRoot/../../$ModuleName"
 
 if ($env:TRAVIS -eq 'true') {
     $token = Get-Content /config/token | Select -Last 1

@@ -1,9 +1,9 @@
 $ModuleName = Split-Path (Resolve-Path "$PSScriptRoot\..\" ) -Leaf
-$ModuleManifest = Resolve-Path "$PSScriptRoot\..\PSGitLab\$ModuleName.psd1"
+$ModuleName = 'PSGitLab'
 
 Get-Module $ModuleName | Remove-Module
 
-Import-Module $ModuleManifest
+Import-Module "$PSScriptRoot/../$ModuleName"
 
 #region Save-GitLabAPIConfiguration
 

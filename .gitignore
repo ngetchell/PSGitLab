@@ -1,3 +1,3 @@
 Release/*
 Results/*
-./docker/config/*
+docker/config/*
