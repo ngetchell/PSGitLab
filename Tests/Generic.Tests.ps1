@@ -70,6 +70,7 @@ Get-Command -Module $ModuleName | Where-Object { $_.CommandType -ne 'Alias' } | 
 }
 
 Describe 'Module Information' -Tags 'Command'{
+    $ModuleManifest = Resolve-Path "$PSScriptRoot\..\Release\$ModuleName.psd1"
     Context 'Manifest Testing' { 
         It 'Valid Module Manifest' {
             {

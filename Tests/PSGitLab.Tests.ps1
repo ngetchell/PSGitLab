@@ -49,7 +49,7 @@ Import-Module $ModulePath
 
 Describe 'Module Information' {
     
-    #$ModuleManifest = "$PSScriptRoot\..\PSGitlab\PSGitlab.psd1"
+    $ModuleManifest = Resolve-Path "$PSScriptRoot\..\Release\$ModuleName.psd1"
     
     Context 'Module Manifest' {
         $Script:Manifest = $null

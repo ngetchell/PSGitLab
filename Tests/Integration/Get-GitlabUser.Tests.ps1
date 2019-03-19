@@ -1,7 +1,7 @@
 $ModuleName = 'PSGitLab'
 Get-Module $ModuleName | Remove-Module
 if ($env:APPVEYOR -eq 'True') {
-    $ModulePath = "$PSScriptRoot\..\Release\$ModuleName.psd1"
+    $ModulePath = "$PSScriptRoot\..\..\Release\$ModuleName.psd1"
 }
 else {
     $ModulePath = "$PSScriptRoot\..\PSGitLab\"
