@@ -6,7 +6,7 @@ Get-Module $ModuleName | Remove-Module
 Import-Module $ModuleManifest
 
 
-Describe 'Initial Test' {
+Describe 'Initial Test' -Tag 'Integration' {
     It 'Test' {
         $Result = Test-GitLabAPI
         $Result.StatusCode | Should -Be 200 -Because 'a 200 status code means things are OK'
