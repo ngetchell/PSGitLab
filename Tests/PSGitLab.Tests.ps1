@@ -1,4 +1,3 @@
-$ModuleName = Split-Path (Resolve-Path "$PSScriptRoot\..\" ) -Leaf
 $ModuleName = 'PSGitLab'
 
 Get-Module $ModuleName | Remove-Module
