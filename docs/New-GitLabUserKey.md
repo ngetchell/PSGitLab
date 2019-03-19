@@ -1,5 +1,6 @@
 ---
 external help file: PSGitLab-help.xml
+Module Name: PSGitLab
 online version: https://docs.gitlab.com/ce/api/projects.html#hooks
 schema: 2.0.0
 ---
@@ -13,12 +14,12 @@ Creates new SSH Key for the current or another user.
 
 ### Explicit (Default)
 ```
-New-GitLabUserKey [-Title <String>] -Key <String> [-Username <Object>]
+New-GitLabUserKey [-Title <String>] -Key <String> [-Username <Object>] [<CommonParameters>]
 ```
 
 ### File
 ```
-New-GitLabUserKey -KeyFile <String> [-Username <Object>]
+New-GitLabUserKey -KeyFile <String> [-Username <Object>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -49,7 +50,7 @@ A string representation of the SSH key.
 ```yaml
 Type: String
 Parameter Sets: Explicit
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -64,7 +65,7 @@ The public key you wish to upload.
 ```yaml
 Type: String
 Parameter Sets: File
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -79,7 +80,7 @@ The title of the SSH key.
 ```yaml
 Type: String
 Parameter Sets: Explicit
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -94,7 +95,7 @@ The username of the user you would like to add the SSH key for.
 ```yaml
 Type: Object
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -102,6 +103,9 @@ Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
+
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -114,4 +118,3 @@ Accept wildcard characters: False
 ## NOTES
 
 ## RELATED LINKS
-

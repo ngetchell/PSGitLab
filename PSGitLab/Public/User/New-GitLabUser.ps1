@@ -11,9 +11,9 @@ Function New-GitLabUser {
         [string]$Password,
 
         [ValidateNotNullOrEmpty()]
-        [Parameter(Mandatory=$true)]        
+        [Parameter(Mandatory=$true)]
         [string]$Username,
-        
+
         [ValidateNotNullOrEmpty()]
         [Parameter(Mandatory=$true)]
         [string]$Name,

@@ -1,6 +1,7 @@
 ---
 external help file: PSGitLab-help.xml
-online version: 
+Module Name: PSGitLab
+online version:
 schema: 2.0.0
 ---
 
@@ -13,17 +14,17 @@ Used to unblock gitlab users.
 
 ### ID (Default)
 ```
-Unblock-GitLabUser -ID <String> [-Passthru]
+Unblock-GitLabUser -ID <String> [-Passthru] [<CommonParameters>]
 ```
 
 ### Username
 ```
-Unblock-GitLabUser -Username <String> [-Passthru]
+Unblock-GitLabUser -Username <String> [-Passthru] [<CommonParameters>]
 ```
 
 ### Email
 ```
-Unblock-GitLabUser -Email <String> [-Passthru]
+Unblock-GitLabUser -Email <String> [-Passthru] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -32,22 +33,22 @@ Can be done form the parameters or from the pipeline.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 Unlock-GitLabUser -ID 22
 ```
 
-### -------------------------- EXAMPLE 2 --------------------------
+### EXAMPLE 2
 ```
 Unlock-GitLabUser -Email fake@email.com
 ```
 
-### -------------------------- EXAMPLE 3 --------------------------
+### EXAMPLE 3
 ```
 Unlock-GitLabUser -Username fake
 ```
 
-### -------------------------- EXAMPLE 4 --------------------------
+### EXAMPLE 4
 ```
 Get-GitLabUser -Username fake | Unblock-GitLabUser
 ```
@@ -60,7 +61,7 @@ The user ID.
 ```yaml
 Type: String
 Parameter Sets: ID
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -75,7 +76,7 @@ The username for the user.
 ```yaml
 Type: String
 Parameter Sets: Username
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -90,7 +91,7 @@ The email address for the user.
 ```yaml
 Type: String
 Parameter Sets: Email
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -105,7 +106,7 @@ To return the unblocked user to the pipeline.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -114,6 +115,9 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
 ## INPUTS
 
 ## OUTPUTS
@@ -121,4 +125,3 @@ Accept wildcard characters: False
 ## NOTES
 
 ## RELATED LINKS
-

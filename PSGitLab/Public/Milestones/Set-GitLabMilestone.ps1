@@ -21,7 +21,7 @@ Function Set-GitLabMilestone {
         [string]$StateEvent
     )
 
-BEGIN {} 
+BEGIN {}
 
 PROCESS {
 

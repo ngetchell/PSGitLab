@@ -12,13 +12,13 @@
 RootModule = 'PSGitLab.psm1'
 
 # Version number of this module.
-ModuleVersion = '2.6.2'
+ModuleVersion = '3.0.1'
 
 # ID used to uniquely identify this module
 GUID = 'f844db87-fda8-403b-a7da-bdc00a3f5a58'
 
 # Author of this module
-Author = 'Nicholas M. Getchell, Leonhard Schick, and Brooks Collins'
+Author = 'Nicholas M. Getchell, Leonhard Schick, Brooks Collins, Wojciech Sciesinski and Robin Malik'
 
 # Company or vendor of this module
 # CompanyName = 'Unknown'
@@ -67,60 +67,67 @@ FormatsToProcess = @('PSGitLab.Format.ps1xml')
 
 # Functions to export from this module
 FunctionsToExport = @(
-    'Unblock-GitLabUser',
+    'Add-GitLabProjectRunner',
     'Block-GitLabUser',
-    'Get-GitLabUser',
-    'Remove-GitLabUser',
-    'New-GitLabUser',
-    "Get-GitLabUserKey",
+    'Close-GitLabMergeRequest',
+    'Close-GitLabMilestone',
+    'Get-GitLabCommitStats',
+    'Get-GitLabGroup',
+    'Get-GitLabIssue',
+    'Get-GitLabMergeRequest',
+    'Get-GitLabMilestone',
+    'Get-GitLabNamespace',
+    'Get-GitLabPipeline',
     'Get-GitLabProject',
-    'Get-GitLabProjectEvent',
-    'Get-GitLabProjectWebhook',
-    'Get-GitlabProjectServiceSlack',
-    'Set-GitlabProjectServiceSlack',
-    'Remove-GitlabProjectServiceSlack',
-    'Get-GitlabProjectServiceMSTeams',
-    'Set-GitlabProjectServiceMSTeams',
-    'Remove-GitlabProjectServiceMSTeams',
-    'Get-GitLabProjectTag',
+    'Get-GitLabProjectArchive',
     'Get-GitLabProjectCommit',
+    'Get-GitLabProjectEvent',
+    'Get-GitLabProjectRepositoryTree',
+    'Get-GitlabProjectServiceMSTeams',
+    'Get-GitlabProjectServiceSlack',
+    'Get-GitLabProjectSubmodule',
+    'Get-GitLabProjectTag',
+    'Get-GitLabProjectWebhook',
+    'Get-GitLabRunner',
+    'Get-GitLabSetting',
+    'Get-GitLabUser',
+    'Get-GitLabUserKey',
+    'Get-GitLabVersion',
+    'New-GitLabBuild',
     'New-GitLabFork',
-    'Set-GitLabUser',
+    'New-GitLabGroup',
+    'New-GitLabMergeRequest',
+    'New-GitLabMilestone',
     'New-GitLabProject',
     'New-GitLabProjectWebhook',
-    'Set-GitLabProjectWebhook',
-    'Remove-GitLabProjectWebhook',
-    'Set-GitLabProject',
-    'Remove-GitLabProject',
-    'Save-GitLabAPIConfiguration',
-    'Test-GitLabAPI',
-    'Search-GitLabUser',
-    'Get-GitLabNamespace',
-    'Get-GitLabCommitStats',
-    'New-GitLabBuild',
-    'New-GitLabMergeRequest',
-    'Get-GitLabMergeRequest',
-    'Set-GitLabMergeRequest',
-    'Remove-GitLabMergeRequest',
-    'Close-GitLabMergeRequest',
-    'New-GitLabMilestone',
-    'Get-GitLabMilestone',
-    'Set-GitLabMilestone',
-    'Close-GitLabMilestone',
-    'New-GitLabUserKey',
-    'Remove-GitLabUserKey',
-    'Push-SSHKeysToGitLab',
-    'Get-GitLabProjectSubmodule',
-    'Get-GitLabProjectArchive',
-    'Get-GitLabProjectRepositoryTree',
-    'Get-GitLabSetting',
-    'Get-GitLabVersion',
-    'Add-GitLabProjectRunner',
-    'Get-GitLabRunner',
     'New-GitLabRunner',
-    'Remove-GitLabProjectRunner', 
+    'New-GitLabUser',
+    'New-GitLabUserKey',
+    'Push-SSHKeysToGitLab',
+    'Remove-GitLabMergeRequest',
+    'Remove-GitLabProject',
+    'Remove-GitLabProjectRunner',
+    'Remove-GitlabProjectServiceMSTeams',
+    'Remove-GitlabProjectServiceSlack',
+    'Remove-GitLabProjectWebhook',
     'Remove-GitLabRunner',
-    'Set-GitLabRunner' 
+    'Remove-GitLabUser',
+    'Remove-GitLabUserKey',
+    'Restart-GitLabPipeline',
+    'Save-GitLabAPIConfiguration',
+    'Search-GitLabUser',
+    'Set-GitLabMergeRequest',
+    'Set-GitLabMilestone',
+    'Set-GitLabProject',
+    'Set-GitlabProjectServiceMSTeams',
+    'Set-GitlabProjectServiceSlack',
+    'Set-GitLabProjectWebhook',
+    'Set-GitLabRunner',
+    'Set-GitLabUser',
+    'Start-GitLabPipeline',
+    'Stop-GitLabPipeline',
+    'Test-GitLabAPI',
+    'Unblock-GitLabUser'
     )
 
 # Cmdlets to export from this module
@@ -153,7 +160,9 @@ PrivateData = @{
                  'CI'
                  'ContinuousIntegration',
                  'Builds',
-                 'Repository'
+                 'Repository',
+                 'PSEdition_Core',
+                 'PSEdition_Desktop'
         )
 
         # A URL to the license for this module.
@@ -165,8 +174,10 @@ PrivateData = @{
         # A URL to an icon representing this module.
         # IconUri = ''
 
-        # ReleaseNotes of this module
-        # ReleaseNotes = ''
+        # ReleaseNotes of this module 
+        # Generate list 
+        # # git log v2.7.1...master --pretty=format:"%h - %an : %s"
+        ReleaseNotes = 'https://github.com/ngetchell/PSGitLab/blob/master/ReleaseNotes.md'
 
     } # End of PSData hashtable
 

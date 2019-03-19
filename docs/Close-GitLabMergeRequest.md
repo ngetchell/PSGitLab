@@ -1,6 +1,7 @@
 ---
 external help file: PSGitLab-help.xml
-online version: 
+Module Name: PSGitLab
+online version:
 schema: 2.0.0
 ---
 
@@ -12,7 +13,7 @@ Closes your GitLab merge requests.
 ## SYNTAX
 
 ```
-Close-GitLabMergeRequest [-ProjectId] <String> [-ID] <String[]> [-Passthru]
+Close-GitLabMergeRequest [-ProjectId] <String> [-ID] <String[]> [-Passthru] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -20,7 +21,7 @@ Closes your GitLab merge requests.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 Close-GitLabMergeRequest -ProjectId 8 -Id 32
 ```
@@ -48,7 +49,7 @@ The ID of the Merge request you'd like to close.
 ```yaml
 Type: String[]
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: 2
@@ -63,7 +64,7 @@ Whether to return closed Merge Request object to the pipeline.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -72,6 +73,9 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
 ## INPUTS
 
 ## OUTPUTS
@@ -79,4 +83,3 @@ Accept wildcard characters: False
 ## NOTES
 
 ## RELATED LINKS
-

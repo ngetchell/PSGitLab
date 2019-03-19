@@ -11,11 +11,11 @@ Function Set-GitLabUser {
 
         [ValidateNotNullOrEmpty()]
         [Parameter(Mandatory=$true,ParameterSetName='Username')]
-        [string]$Username,        
+        [string]$Username,
 
-        #[string]$NewEmail = $null,     
-        [string]$Password = $null,    
-        [string]$NewUsername = $null,        
+        #[string]$NewEmail = $null,
+        [string]$Password = $null,
+        [string]$NewUsername = $null,
         [string]$Name = $null,
         [string]$SkypeID = $null,
         [string]$LinkedIn = $null,
@@ -53,7 +53,7 @@ Function Set-GitLabUser {
     $Request = @{
         URI = "/users/$($User.ID)"
         Method = 'PUT'
-        Body = $Body 
+        Body = $Body
         ContentType = 'application/x-www-form-urlencoded'
     }
 

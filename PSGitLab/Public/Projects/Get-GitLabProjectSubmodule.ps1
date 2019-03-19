@@ -23,11 +23,11 @@
   }
   $GitsubmoduleFile = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String((QueryGitLabAPI -Request $Request -ObjectType 'File').content))
   $Gitsubmodules = $GitsubmoduleFile.Split('[]') -ne '' | ForEach-Object -Begin {
-    $i = 0 
+    $i = 0
   } -Process {
-    if ($i++ % 2) 
+    if ($i++ % 2)
     {
-      [PSCustomObject](ConvertFrom-StringData -StringData $_) 
+      [PSCustomObject](ConvertFrom-StringData -StringData $_)
     }
   }
   $Object = @()

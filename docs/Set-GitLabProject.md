@@ -1,6 +1,7 @@
 ---
 external help file: PSGitLab-help.xml
-online version: 
+Module Name: PSGitLab
+online version:
 schema: 2.0.0
 ---
 
@@ -13,7 +14,7 @@ Modify your GitLab projects.
 
 ```
 Set-GitLabProject -ID <String[]> [-Name <String>] [-Path <String>] [-Description <String>]
- [-VisabilityLevel <Object>] [-Passthru]
+ [-VisabilityLevel <Object>] [-Passthru] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -22,12 +23,12 @@ Useful for changing the names or changing the visibility of your project.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 Set-GitLabProject -Id 32 -Name "NewName"
 ```
 
-### -------------------------- EXAMPLE 2 --------------------------
+### EXAMPLE 2
 ```
 Get-GitLabProject  | Set-GitLabProject -Description 'Fake Description'
 ```
@@ -40,7 +41,7 @@ The project ID.
 ```yaml
 Type: String[]
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -55,7 +56,7 @@ The name of the new project.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -71,7 +72,7 @@ By default generated based on name.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -86,7 +87,7 @@ The description of the project.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -121,7 +122,7 @@ Whether to return the project to the pipeline.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -130,6 +131,9 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
 ## INPUTS
 
 ## OUTPUTS
@@ -137,4 +141,3 @@ Accept wildcard characters: False
 ## NOTES
 
 ## RELATED LINKS
-

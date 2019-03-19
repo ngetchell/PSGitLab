@@ -1,6 +1,7 @@
 ---
 external help file: PSGitLab-help.xml
-online version: 
+Module Name: PSGitLab
+online version:
 schema: 2.0.0
 ---
 
@@ -13,12 +14,12 @@ Gets rid of an SSH key for the current user or another user.
 
 ### User
 ```
-Remove-GitLabUserKey -Id <String> -Username <String> [-Passthru] [-WhatIf] [-Confirm]
+Remove-GitLabUserKey -Id <String> -Username <String> [-Passthru] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### Id
 ```
-Remove-GitLabUserKey -Id <String> [-Passthru] [-WhatIf] [-Confirm]
+Remove-GitLabUserKey -Id <String> [-Passthru] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -63,7 +64,7 @@ The id of the key.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -78,7 +79,7 @@ Whether to return the key information or not.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -93,7 +94,7 @@ The username you would like to delete the key for.
 ```yaml
 Type: String
 Parameter Sets: User
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -118,17 +119,17 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
 ## INPUTS
 
 ### None
-
 
 ## OUTPUTS
 
 ### GitLab.User.Key
 
-
 ## NOTES
 
 ## RELATED LINKS
-

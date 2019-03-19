@@ -1,6 +1,7 @@
 ---
 external help file: PSGitLab-help.xml
-online version: 
+Module Name: PSGitLab
+online version:
 schema: 2.0.0
 ---
 
@@ -13,9 +14,9 @@ Requires a name.
 ## SYNTAX
 
 ```
-New-GitLabProject [-name] <String> [[-path] <String>] [[-namespace] <String>] [[-description] <String>]
- [-issues_enabled] [-merge_requests_enabled] [-builds_enabled] [-wiki_enabled] [-snippets_enabled]
- [-container_registry_enabled] [-public] [[-visibility_level] <String>]
+New-GitLabProject [-name] <String> [-namespace] <String> [[-description] <String>] [-issues_enabled]
+ [-merge_requests_enabled] [-builds_enabled] [-wiki_enabled] [-snippets_enabled] [-container_registry_enabled]
+ [-public] [[-visibility_level] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,7 +25,7 @@ Requires a name.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 New-GitlabProject -Name 'Fake'
 ```
@@ -37,26 +38,10 @@ The name of the new project.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases: Path
 
 Required: True
 Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -path
-Custom repository name for new project.
-By default generated based on name.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases: 
-
-Required: False
-Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -68,9 +53,9 @@ Namespace for the new project (defaults to the current user's namespace).
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
-Required: False
+Required: True
 Position: 3
 Default value: None
 Accept pipeline input: False
@@ -83,7 +68,7 @@ The description of the project.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: 4
@@ -98,7 +83,7 @@ Whether to turn on issues for this project.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -113,7 +98,7 @@ Whether to turn on merge requests for this project.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -128,7 +113,7 @@ Whether to turn on builds for the project.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -143,7 +128,7 @@ Whether to turn on a wiki for the project.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -158,7 +143,7 @@ Whether to turn on snippets for the project.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -173,7 +158,7 @@ Whether to turn on the container registry.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -188,7 +173,7 @@ Whether the project should be public.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -203,7 +188,7 @@ Whether the project should be private, internal, or public.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: 5
@@ -212,6 +197,9 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
 ## INPUTS
 
 ## OUTPUTS
@@ -219,4 +207,3 @@ Accept wildcard characters: False
 ## NOTES
 
 ## RELATED LINKS
-

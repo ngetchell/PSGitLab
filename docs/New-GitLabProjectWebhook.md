@@ -1,5 +1,6 @@
 ---
 external help file: PSGitLab-help.xml
+Module Name: PSGitLab
 online version: https://docs.gitlab.com/ce/api/projects.html#hooks
 schema: 2.0.0
 ---
@@ -14,7 +15,7 @@ Add a New webhook for a Project
 ```
 New-GitLabProjectWebhook [-Id <String>] [-Namespace <String>] -URL <String> [-push_events] [-issues_events]
  [-merge_requests_events] [-tag_push_events] [-note_events] [-pipeline_events] [-wiki_events]
- [-enable_ssl_verification] [-Token <String>]
+ [-enable_ssl_verification] [-Token <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -22,14 +23,14 @@ Add a new webhook for a project
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 New-GitLabProjectWebhook -Id 1 -URL 'https:\webhook'
 ```
 
 Setup a webhook on project id 1
 
-### -------------------------- EXAMPLE 2 --------------------------
+### EXAMPLE 2
 ```
 New-GitLabProjectWebhook -Namespace Value -URL 'https:\webhook'
 ```
@@ -44,7 +45,7 @@ Project Id.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -59,7 +60,7 @@ Project Namespace.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -74,7 +75,7 @@ Webhook URL.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -89,7 +90,7 @@ Send on push_events.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -104,7 +105,7 @@ Send on issues_events.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -119,7 +120,7 @@ Send on merge_requests_events.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -134,7 +135,7 @@ Send on tag_push_events.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -149,7 +150,7 @@ Send on note_events.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -164,7 +165,7 @@ Send on pipeline_events.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -179,7 +180,7 @@ Send on wiki_events.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -194,7 +195,7 @@ enable_ssl_verification.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -209,7 +210,7 @@ Security Token fro webhook
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -217,6 +218,9 @@ Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
+
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 

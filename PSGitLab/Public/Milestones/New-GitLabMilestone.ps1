@@ -10,7 +10,7 @@ Function New-GitLabMilestone {
         [string]$Title,
 
         [string]$Description,
-        
+
         [datetime]$DueDate
     )
 

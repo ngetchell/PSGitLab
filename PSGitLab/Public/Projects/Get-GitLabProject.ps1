@@ -6,6 +6,9 @@ Function Get-GitLabProject {
         [Parameter(ParameterSetName='Single',
                    Mandatory=$true)]
         [int]$Id,
+        [Parameter(ParameterSetName='PerGroup',
+                   Mandatory=$true)]
+        [int]$GroupId,
 
         [Parameter(Mandatory=$false,
                    ParameterSetName='Projects',
@@ -18,6 +21,9 @@ Function Get-GitLabProject {
                    HelpMessage='Return only archived projects')]
         [Parameter(Mandatory=$false,
                    ParameterSetName='Starred',
+                   HelpMessage='Return only archived projects')]
+        [Parameter(Mandatory=$false,
+                   ParameterSetName='PerGroup',
                    HelpMessage='Return only archived projects')]
         [switch]$Archived = $false,
 
@@ -33,6 +39,9 @@ Function Get-GitLabProject {
         [Parameter(Mandatory=$false,
                    HelpMessage='Limit by visibility',
                    ParameterSetName='Starred')]
+        [Parameter(Mandatory=$false,
+                   HelpMessage='Limit by visibility',
+                   ParameterSetName='PerGroup')]
         [ValidateSet("public", "internal", "private","none")]
         $Visibility = 'none',
 
@@ -48,9 +57,12 @@ Function Get-GitLabProject {
         [Parameter(Mandatory=$false,
                    HelpMessage='Choose the order in which projects are returned.',
                    ParameterSetName='Starred')]
+        [Parameter(Mandatory=$false,
+                   HelpMessage='Choose the order in which projects are returned.',
+                   ParameterSetName='PerGroup')]
         [ValidateSet('id','name','path','created_at','updated_at','last_activity_at')]
         $Order_by = 'created_at',
-        
+
 
         [Parameter(Mandatory=$false,
                    HelpMessage='Ascending or Descending',
@@ -64,6 +76,9 @@ Function Get-GitLabProject {
         [Parameter(Mandatory=$false,
                    HelpMessage='Ascending or Descending',
                    ParameterSetName='Starred')]
+        [Parameter(Mandatory=$false,
+                   HelpMessage='Ascending or Descending',
+                   ParameterSetName='PerGroup')]
         [ValidateSet('asc','desc')]
         $Sort = 'desc',
 
@@ -79,6 +94,9 @@ Function Get-GitLabProject {
         [Parameter(Mandatory=$false,
                    HelpMessage='Search for a project.',
                    ParameterSetName='Starred')]
+        [Parameter(Mandatory=$false,
+                   HelpMessage='Search for a project.',
+                   ParameterSetName='PerGroup')]
         $Search,
 
         [Parameter(ParameterSetName='Owned',
@@ -101,7 +119,10 @@ Function Get-GitLabProject {
         if ($archived) {
             $GetUrlParameters += @{archived='true'}
         }
-
+        else {
+            $GetUrlParameters += @{archived='false'}
+        }
+        
         if ($search -ne $null) {
             $GetUrlParameters += @{search=$search}
         }
@@ -122,14 +143,15 @@ Function Get-GitLabProject {
 
     switch ($PSCmdlet.ParameterSetName) {
         Projects { $Request.URI = "/projects$URLParameters"; break; }
+        PerGroup { $Request.URI = "/groups/$GroupId/projects$URLParameters"; break; }
         Owned { $Request.URI = "/projects/owned$URLParameters"; break; }
-        All { $Request.URI="/projects/all$URLParameters"; break; }
+        All { $Request.URI="/projects$URLParameters"; break; }
         Starred { $Request.URI="/projects/starred$URLParameters"; break; }
         Single { $Request.URI="/projects/$Id"; break; }
         default { Write-Error "Incorrect parameter set."; break; }
 
     }
-    
+
     QueryGitLabAPI -Request $Request -ObjectType 'GitLab.Project'
 
 }

@@ -10,7 +10,7 @@ Function Remove-GitLabUserKey {
         [string]$Username,
 
         [switch]$Passthru
-        
+
     )
 
     $Request = @{
@@ -19,18 +19,18 @@ Function Remove-GitLabUserKey {
     }
 
     switch ( $PSCmdlet.ParameterSetName ) {
-        'User' { 
+        'User' {
             $UserId = (Get-GitLabUser -Username $Username).Id
-            $Request.URI = "/users/$UserId/keys/$Id" 
+            $Request.URI = "/users/$UserId/keys/$Id"
         }
-        'Id' {  
-            $Request.URI = "/user/keys/$Id"  
+        'Id' {
+            $Request.URI = "/user/keys/$Id"
         }
     }
 
 
-    if ( $PSCmdlet.ShouldProcess("Delete SSH Key $Id") ) {   
-        $Results = QueryGitLabAPI -Request $Request -ObjectType 'GitLab.User.Key'      
+    if ( $PSCmdlet.ShouldProcess("Delete SSH Key $Id") ) {
+        $Results = QueryGitLabAPI -Request $Request -ObjectType 'GitLab.User.Key'
         if ( $Passthru ) {
             $Results
         }

@@ -1,6 +1,7 @@
 ---
 external help file: PSGitLab-help.xml
-online version: 
+Module Name: PSGitLab
+online version:
 schema: 2.0.0
 ---
 
@@ -14,7 +15,7 @@ Modify your GitLab merge requests.
 ```
 Set-GitLabMergeRequest [-ProjectId] <String> [-ID] <String[]> [[-TargetBranch] <String>]
  [[-AssigneeId] <String>] [[-Title] <String>] [[-Description] <String>] [[-StateEvent] <String>]
- [[-Labels] <String>] [[-MilestoneId] <String>] [-Passthru]
+ [[-Labels] <String>] [[-MilestoneId] <String>] [-Passthru] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,12 +24,12 @@ Useful for changing the names or other parameter of your merge request.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 Set-GitLabMergeRequest -ProjectId 8 -Id 32 -Name "NewName"
 ```
 
-### -------------------------- EXAMPLE 2 --------------------------
+### EXAMPLE 2
 ```
 Get-GitLabMergeReqeust -ProjectId 8 | Set-GitLabMergeReqeust -Description 'Fake Description'
 ```
@@ -56,7 +57,7 @@ The ID of the merge request your modifying.
 ```yaml
 Type: String[]
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: 2
@@ -71,7 +72,7 @@ The target branch.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: 3
@@ -86,7 +87,7 @@ The ID of the user assigned to the merge request.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: 4
@@ -101,7 +102,7 @@ The title of the merge request.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: 5
@@ -116,7 +117,7 @@ The description of the merge request.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: 6
@@ -131,7 +132,7 @@ New state.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: 7
@@ -146,7 +147,7 @@ Labels for MR as a comma-separated list.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: 8
@@ -161,7 +162,7 @@ Milestone ID.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: 9
@@ -176,7 +177,7 @@ Whether to return the merge request to the pipeline.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -185,6 +186,9 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
 ## INPUTS
 
 ## OUTPUTS
@@ -192,4 +196,3 @@ Accept wildcard characters: False
 ## NOTES
 
 ## RELATED LINKS
-

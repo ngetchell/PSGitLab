@@ -1,6 +1,7 @@
 ---
 external help file: PSGitLab-help.xml
-online version: 
+Module Name: PSGitLab
+online version:
 schema: 2.0.0
 ---
 
@@ -13,27 +14,27 @@ Get users from the GitLab instance.
 
 ### All (Default)
 ```
-Get-GitLabUser [-All]
+Get-GitLabUser [-All] [<CommonParameters>]
 ```
 
 ### ID
 ```
-Get-GitLabUser [-ID <String>]
+Get-GitLabUser [-ID <String>] [<CommonParameters>]
 ```
 
 ### Username
 ```
-Get-GitLabUser [-Username <String>]
+Get-GitLabUser [-Username <String>] [<CommonParameters>]
 ```
 
 ### Email
 ```
-Get-GitLabUser [-Email <String>]
+Get-GitLabUser [-Email <String>] [<CommonParameters>]
 ```
 
 ### CurrentUser
 ```
-Get-GitLabUser [-CurrentUser]
+Get-GitLabUser [-CurrentUser] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -41,22 +42,22 @@ Get users from the GitLab instance.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 Get-GitLabUser -ID 4
 ```
 
-### -------------------------- EXAMPLE 2 --------------------------
+### EXAMPLE 2
 ```
 Get-GitLabUser -All
 ```
 
-### -------------------------- EXAMPLE 3 --------------------------
+### EXAMPLE 3
 ```
 Get-GitLabUser -Username 'fakeuser'
 ```
 
-### -------------------------- EXAMPLE 4 --------------------------
+### EXAMPLE 4
 ```
 Get-GitLabUser -Email 'fake@domain.com'
 ```
@@ -69,7 +70,7 @@ The user ID.
 ```yaml
 Type: String
 Parameter Sets: ID
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -84,7 +85,7 @@ Return back all users.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: All
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -99,7 +100,7 @@ Return user by username.
 ```yaml
 Type: String
 Parameter Sets: Username
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -114,7 +115,7 @@ Return user by email.
 ```yaml
 Type: String
 Parameter Sets: Email
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -129,7 +130,7 @@ Return back the current user.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: CurrentUser
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -137,6 +138,9 @@ Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
+
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -147,4 +151,3 @@ Accept wildcard characters: False
 ## NOTES
 
 ## RELATED LINKS
-

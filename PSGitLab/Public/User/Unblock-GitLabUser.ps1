@@ -2,7 +2,7 @@ Function Unblock-GitLabUser {
     [cmdletbinding(DefaultParameterSetName='ID')]
     param(
         [Parameter(Mandatory=$True,
-                   ParameterSetName='ID',                   
+                   ParameterSetName='ID',
                    ValueFromPipelineByPropertyName=$true)]
         [string]$ID,
 
@@ -30,13 +30,13 @@ Function Unblock-GitLabUser {
 
         $request = @{
             URI = "/users/$($User.ID)/unblock"
-            Method = 'PUT'
+            Method = 'POST'
         }
 
-        $null = QueryGitLabAPI -Request $Request -ObjectType 'GitLab.User' 
+        $null = QueryGitLabAPI -Request $Request -ObjectType 'GitLab.User'
         if ($Passthru.IsPresent) {
             Get-GitLabuser -id $User.ID
-        }    
+        }
 
     }
 

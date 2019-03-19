@@ -1,6 +1,7 @@
 ---
 external help file: PSGitLab-help.xml
-online version: 
+Module Name: PSGitLab
+online version:
 schema: 2.0.0
 ---
 
@@ -14,12 +15,12 @@ Retrieves all of the different merge requests for a project in a GitLab instance
 ### MergeRequests (Default)
 ```
 Get-GitLabMergeRequest -ProjectId <String> [-Iid <String>] [-State <String>] [-OrderBy <String>]
- [-Sort <String>]
+ [-Sort <String>] [<CommonParameters>]
 ```
 
 ### Single
 ```
-Get-GitLabMergeRequest -ProjectId <String> -Id <String>
+Get-GitLabMergeRequest -ProjectId <String> -Id <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -28,12 +29,12 @@ Queries over HTTP and returns GitLab.MergeRequest type.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 Get-GitLabMergeRequest -ProjectId 1
 ```
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 Get-GitLabMergeRequest -ProjectId 1 -Id 20
 ```
@@ -46,7 +47,7 @@ The ID of a project
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -61,7 +62,7 @@ The ID of the merge request your retrieving.
 ```yaml
 Type: String
 Parameter Sets: Single
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -76,7 +77,7 @@ Return the request having the given iid.
 ```yaml
 Type: String
 Parameter Sets: MergeRequests
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -91,7 +92,7 @@ Return all requests or just those that are merged, opened or closed.
 ```yaml
 Type: String
 Parameter Sets: MergeRequests
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -107,7 +108,7 @@ Default is created_at.
 ```yaml
 Type: String
 Parameter Sets: MergeRequests
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -123,7 +124,7 @@ Default is desc.
 ```yaml
 Type: String
 Parameter Sets: MergeRequests
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -131,6 +132,9 @@ Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
+
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -141,4 +145,3 @@ Accept wildcard characters: False
 ## NOTES
 
 ## RELATED LINKS
-

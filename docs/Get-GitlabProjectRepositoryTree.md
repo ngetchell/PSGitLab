@@ -1,6 +1,7 @@
 ---
 external help file: PSGitLab-help.xml
-online version: 
+Module Name: PSGitLab
+online version:
 schema: 2.0.0
 ---
 
@@ -12,7 +13,7 @@ Get the tree for a project
 ## SYNTAX
 
 ```
-Get-GitlabProjectRepositoryTree [-ProjectID] <Int32> [[-CommitID] <AllowNullAttribute>]
+Get-GitlabProjectRepositoryTree [-ProjectID] <Int32> [[-CommitID] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -20,7 +21,7 @@ Reads the Repository tree from a Project
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 Get-GitlabProjectRepositoryTree -ProjectID 1
 ```
@@ -35,7 +36,7 @@ ProjectID.
 ```yaml
 Type: Int32
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: 1
@@ -48,9 +49,9 @@ Accept wildcard characters: False
 CommitID.
 
 ```yaml
-Type: AllowNullAttribute
+Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: 2
@@ -59,6 +60,9 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
 ## INPUTS
 
 ## OUTPUTS
@@ -66,4 +70,3 @@ Accept wildcard characters: False
 ## NOTES
 
 ## RELATED LINKS
-

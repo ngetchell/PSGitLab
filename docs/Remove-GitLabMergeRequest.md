@@ -1,6 +1,7 @@
 ---
 external help file: PSGitLab-help.xml
-online version: 
+Module Name: PSGitLab
+online version:
 schema: 2.0.0
 ---
 
@@ -12,7 +13,7 @@ Deletes a GitLab merge request from project.
 ## SYNTAX
 
 ```
-Remove-GitLabMergeRequest [-ProjectId] <String> [-Id] <String> [-WhatIf] [-Confirm]
+Remove-GitLabMergeRequest [-ProjectId] <String> [-Id] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -22,7 +23,7 @@ Supports should process.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 Remove-GitLabMergeRequest -ProjectId 8 -Id 99
 ```
@@ -50,7 +51,7 @@ The id of the merge request.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: 2
@@ -89,6 +90,9 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
 ## INPUTS
 
 ## OUTPUTS
@@ -96,4 +100,3 @@ Accept wildcard characters: False
 ## NOTES
 
 ## RELATED LINKS
-

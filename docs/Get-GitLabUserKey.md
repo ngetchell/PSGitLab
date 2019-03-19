@@ -1,6 +1,7 @@
 ---
 external help file: PSGitLab-help.xml
-online version: 
+Module Name: PSGitLab
+online version:
 schema: 2.0.0
 ---
 
@@ -13,22 +14,22 @@ Retrieves SSH keys from the current user. It can also get the keys of other user
 
 ### All (Default)
 ```
-Get-GitLabUserKey [-All]
+Get-GitLabUserKey [-All] [<CommonParameters>]
 ```
 
 ### Key
 ```
-Get-GitLabUserKey [-Key <Int32>]
+Get-GitLabUserKey [-Key <Int32>] [<CommonParameters>]
 ```
 
 ### Username
 ```
-Get-GitLabUserKey [-Username <String>]
+Get-GitLabUserKey [-Username <String>] [<CommonParameters>]
 ```
 
 ### UserID
 ```
-Get-GitLabUserKey [-UserId <Int32>]
+Get-GitLabUserKey [-UserId <Int32>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -65,7 +66,7 @@ Get a list of currently authenticated user's SSH keys.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: All
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -80,7 +81,7 @@ Get the one key you're looking for.
 ```yaml
 Type: Int32
 Parameter Sets: Key
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -95,7 +96,7 @@ Get a list of a specified user's SSH keys. Available only for admin.
 ```yaml
 Type: Int32
 Parameter Sets: UserID
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -110,7 +111,7 @@ Get a list of a specified user's SSH keys. Available only for admin.
 ```yaml
 Type: String
 Parameter Sets: Username
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -119,17 +120,17 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
 ## INPUTS
 
 ### None
-
 
 ## OUTPUTS
 
 ### GitLab.User.Key
 
-
 ## NOTES
 
 ## RELATED LINKS
-

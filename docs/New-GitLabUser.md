@@ -1,6 +1,7 @@
 ---
 external help file: PSGitLab-help.xml
-online version: 
+Module Name: PSGitLab
+online version:
 schema: 2.0.0
 ---
 
@@ -14,7 +15,7 @@ Make a new users for your GitLab instance.
 ```
 New-GitLabUser [-Email] <String> [-Password] <String> [-Username] <String> [-Name] <String>
  [[-SkypeID] <String>] [[-LinkedIn] <String>] [[-Twitter] <String>] [[-WebsiteURL] <String>]
- [[-ProjectsLimit] <Int32>] [-Admin] [-CanCreateGroup] [-External] [-Passthru]
+ [[-ProjectsLimit] <Int32>] [-Admin] [-CanCreateGroup] [-External] [-Passthru] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -22,7 +23,7 @@ Make a new users for your GitLab instance.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 New-GitLabUser -Email 'fake@domain.com' -username 'fake' -name 'Fake User' -Password 'GitLabPassword'
 ```
@@ -35,7 +36,7 @@ The email of the user.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: 1
@@ -50,7 +51,7 @@ The password for the user.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: 2
@@ -65,7 +66,7 @@ The username for the user.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: 3
@@ -80,7 +81,7 @@ The full name of the user.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: 4
@@ -95,7 +96,7 @@ The SkypeID of the user.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: 5
@@ -110,7 +111,7 @@ The URL for the LinkedIn user profile.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: 6
@@ -125,7 +126,7 @@ The twitter handle of the user.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: 7
@@ -140,7 +141,7 @@ The URL for the user's website.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: 8
@@ -155,7 +156,7 @@ To limit how many projects a user can have open.
 ```yaml
 Type: Int32
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: 9
@@ -170,7 +171,7 @@ Make a user an admin.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -185,7 +186,7 @@ Whether a user can create a group.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -200,7 +201,7 @@ External UID.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -215,7 +216,7 @@ To return the user to the pipeline.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -224,6 +225,9 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
 ## INPUTS
 
 ## OUTPUTS
@@ -231,4 +235,3 @@ Accept wildcard characters: False
 ## NOTES
 
 ## RELATED LINKS
-

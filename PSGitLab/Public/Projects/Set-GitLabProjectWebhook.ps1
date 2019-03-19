@@ -24,17 +24,17 @@ Function Set-GitLabProjectWebhook
     [switch]$wiki_events,
     [switch]$enable_ssl_verification,
     [string]$Token
-        
+
   )
-  
+
   $Project = $null
   switch ($PSCmdlet.ParameterSetName) {
-    'Id' 
+    'Id'
     {
       $Project = Get-GitLabProject -Id $Id
       $null = $PSBoundParameters.Remove('Id')
     }
-    'Namespace' 
+    'Namespace'
     {
       $Project = Get-GitLabProject -Namespace $Namespace
       $null = $PSBoundParameters.Remove('Namespace')
@@ -49,9 +49,9 @@ Function Set-GitLabProjectWebhook
     url = $URL
   }
   $null = $PSBoundParameters.Remove('URL')
-  try 
+  try
   {
-    foreach($p in $PSBoundParameters.GetEnumerator()) 
+    foreach($p in $PSBoundParameters.GetEnumerator())
     {
       $Body.Add($p.Key, $($p.Value))
     }
@@ -65,7 +65,7 @@ Function Set-GitLabProjectWebhook
     $Body
     QueryGitLabAPI -Request $Request -ObjectType 'GitLab.Project.Webhook'
   }
-  catch 
+  catch
   {
     Write-Error -Message $_
   }

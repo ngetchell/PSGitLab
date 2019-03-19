@@ -29,7 +29,7 @@ Function Set-GitLabMergeRequest {
 
     )
 
-BEGIN {} 
+BEGIN {}
 
 PROCESS {
 

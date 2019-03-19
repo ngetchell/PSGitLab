@@ -12,17 +12,17 @@ Function Set-GitLabProjectServiceSlack
     [ValidateNotNullOrEmpty()]
     #[Parameter(ParameterSetName='Namespace')]
     [string]$Namespace,
-    [parameter(mandatory,HelpMessage='Slack Webhook')][string]$webhook 
+    [parameter(mandatory,HelpMessage='Slack Webhook')][string]$webhook
   )
-  
+
   $Project = $null
   switch ($PSCmdlet.ParameterSetName) {
-    'Id' 
+    'Id'
     {
       $Project = Get-GitLabProject -Id $Id
       $null = $PSBoundParameters.Remove('Id')
     }
-    'Namespace' 
+    'Namespace'
     {
       $Project = Get-GitLabProject -Namespace $Namespace
       $null = $PSBoundParameters.Remove('Namespace')
@@ -36,7 +36,7 @@ Function Set-GitLabProjectServiceSlack
     webhook = $webhook
   }
   $null = $PSBoundParameters.Remove('webhook')
-  try 
+  try
   {
     $Request = @{
       URI         = "/projects/$($Project.id)/services/slack"
@@ -47,7 +47,7 @@ Function Set-GitLabProjectServiceSlack
     $Body
     QueryGitLabAPI -Request $Request -ObjectType 'GitLab.Project.Service.Slack'
   }
-  catch 
+  catch
   {
     Write-Error -Message $_
   }

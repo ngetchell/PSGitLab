@@ -1,4 +1,4 @@
-Function FormatCommits { 
+Function FormatCommits {
     param(
         [Parameter(Mandatory=$true)]
         [psobject]$dtCommits,

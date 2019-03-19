@@ -3,7 +3,7 @@ Set-BuildEnvironment -VariableNamePrefix 'Build' -Force
 $ModuleName = $env:BuildProjectName
 $projectRoot = $ENV:BuildProjectPath
 if(-not $projectRoot) {
-	$projectRoot = $PSScriptRoot
+    $projectRoot = $PSScriptRoot
 }
 
 #$sut = "$projectRoot\$ModuleName"
@@ -23,13 +23,13 @@ task Init {
     Get-Item ENV:Build* | Format-Table Name,Value -AutoSize
 
     $modules = 'Pester', 'PSDeploy', 'PSScriptAnalyzer', 'PlatyPS'
-    Import-Module $modules -Verbose:$false -Force	
+    Import-Module $modules -Verbose:$false -Force
 
     if ( -not ( test-path -Path $ReleaseDirectory ) ) { New-Item -ItemType Directory -Path $projectRoot -Name Release | Out-Null }
     if ( -not ( test-path -Path $ResultsDirectory ) ) { New-Item -ItemType Directory -Path $projectRoot -Name Results | Out-Null}
 }
 
-# Synopsis: PSScriptAnalyzer 
+# Synopsis: PSScriptAnalyzer
 task Analyze -inputs { Get-ChildItem -Path "$projectRoot\$ModuleName\" -Recurse | Where-Object { -not $_.PSIsContainer } } -outputs $PSScriptResultsFile   Build,{
     # Modify PSModulePath of the current PowerShell session.
     # We want to make sure we always test the development version of the resource
@@ -57,7 +57,7 @@ task Analyze -inputs { Get-ChildItem -Path "$projectRoot\$ModuleName\" -Recurse 
     if ($saResults) {
         $saResults | Format-Table
         throw 'One or more Script Analyzer errors/warnings where found. Build cannot continue!'
-    }    
+    }
 }
 
 # Synopsis: Pester Tests
@@ -73,7 +73,7 @@ Task Pester -inputs { Get-ChildItem -Path "$projectRoot\$ModuleName\","$projectR
 
     $testResults = Invoke-Pester -Path $tests -PassThru -OutputFile $PesterResultsFile
 
-    # Upload to AppVeyor 
+    # Upload to AppVeyor
     if ( $env:BuildBuildSystem -eq 'AppVeyor' ) {
         (New-Object 'System.Net.WebClient').UploadFile("https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path $PesterResultsFile))
     }
@@ -81,7 +81,7 @@ Task Pester -inputs { Get-ChildItem -Path "$projectRoot\$ModuleName\","$projectR
     if ($testResults.FailedCount -gt 0) {
         $testResults | Format-List
         throw 'One or more Pester tests failed. Build cannot continue!'
-    }    
+    }
 }
 
 $mergePSM1Parameters = @{
@@ -91,7 +91,7 @@ $mergePSM1Parameters = @{
 
 # Synopsis: Merge private and public functions into one .psm1 file
 task mergePSM1 @mergePSM1Parameters {
-    
+
     $ReleaseDirectory = join-path $projectRoot 'Release'
     if (Test-Path $ReleaseDirectory) {
         remove-item -Recurse -Force -Path $ReleaseDirectory
@@ -99,7 +99,7 @@ task mergePSM1 @mergePSM1Parameters {
 
     #Create Release Folder
     New-Item -Path $ReleaseDirectory -ItemType Directory -Force | Out-Null
-    
+
     #Copy Module Manifest
     Copy-Item "$projectRoot\$ModuleName\$ModuleName.psd1" -Destination $ReleaseDirectory -Force
 
@@ -123,7 +123,7 @@ task mergePSM1 @mergePSM1Parameters {
         }
 
     }
-    
+
 }
 
 $buildMamlParams = @{
@@ -154,7 +154,7 @@ task . Pre-Commit
 
 task psdeploy {
     Import-Module "$ReleaseDirectory\$ModuleName.psd1"
-    
+
     # Gate deployment
     if( $ENV:BuildBuildSystem -ne 'Unknown' -and
         $ENV:BuildBranchName -eq "master" -and
@@ -165,18 +165,18 @@ task psdeploy {
             Force = $true
             Recurse = $false
         }
-        
+
         Invoke-PSDeploy @Params
     } else {
         "Skipping deployment: To deploy, ensure that...`n" +
         "`t* You are in a known build system (Current: $ENV:BuildBuildSystem)`n" +
         "`t* You are committing to the master branch (Current: $ENV:BuildBranchName) `n" +
         "`t* Your commit message includes !deploy (Current: $ENV:BuildCommitMessage)"
-    }    
+    }
 }
 
 # Synopsis: Deploy to Powershell Gallery
-task Deploy build,pester,analyze,psdeploy 
+task Deploy build,pester,analyze,psdeploy
 
 # Synopsis: Clean all of the artifacts from the build process
 task Clean {

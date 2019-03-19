@@ -1,4 +1,4 @@
-﻿Function Get-GitLabProjectArchive 
+﻿Function Get-GitLabProjectArchive
 {
 [OutputType('String')]
   param(
@@ -18,7 +18,7 @@
   {
     Write-Verbose -Message ('Commit id OK')
   }
-  Else 
+  Else
   {
     Throw 'Commit ID bad'
   }

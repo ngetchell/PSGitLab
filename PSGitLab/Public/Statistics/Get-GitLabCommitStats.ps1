@@ -15,8 +15,8 @@ param(
     [Parameter(ParameterSetName="AllLastYear",Mandatory=$true)]
     [Parameter(ParameterSetName="AllByAuthor",Mandatory=$false)]
     [Parameter(ParameterSetName="AllBDate",Mandatory=$true)]
-    [Parameter(ParameterSetName="AllADate",Mandatory=$true)] 
-    [Parameter(ParameterSetName="AllBothDate",Mandatory=$true)] 
+    [Parameter(ParameterSetName="AllADate",Mandatory=$true)]
+    [Parameter(ParameterSetName="AllBothDate",Mandatory=$true)]
     [switch]$All,
     [Parameter(ParameterSetName="IdAuth",Mandatory=$true)]
     [Parameter(ParameterSetName="IdLastYear",Mandatory=$false)]
@@ -31,15 +31,15 @@ param(
     [Parameter(ParameterSetName="IdBothDate",Mandatory=$false)]
     [Parameter(ParameterSetName="AllBothDate",Mandatory=$false)]
     [string[]]$author = "*",
-    [Parameter(ParameterSetName="IdBDate",Mandatory=$true)]  
+    [Parameter(ParameterSetName="IdBDate",Mandatory=$true)]
     [Parameter(ParameterSetName="AllBDate",Mandatory=$true)]
     [Parameter(ParameterSetName="IdBothDate",Mandatory=$true)]
     [Parameter(ParameterSetName="AllBothDate",Mandatory=$true)]
     [datetime]$beforeDate,
-    [Parameter(ParameterSetName="IdADate",Mandatory=$true)]   
+    [Parameter(ParameterSetName="IdADate",Mandatory=$true)]
     [Parameter(ParameterSetName="AllADate",Mandatory=$true)]
-    [Parameter(ParameterSetName="IdBothDate",Mandatory=$true)]    
-    [Parameter(ParameterSetName="AllBothDate",Mandatory=$true)] 
+    [Parameter(ParameterSetName="IdBothDate",Mandatory=$true)]
+    [Parameter(ParameterSetName="AllBothDate",Mandatory=$true)]
     [datetime]$afterDate,
     [Parameter(ParameterSetName="IdLastYear",Mandatory=$true)]
     [Parameter(ParameterSetName="AllLastYear",Mandatory=$true)]

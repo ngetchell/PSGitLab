@@ -2,18 +2,18 @@
     param(
         [Parameter(Mandatory=$true)]
         [int]$Id,
-        
+
         [string]$Description,
-        
+
         # See http://itproctology.blogspot.be/2014/03/powershell-passing-empty-parameters-and.html
         # for the rationale for this
         [ValidateSet("True","False","", 0, 1)]
         [string]$Active,
         [string]$Tags,
-        
+
         [ValidateSet("True","False","", 0, 1)]
         [string]$RunUntagged,
-        
+
         [ValidateSet("True","False","", 0, 1)]
         [string]$Locked,
 
@@ -22,7 +22,7 @@
 
     $Body = @{}
 
-    
+
     if ($Description) { $Body.Add('description',$Description) }
     if ($Active) { $Body.Add('active',$active) }
     if ($Tags) { $Body.Add('tag_list', $Tags) }

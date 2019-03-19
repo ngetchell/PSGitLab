@@ -16,13 +16,13 @@ Function Get-GitLabProjectServiceMSTeams
 
   $Project = $null
   switch ($PSCmdlet.ParameterSetName) {
-    'Id' 
+    'Id'
     {
-      $Project = Get-GitLabProject -Id $Id 
+      $Project = Get-GitLabProject -Id $Id
     }
-    'Namespace' 
+    'Namespace'
     {
-      $Project = Get-GitLabProject -Namespace $Namespace 
+      $Project = Get-GitLabProject -Namespace $Namespace
     }
   }
 

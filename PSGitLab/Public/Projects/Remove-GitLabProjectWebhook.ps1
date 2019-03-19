@@ -13,17 +13,17 @@ Function Remove-GitLabProjectWebhook
     #[Parameter(ParameterSetName='Namespace')]
     [string]$Namespace,
     [parameter(mandatory,HelpMessage = 'Webhook id')][string]$hook_id
-        
+
   )
-  
+
   $Project = $null
   switch ($PSCmdlet.ParameterSetName) {
-    'Id' 
+    'Id'
     {
       $Project = Get-GitLabProject -Id $Id
       $null = $PSBoundParameters.Remove('Id')
     }
-    'Namespace' 
+    'Namespace'
     {
       $Project = Get-GitLabProject -Namespace $Namespace
       $null = $PSBoundParameters.Remove('Namespace')
@@ -38,7 +38,7 @@ Function Remove-GitLabProjectWebhook
     url     = $URL
     hook_id = $hook_id
   }
-  try 
+  try
   {
     $Request = @{
       URI    = "/projects/$($Project.id)/hooks/$hook_id"
@@ -48,7 +48,7 @@ Function Remove-GitLabProjectWebhook
     $Body
     QueryGitLabAPI -Request $Request -ObjectType 'GitLab.Project.Webhook'
   }
-  catch 
+  catch
   {
     Write-Error -Message $_
   }

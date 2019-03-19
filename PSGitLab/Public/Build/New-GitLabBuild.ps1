@@ -41,7 +41,7 @@ param(
             "$Value$LF")
     }
     $bodyLines += "--$boundary--$LF"
-    
+
     try {
         $result = Invoke-RestMethod -Uri $uri -Method Post -ContentType "multipart/form-data; boundary=`"$boundary`"" -Body $bodyLines
         Write-Debug $result
