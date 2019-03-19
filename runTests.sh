@@ -1,5 +1,5 @@
 #!/bin/bash
-# runTestsInDockerContainers.sh
+
 set -e
 
 echo "Building Docker containers..."
@@ -11,7 +11,7 @@ while [ ! -f ./docker/config/token ]; do
     sleep 10
     if [ $attempt -gt $MAX_TRIES ]; then
         echo "Error: Gitlab not responding, cancelling set up"
-        if [ $TRAVIS != "true" ];
+        if [ "$TRAVIS" != "true" ];
             then rm -f ./docker/config/token;
         fi
         exit 1
@@ -20,6 +20,6 @@ done
 docker-compose -f ./docker/docker-compose.yml run test
 echo "Tests complete, stop and remove Docker containers..."
 docker-compose -f ./docker/docker-compose.yml down
-if [ $TRAVIS != "true" ];
+if [ "$TRAVIS" != "true" ];
   then rm -f ./docker/config/token;
 fi
