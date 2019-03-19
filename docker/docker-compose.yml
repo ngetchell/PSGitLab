@@ -20,7 +20,7 @@ services:
       - TRAVIS=true
     command: >
       pwsh -c "Install-Module Pester,PSScriptAnalyzer,Psake -Scope CurrentUser -force";
-      pwsh -File ./PSGitlab/run-tests.ps1
+      pwsh -File /PSGitlab/run-tests.ps1
     container_name: gitlab-ps
     volumes:
       - ../../PSGitlab:/PSGitlab
