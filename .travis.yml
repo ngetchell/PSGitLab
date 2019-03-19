@@ -4,7 +4,7 @@ dist: trusty
 install:
 - bash <(wget -O - https://raw.githubusercontent.com/PowerShell/PowerShell/master/tools/install-powershell.sh)
 - pwsh --version
-- pwsh -c "Install-Module Pester,PSScriptAnalyzer,Psake -Scope CurrentUser"
+- pwsh -c "Install-Module Pester,PSScriptAnalyzer,Psake -Scope CurrentUser -force"
 - pwsh ./Tests/Integration/Install.ps1
 script:
 - pwsh -c "Get-Module -ListAvailable; Import-Module Pester; ./Tests/Integration/Get-GitlabUser.Tests.ps1"
