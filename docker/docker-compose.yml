@@ -23,7 +23,7 @@ services:
       pwsh -File /PSGitlab/run-tests.ps1
     container_name: gitlab-ps
     volumes:
-      - ../../PSGitlab:/PSGitlab
+      - ../.:/PSGitlab
       - ./config:/config
     links:
       - gitlab
