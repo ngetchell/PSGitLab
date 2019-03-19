@@ -18,4 +18,4 @@ done
 docker-compose -f ./docker/docker-compose.yml run test
 echo "Tests complete, stop and remove Docker containers..."
 docker-compose -f ./docker/docker-compose.yml down
-rm ./docker/config/token
+rm -f ./docker/config/token
