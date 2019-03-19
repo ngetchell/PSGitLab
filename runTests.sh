@@ -11,11 +11,15 @@ while [ ! -f ./docker/config/token ]; do
     sleep 10
     if [ $attempt -gt $MAX_TRIES ]; then
         echo "Error: Gitlab not responding, cancelling set up"
-        rm ./docker/config/token || true
+        if [ $TRAVIS != "true" ];
+            then rm -f ./docker/config/token;
+        fi
         exit 1
     fi
 done
 docker-compose -f ./docker/docker-compose.yml run test
 echo "Tests complete, stop and remove Docker containers..."
 docker-compose -f ./docker/docker-compose.yml down
-rm -f ./docker/config/token
+if [ $TRAVIS != "true" ];
+  then rm -f ./docker/config/token;
+fi
