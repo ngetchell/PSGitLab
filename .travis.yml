@@ -10,7 +10,7 @@ before_install:
  - sudo mv docker-compose /usr/local/bin
 
 script:
-  - docker-compose -f ./docker/docker-compose.yml run test
+  - ./runTests.sh
 # dist: trusty
 # install:
 # - bash <(wget -O - https://raw.githubusercontent.com/PowerShell/PowerShell/master/tools/install-powershell.sh)
