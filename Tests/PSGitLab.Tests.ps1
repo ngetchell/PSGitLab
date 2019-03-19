@@ -1,8 +1,13 @@
 $ModuleName = 'PSGitLab'
-
 Get-Module $ModuleName | Remove-Module
+if ($env:APPVEYOR -eq 'True') {
+    $ModulePath = "$PSScriptRoot\..\Release\$ModuleName.psd1"
+}
+else {
+    $ModulePath = "$PSScriptRoot\..\PSGitLab\"
+}
 
-Import-Module "$PSScriptRoot/../$ModuleName"
+Import-Module $ModulePath
 
 #region Save-GitLabAPIConfiguration
 
