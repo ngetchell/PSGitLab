@@ -4,7 +4,7 @@ dist: trusty
 install:
 - bash <(wget -O - https://raw.githubusercontent.com/PowerShell/PowerShell/master/tools/install-powershell.sh)
 - pwsh --version
-- pwsh -c "Install-Module Pester,PSScriptAnalyzer,Psake,InvokeBuild,BuildHelpers,PSDepend -Scope CurrentUser -force"
+- pwsh -c "Install-Module Pester,PSScriptAnalyzer,Psake,InvokeBuild,BuildHelpers,PSDeploy -Scope CurrentUser -force"
 script:
 - pwsh -c "Invoke-Build -File ./psgitlab.build.ps1 -Task Integration"
 notifications:
