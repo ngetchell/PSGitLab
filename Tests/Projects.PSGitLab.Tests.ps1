@@ -1,9 +1,13 @@
-﻿$ModuleName = Split-Path (Resolve-Path "$PSScriptRoot\..\" ) -Leaf
-$ModuleManifest = Resolve-Path "$PSScriptRoot\..\Release\$ModuleName.psd1"
-
+﻿$ModuleName = 'PSGitLab'
 Get-Module $ModuleName | Remove-Module
+if ($env:APPVEYOR -eq 'True') {
+    $ModulePath = "$PSScriptRoot\..\Release\$ModuleName.psd1"
+}
+else {
+    $ModulePath = "$PSScriptRoot\..\PSGitLab\"
+}
 
-Import-Module $ModuleManifest
+Import-Module $ModulePath
 
 ## Projects ##
 

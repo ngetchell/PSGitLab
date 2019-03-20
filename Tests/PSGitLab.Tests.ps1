@@ -1,9 +1,13 @@
-$ModuleName = Split-Path (Resolve-Path "$PSScriptRoot\..\" ) -Leaf
-$ModuleManifest = Resolve-Path "$PSScriptRoot\..\Release\$ModuleName.psd1"
-
+$ModuleName = 'PSGitLab'
 Get-Module $ModuleName | Remove-Module
+if ($env:APPVEYOR -eq 'True') {
+    $ModulePath = "$PSScriptRoot\..\Release\$ModuleName.psd1"
+}
+else {
+    $ModulePath = "$PSScriptRoot\..\PSGitLab\"
+}
 
-Import-Module $ModuleManifest
+Import-Module $ModulePath
 
 #region Save-GitLabAPIConfiguration
 
@@ -44,9 +48,9 @@ Import-Module $ModuleManifest
 #}
 
 Describe 'Module Information' {
-
-    #$ModuleManifest = "$PSScriptRoot\..\PSGitlab\PSGitlab.psd1"
-
+    
+    $ModuleManifest = Resolve-Path "$PSScriptRoot\..\Release\$ModuleName.psd1"
+    
     Context 'Module Manifest' {
         $Script:Manifest = $null
         It 'Valid Manifest File' {

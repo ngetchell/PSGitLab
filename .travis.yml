@@ -1,0 +1,25 @@
+sudo: required
+services:
+ - docker
+env:
+  COMPOSE_VERSION: 1.23.2
+
+before_install:
+ - curl -L https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+ - chmod +x docker-compose
+ - sudo mv docker-compose /usr/local/bin
+
+script:
+  - ./runTests.sh
+# dist: trusty
+# install:
+# - bash <(wget -O - https://raw.githubusercontent.com/PowerShell/PowerShell/master/tools/install-powershell.sh)
+# - pwsh --version
+# - pwsh -c "Install-Module Pester,PSScriptAnalyzer,Psake -Scope CurrentUser -force"
+# - pwsh ./Tests/Integration/Install.ps1
+# script:
+# - pwsh -c "Get-Module -ListAvailable; Import-Module Pester; Invoke-Pester -Tag 'Integration'"
+# notifications:
+#   slack:
+#     secure: u6tFFt48sbU3PtNh6DqQhoKYooyXljvDY5Q9vp5Udy4ezpAIGvA52VukMmdO4Gq9PlRTEDnkm1G9s/QrbLvcn7FCbZtCiEKK6NXvl15MlmRiLh2u3/A2dGtBYGb+7tt2YaCHcwhqfVW/aNK7PEMoJchWxvrpzXj5ORllU3XXmlAkK1/hWDhQT/VPrNlOB1XmRNYgoAfKinl2h8YQNsLLrtoHp3bKzN5/rvmnaNUUO1gVMZZxWhSGbJCtVTLHO9rWxrNqhpFH2BEihnTQJij89Zv4N7UsYJkCcVAGgtD256RJdvtJD59nYDb6ovRbjTqKYg/bxX9dipWXl3tJnAun2uM1zNMICwHsFr/aUxpjZZVe+WY7Se1V0+Eulyb5IwefWtbf2ljg5yZEgY3xltmcAX2k2AjYRADb1ThAPFdeYHTVcuHbpXQzjQs8w37prgjHh9BkEVBdg5UInbUHIv+ICq2m4Bd+Zf+kuwD7oijz011okAkGEQgqaXPv55N2KMOpZjh4bU4FpGeMlOGLYxHR1Aqr0KG62h6Xtjr4eloBPMSenSNAit1922EoZ0TmHUMyQiC0omqsYIqAT+G2FsRVGSzBLEh4EaRPVJ1cniISFG5Rz4sLj6UDF47VgnMDPbYKS3FXgrx1zYsqwHhwKwDNTGSbwoKIcnQUWq9dEHe1Sh4=
+#   email: false
