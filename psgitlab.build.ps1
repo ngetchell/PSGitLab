@@ -119,7 +119,7 @@ Task BeforeIntegration  Build, {
     
     Save-GitLabAPIConfiguration -Token $Token -Domain 'http://localhost'
     
-    Test-GitLabAPI  
+    Start-Sleep -Seconds 20 
 }
 
 # Synopsis: Integration Tests
