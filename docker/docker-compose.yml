@@ -15,7 +15,7 @@ services:
       - ./test.rb:/init/test.rb
       - ./config:/config
   test:
-    image: mcr.microsoft.com/powershell:6.1.3-ubuntu-18.04
+    image: mcr.microsoft.com/powershell:latest
     environment:
       - TRAVIS=true
     command: >
