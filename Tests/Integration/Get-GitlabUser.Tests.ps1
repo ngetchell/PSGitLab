@@ -16,8 +16,8 @@ Describe 'Initial Test' -Tag 'Integration' {
         $Result = Get-GitLabUser -Id 1 
         $Result.Name | Should -be Administrator -Because 'the default user has a name of administrator'
         $Result.username | Should -be root -Because 'the default user has a username of root'
-        $Result.id | Should -be 12
-        $Result.is_admin | Should -be $true
+        $Result.id | Should -be 1 -Because 'the root user is the first user'
+        $Result.is_admin | Should -be $true -Because 'the admin is an admin over the instance'
     }
 }
 
