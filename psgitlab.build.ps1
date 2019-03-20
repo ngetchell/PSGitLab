@@ -86,8 +86,7 @@ Task Pester -inputs { Get-ChildItem -Path "$projectRoot\$ModuleName\","$projectR
 
 # Synopsis: Prepair Integration Tests
 Task BeforeIntegration  Build, {
-    $ProgressPreference = 'Silent'
-    $WarningPreference = 'Silent'
+    $ProgressPreference = 'SilentlyContinue'
     
     
     $Token = Get-Random
