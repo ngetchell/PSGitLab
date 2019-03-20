@@ -85,7 +85,7 @@ Task Pester -inputs { Get-ChildItem -Path "$projectRoot\$ModuleName\","$projectR
 }
 
 # Synopsis: Prepair Integration Tests
-Task Pre-Integration  Build, {
+Task BeforeIntegration  Build, {
     $ProgressPreference = 'Silent'
     $WarningPreference = 'Silent'
     
@@ -123,7 +123,7 @@ Task Pre-Integration  Build, {
 }
 
 # Synopsis: Integration Tests
-Task Integration  Build,Pre-integration {
+Task Integration  BeforeIntegration, {
     if(-not $ENV:BuildProjectPath) {
         Set-BuildEnvironment -Path $PSScriptRoot\..
     }
