@@ -4,7 +4,7 @@ if ($env:APPVEYOR -eq 'True') {
     $ModulePath = "$PSScriptRoot\..\..\Release\$ModuleName.psd1"
 }
 else {
-    $ModulePath = "$PSScriptRoot\..\PSGitLab\"
+    $ModulePath = "$PSScriptRoot\..\..\PSGitLab\"
 }
 
 Import-Module $ModulePath
