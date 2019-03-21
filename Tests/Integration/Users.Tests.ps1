@@ -93,7 +93,7 @@ Describe 'Testing User Commands' -Tag 'Integration' {
         Remove-GitLabUser -Username $params.Username -Confirm:$false
     }
 
-    Context "New-GitLabUser with optional params" {
+    Context "New-GitLabUser with optional params (except external)" {
         $params = @{
             Email = 'test2@testing.com'
             Password = 'password'
@@ -106,7 +106,6 @@ Describe 'Testing User Commands' -Tag 'Integration' {
             ProjectsLimit = 1
             Admin = $true
             CanCreateGroup = $true
-            External = $true
         }
         New-GitLabUser @params
         $Result = Get-GitLabUser -Username $params.Username | Select *
@@ -153,10 +152,6 @@ Describe 'Testing User Commands' -Tag 'Integration' {
 
         It 'Should have group create permissions of' {
             $Result.can_create_group | Should -be $true
-        }
-
-        It 'Should be an external account' {
-            $Result.external | Should -be $true
         }
 
         Remove-GitLabUser -Username $params.Username -Confirm:$false
@@ -438,11 +433,9 @@ Describe 'Testing User Commands' -Tag 'Integration' {
             ProjectsLimit = 1
             Admin = $true
             CanCreateGroup = $true
-            External = $true
-            PassThru = $true
         }
-        $setResults = Set-GitLabUser @setParams | Select *
-
+        Set-GitLabUser @setParams
+        $setResults  = Get-GitLabUser -Username $setParams.NewUserName | Select *
         It "Should have username of" {
             $setResults.username | Should -Be $setParams.NewUserName
         }
@@ -477,10 +470,6 @@ Describe 'Testing User Commands' -Tag 'Integration' {
 
         It 'Should have group create permissions of' {
             $setResults.can_create_group | Should -be $true
-        }
-
-        It 'Should be an external account' {
-            $setResults.external | Should -be $true
         }
 
         Remove-GitLabUser -Username $setParams.NewUserName -Confirm:$false
@@ -508,10 +497,9 @@ Describe 'Testing User Commands' -Tag 'Integration' {
             ProjectsLimit = 1
             Admin = $true
             CanCreateGroup = $true
-            External = $true
-            PassThru = $true
         }
-        $setResults = Set-GitLabUser @setParams | Select *
+        Set-GitLabUser @setParams
+        $setResults = Get-GitLabUser -Username $setParams.NewUserName | Select *
 
         It "Should have username of" {
             $setResults.username | Should -Be $setParams.NewUserName
@@ -547,10 +535,6 @@ Describe 'Testing User Commands' -Tag 'Integration' {
 
         It 'Should have group create permissions of' {
             $setResults.can_create_group | Should -be $true
-        }
-
-        It 'Should be an external account' {
-            $setResults.external | Should -be $true
         }
 
         Remove-GitLabUser -Username $setParams.NewUserName -Confirm:$false
@@ -578,10 +562,9 @@ Describe 'Testing User Commands' -Tag 'Integration' {
             ProjectsLimit = 1
             Admin = $true
             CanCreateGroup = $true
-            External = $true
-            PassThru = $true
         }
-        $setResults = Set-GitLabUser @setParams | Select *
+        Set-GitLabUser @setParams
+        $setResults = Get-GitLabUser -Username $setParams.NewUserName | Select *
 
         It "Should have username of" {
             $setResults.username | Should -Be $setParams.NewUserName
@@ -617,10 +600,6 @@ Describe 'Testing User Commands' -Tag 'Integration' {
 
         It 'Should have group create permissions of' {
             $setResults.can_create_group | Should -be $true
-        }
-
-        It 'Should be an external account' {
-            $setResults.external | Should -be $true
         }
 
         Remove-GitLabUser -Username $setParams.NewUserName -Confirm:$false

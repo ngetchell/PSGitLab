@@ -44,6 +44,7 @@ Function New-GitLabUser {
     if ($ProjectsLimit -ne $null ) { $Body.Add('projects_limit',$ProjectsLimit) }
     if ($Admin.IsPresent ) { $Body.Add('admin','true') }
     if ($CanCreateGroup.IsPresent ) { $Body.Add('can_create_group','true') }
+    else { $Body.Add('can_create_group','false') }
     if ($External.IsPresent ) { $Body.Add('external','true') }
 
     $Request = @{
