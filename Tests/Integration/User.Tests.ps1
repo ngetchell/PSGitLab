@@ -1,15 +1,10 @@
 $ModuleName = 'PSGitLab'
 Get-Module $ModuleName | Remove-Module
-if ($env:APPVEYOR -eq 'True') {
-    $ModulePath = "$PSScriptRoot\..\..\Release\$ModuleName.psd1"
-}
-else {
-    $ModulePath = "$PSScriptRoot\..\..\PSGitLab\"
-}
+$ModulePath = "$PSScriptRoot\..\..\PSGitLab\"
 
 Import-Module $ModulePath
 
-if ($env:TRAVIS -eq 'true') {
+if ($env:GITHUB_ACTIONS -eq 'true') {
     $token = Get-Content /config/token | Select -Last 1
     $url = "http://gitlab"
     Save-GitLabAPIConfiguration -Token $token -Domain $url -APIVersion 4

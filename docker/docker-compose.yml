@@ -17,7 +17,7 @@ services:
   test:
     image: mcr.microsoft.com/powershell:latest
     environment:
-      - TRAVIS=true
+      - GITHUB_ACTIONS=true
     command: >
       pwsh -c "Install-Module Pester,PSScriptAnalyzer,Psake -Scope CurrentUser -force";
       pwsh -File /PSGitlab/run-tests.ps1
