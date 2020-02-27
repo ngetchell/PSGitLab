@@ -90,13 +90,15 @@ Describe 'User' -Tag 'Integration' {
 
     It 'Search for a User' {
         $body = @{
-            User = 'user'
+            User = 'User One'
         }
         $Result = Search-GitLabUser @body
 
-        $Result.count | Should -be 2
-        $Result[0].username | Should -BeIn @('user1','ghost')
-        $Result[1].username | Should -BeIn @('user1','ghost')
+        $Result.name | Should -be 'User One'
+        $Result.username | Should -be 'user1'
+        $Result.is_admin | Should -be 'True'
+        $Result.email | Should -be 'user1@test.com'
+        $Result.state | Should -be 'active'
     }
 
     It 'Deletes a User' {
