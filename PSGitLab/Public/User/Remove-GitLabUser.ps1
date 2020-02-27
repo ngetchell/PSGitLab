@@ -13,7 +13,11 @@ Function Remove-GitLabUser {
     PROCESS {
         foreach ( $user in $Username ) {
 
-            $UserInfo = (Get-GitLabUser -Username $User)[0]
+            $UserInfo = (Get-GitLabUser -Username $User)
+            if ( -not $UserInfo ) {
+                Write-Error "User does not exist"
+            }
+
             Write-Verbose "$($UserInfo.Username)"
             $Request = @{
                 URI="/users/$($UserInfo.ID)"

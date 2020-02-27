@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## Running the init logic for gitlab. See PR# for splitting this wrapper file into two pieces
+## Running the init logic for gitlab.
 /bin/bash init/init
 
 echo Sleep for 30 seconds to ensure all services are running

@@ -6,6 +6,7 @@ services:
     entrypoint: init/docker-entrypoint
     environment:
       - EXTERNAL_PORT=8080
+      - GITHUB_ACTIONS=${GITHUB_ACTIONS}
     ports: 
       - 8080:80
       - 8443:443
@@ -17,7 +18,7 @@ services:
   test:
     image: mcr.microsoft.com/powershell:latest
     environment:
-      - TRAVIS=true
+      - GITHUB_ACTIONS=${GITHUB_ACTIONS}
     command: >
       pwsh -c "Install-Module Pester,PSScriptAnalyzer,Psake -Scope CurrentUser -force";
       pwsh -File /PSGitlab/run-tests.ps1

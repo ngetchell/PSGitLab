@@ -1,0 +1,18 @@
+name: Docker Image CI
+
+on: [push]
+
+jobs:
+
+  build:
+    env:
+      GITHUB_ACTIONS: true
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set Permissions
+      run: chmod +x ./runTests.sh
+    - name: Build the docker-compose and running tests
+      run: ./runTests.sh

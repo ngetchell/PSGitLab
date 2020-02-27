@@ -1,11 +1,6 @@
 $ModuleName = 'PSGitLab'
 Get-Module $ModuleName | Remove-Module
-if ($env:APPVEYOR -eq 'True') {
-    $ModulePath = "$PSScriptRoot\..\Release\$ModuleName.psd1"
-}
-else {
-    $ModulePath = "$PSScriptRoot\..\PSGitLab\"
-}
+$ModulePath = "$PSScriptRoot\..\PSGitLab\"
 
 Import-Module $ModulePath
 
@@ -49,7 +44,7 @@ Import-Module $ModulePath
 
 Describe 'Module Information' {
     
-    $ModuleManifest = Resolve-Path "$PSScriptRoot\..\Release\$ModuleName.psd1"
+    $ModuleManifest = Resolve-Path "$ModulePath\$ModuleName.psd1"
     
     Context 'Module Manifest' {
         $Script:Manifest = $null
@@ -68,7 +63,7 @@ Describe 'Module Information' {
         }
 
         It 'Valid Manifest GUID' {
-            $Script:Manifest.Guid | SHould be 'f844db87-fda8-403b-a7da-bdc00a3f5a58'
+            $Script:Manifest.Guid | Should be 'f844db87-fda8-403b-a7da-bdc00a3f5a58'
         }
 
         It 'Valid Manifest Version' {

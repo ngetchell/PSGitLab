@@ -1,11 +1,6 @@
 ﻿$ModuleName = 'PSGitLab'
 Get-Module $ModuleName | Remove-Module
-if ($env:APPVEYOR -eq 'True') {
-    $ModulePath = "$PSScriptRoot\..\Release\$ModuleName.psd1"
-}
-else {
-    $ModulePath = "$PSScriptRoot\..\PSGitLab\"
-}
+$ModulePath = "$PSScriptRoot\..\PSGitLab\"
 
 Import-Module $ModulePath
 
@@ -15,14 +10,14 @@ Get-Command -Module $ModuleName | Where-Object { $_.CommandType -ne 'Alias' } | 
             It 'Synopsis not empty' {
                 Get-Help $_ | Select-Object -ExpandProperty synopsis | should not benullorempty
             }
-            It "Synopsis should not be auto-generated" -Skip:$( $isLinux ){
+            It "Synopsis should not be auto-generated" -Skip:$( $isLinux -or $isMacOs ){
                 Get-Help $_ | Select-Object -ExpandProperty synopsis | Should Not BeLike '*`[`<CommonParameters`>`]*'
             }
 
-            It 'Description not empty' -Skip:$( $isLinux ) {
+            It 'Description not empty' -Skip:$( $isLinux -or $isMacOs ) {
                 Get-Help $_ | Select-Object -ExpandProperty Description | should not benullorempty
             }
-            It 'Examples Count greater than 0' -Skip:$( $isLinux ) {
+            It 'Examples Count greater than 0' -Skip:$( $isLinux -or $isMacOs ) {
 
                 $Examples = Get-Help $_ | Select-Object -ExpandProperty Examples | Measure-Object
                 $Examples.Count -gt 0 | Should be $true
@@ -49,7 +44,7 @@ Get-Command -Module $ModuleName | Where-Object { $_.CommandType -ne 'Alias' } | 
                 foreach ($Parameter in $Parameters.Name) {
                     $ParameterHelp = $Parameters | Where-Object { $_.name -eq $Parameter }
 
-                    It "Parameter Help for $Parameter" -Skip:$( $isLinux ) {
+                    It "Parameter Help for $Parameter" -Skip:$( $isLinux -or $isMacOs ) {
                         $ParameterHelp.description.text | Should not benullorempty
                     }
                 }
@@ -70,7 +65,8 @@ Get-Command -Module $ModuleName | Where-Object { $_.CommandType -ne 'Alias' } | 
 }
 
 Describe 'Module Information' -Tags 'Command'{
-    $ModuleManifest = Resolve-Path "$PSScriptRoot\..\Release\$ModuleName.psd1"
+    "$PSScriptRoot\..\PSGitLab\"
+    $ModuleManifest = Resolve-Path "$PSScriptRoot\..\PSGitLab\$ModuleName.psd1"
     Context 'Manifest Testing' { 
         It 'Valid Module Manifest' {
             {
