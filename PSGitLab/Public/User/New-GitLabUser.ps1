@@ -22,11 +22,10 @@ Function New-GitLabUser {
         [string]$LinkedIn = $null,
         [string]$Twitter = $null,
         [string]$WebsiteURL = $null,
-        [int]$ProjectsLimit = 0,
+        [int]$ProjectsLimit = $null,
         [switch]$Admin = $false,
         [switch]$CanCreateGroup = $false,
         [switch]$External = $false,
-
         [switch]$Passthru = $false
     )
 
@@ -37,24 +36,29 @@ Function New-GitLabUser {
         name = $Name
     }
 
-    if ($SkypeID -ne $null ) { $Body.Add('skype',$SkypeID) }
-    if ($LinkedIn -ne $null ) { $Body.Add('linkedin',$LinkedIn) }
-    if ($Twitter -ne $null ) { $Body.Add('twitter',$Twitter) }
-    if ($WebsiteURL -ne $null ) { $Body.Add('website_url',$WebsiteURL) }
-    if ($ProjectsLimit -ne $null ) { $Body.Add('projects_limit',$ProjectsLimit) }
-    if ($Admin.IsPresent ) { $Body.Add('admin','true') }
-    if ($CanCreateGroup.IsPresent ) { $Body.Add('can_create_group','true') }
-    if ($External.IsPresent ) { $Body.Add('external','true') }
+    $user = Get-GitLabUser -Username $UserName
 
-    $Request = @{
-        URI = '/users'
-        Method = 'POST'
-        Body = $Body
+    if ($user) {
+        Write-Warning "$UserName already exists. Skipping..."
+    } else {
+        if ($PSBoundParameters.ContainsKey('SkypeID')) { $Body.Add('skype',$SkypeID) }
+        if ($PSBoundParameters.ContainsKey('LinkedIn')) { $Body.Add('linkedin',$LinkedIn) }
+        if ($PSBoundParameters.ContainsKey('Twitter')) { $Body.Add('twitter',$Twitter) }
+        if ($PSBoundParameters.ContainsKey('WebsiteURL')) { $Body.Add('website_url',$WebsiteURL) }
+        if ($PSBoundParameters.ContainsKey('ProjectsLimit')) { $Body.Add('projects_limit',$ProjectsLimit) }
+        if ($Admin.IsPresent) { $Body.Add('admin','true') }
+        if ($CanCreateGroup.IsPresent) { $Body.Add('can_create_group','true') }
+        if ($External.IsPresent) { $Body.Add('external','true') }
+
+        $Request = @{
+            URI = '/users'
+            Method = 'POST'
+            Body = $Body
+        }
+
+        $Results = QueryGitLabAPI -Request $Request -ObjectType 'GitLab.User'
+        if ($Passthru.IsPresent) {
+            $Results
+        }
     }
-
-    $Results = QueryGitLabAPI -Request $Request -ObjectType 'GitLab.User'
-    if ($Passthru.IsPresent) {
-        $Results
-    }
-
 }

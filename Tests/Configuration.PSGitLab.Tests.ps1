@@ -28,7 +28,7 @@ InModuleScope PSGitLab {
         }
 
 
-        It -TestCases $TestCase "<TestName>" -Skip:$( $IsLinux ) {
+        It -TestCases $TestCase "<TestName>" -Skip:$( $isLinux -or $isMacOs ) {
             param(
                 $Domain,
                 $Token,
@@ -65,7 +65,7 @@ InModuleScope PSGitLab {
         }
 
         Context 'Using Configuration File' {
-            It '<TestName>' -TestCases $TestCase -Skip:$( $isLinux ) {
+            It '<TestName>' -TestCases $TestCase -Skip:$( $isLinux -or $isMacOs ) {
                 param(
                     $Domain,
                     $Token,
@@ -85,7 +85,7 @@ InModuleScope PSGitLab {
         }
 
         Context "Using Environment" {
-            It '<TestName>' -TestCases $TestCase -skip:$( $isLinux ) {
+            It '<TestName>' -TestCases $TestCase -skip:$( $isLinux -or $isMacOs ) {
                 param(
                     $Domain,
                     $Token,
@@ -107,7 +107,7 @@ InModuleScope PSGitLab {
                 DecryptString -Token $Results.Token | Should be $Token
             }
 
-            It 'Missing Domain' -Skip:$( $isLinux ) {
+            It 'Missing Domain' -Skip:$( $isLinux -or $isMacOs ) {
                 # Arrange - Continued
                 Remove-Item Env:\PSGitLabDomain
                 $env:PSGitLabToken = 'ENV'
@@ -176,7 +176,7 @@ InModuleScope PSGitLab {
             & $ImportCLIXML $FilePath
         }
 
-        It "<TestName>" -TestCases $DecryptTestCase -Skip:$( $isLinux ) {
+        It "<TestName>" -TestCases $DecryptTestCase -Skip:$( $isLinux -or $isMacOs ) {
             param(
                 $Token
             )

@@ -22,10 +22,14 @@ Function Unblock-GitLabUser {
     PROCESS {
 
         Write-Verbose "$ID"
-        switch ($PSCmdlet.ParameterSetName) {
-            'ID' { $User = Get-GitLabUser -ID $ID }
-            'Email' { $User = Get-GitLabUser -ID $Email }
-            'Username' { $User = Get-GitLabUser -ID $Username }
+        switch ($PScmdlet.ParameterSetName ) {
+            'Email' { $User = Get-GitLabUser -Email $Email }
+            'Username' { $User = Get-GitLabUser -Username $UserName }
+            'ID' { $User = Get-GitLabUser -id $ID }
+        }
+
+        if ( -not $User ) {
+            Write-Error "User does not exist"
         }
 
         $request = @{
